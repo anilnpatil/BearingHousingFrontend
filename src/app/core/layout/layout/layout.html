@@ -1,0 +1,32 @@
+<!-- Error Display Component (Global) -->
+<app-error-display></app-error-display>
+
+<!-- Header -->
+<app-header 
+  *ngIf="showHeader()"
+  [pageTitle]="pageTitle()" 
+  (toggleSidebar)="toggleSidebar()">
+</app-header>
+
+<!-- Sidebar -->
+<app-sidebar
+  [open]="sidebarOpen()"
+  (close)="closeSidebar()">
+</app-sidebar>
+
+<!-- Overlay for Sidebar -->
+<div
+  class="overlay"
+  *ngIf="sidebarOpen()"
+  (click)="closeSidebar()">
+</div>
+
+<!-- Main Content -->
+<main class="content" [class.has-header]="showHeader()">
+  <router-outlet></router-outlet>
+</main>
+
+<!-- Footer -->
+<app-footer></app-footer>
+
+

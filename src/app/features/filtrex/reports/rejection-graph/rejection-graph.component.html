@@ -1,0 +1,33 @@
+<div class="trend-body">
+  <div class="chart-card">
+
+    <div class="chart-container" *ngIf="!loading && chartSeries.length > 0">
+      <apx-chart
+        #chartObj
+        [series]="chartSeries"
+        [chart]="chartOptions"
+        [xaxis]="xaxis"
+        [yaxis]="yaxis"
+        [title]="title"
+        [plotOptions]="plotOptions"
+        [dataLabels]="dataLabels"
+        [stroke]="stroke"
+        [fill]="fill"
+        [tooltip]="tooltip"
+        [legend]="legend"
+        [grid]="grid">
+      </apx-chart>
+    </div>
+
+    <div *ngIf="loading" class="loading">Loading...</div>
+
+    <div *ngIf="!loading && chartSeries.length === 0">
+      No data available
+    </div>
+
+    <div *ngIf="errorMessage" class="error">
+      {{ errorMessage }}
+    </div>
+
+  </div>
+</div>

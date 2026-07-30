@@ -1,0 +1,122 @@
+/*    HOST   */
+:host {
+  display: block;
+  height: 100vh;
+  background: #f1f5f9;
+  overflow: hidden;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  --app-header-height: 60px;
+}
+
+/*   TABLE CONTAINER (ONLY THIS SCROLLS)  */
+.table-wrapper {
+  position: fixed;
+  top: var(--app-header-height, 60px);
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  overflow: auto;
+  background: #f8fafc;
+}
+
+/*   TABLE  */
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  background: #ffffff;
+  font-size: 13px;
+}
+
+/*    STICKY HEADER + COLUMN DIVIDERS  */
+.report-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  background: #e0e7ff;
+  color: #1e293b;
+
+  padding: 10px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+
+  border-bottom: 2px solid #c7d2fe;
+  border-right: 1px solid #c7d2fe; /* 🔥 COLUMN LINE */
+  white-space: nowrap;
+}
+
+/*    BODY CELLS + COLUMN DIVIDERS  */
+.report-table tbody td {
+  padding: 8px 12px;
+
+  border-bottom: 1px solid #e5e7eb;
+  border-right: 1px solid #e5e7eb; /* 🔥 COLUMN LINE */
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.report-table tbody tr:nth-child(even) {
+  background: #f1f5f9;
+}
+
+.report-table tbody tr:hover {
+  background: #dbeafe;
+}
+
+/* Remove last column divider */
+.report-table th:last-child,
+.report-table td:last-child {
+  border-right: none;
+}
+
+
+.col-text {
+  text-align: center;
+}
+
+.col-date {
+  text-align: center;
+}
+
+.col-num {
+  text-align: center;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+
+/*    STATES */
+.loading,
+.empty {
+  padding: 40px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+/*    RESPONSIVE  */
+@media (max-width: 1024px) {
+  .filters {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .report-header {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    padding: 8px;
+  }
+
+  .table-wrapper {
+    top: 120px;
+  }
+}

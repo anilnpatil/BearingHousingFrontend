@@ -1,0 +1,9 @@
+// src/app/core/config/api.config.ts
+export const API_CONFIG = {
+  FILTREX: {
+    LIVE_DATA: '/api/filtrexdata/live',
+    PRODUCTION_SUMMARY_SHIFT: '/api/production-data/shift',
+    REPORT_BY_DATE_RANGE: '/api/production-data/daterange',
+    BARCODE_SEARCH_REPORT: '/api/bearing-housing/report'
+  }
+} as const;

@@ -1,0 +1,57 @@
+
+:host {
+  display: block;
+  height: 100vh;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 900;
+  top: 0;
+}
+
+.content {
+  position: fixed;
+  top: 0;                                    
+  left: 0;
+  right: 0;
+  bottom: var(--app-footer-height, 42px);  /* footer height */
+
+  padding: 0;     /* IMPORTANT: no padding */
+  background: #f8fafc;
+  overflow-y: auto;
+  overflow-x: hidden;
+  
+  /* Adjust top when header is visible */
+  &.has-header {
+    top: var(--app-header-height, 56px);
+  }
+  
+  // /* Custom scrollbar */
+  // &::-webkit-scrollbar {
+  //   width: 8px;
+  // }
+
+  // &::-webkit-scrollbar-track {
+  //   background: #f1f1f1;
+  // }
+
+  // &::-webkit-scrollbar-thumb {
+  //   background: #888;
+  //   border-radius: 4px;
+
+  //   &:hover {
+  //     background: #555;
+  //   }
+  // }
+}
+
+app-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 950;
+}

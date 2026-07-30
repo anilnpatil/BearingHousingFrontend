@@ -1,0 +1,192 @@
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h1>Welcome to SFL Bearing Housing Assembly</h1>
+    <!-- <p>Your comprehensive filtering and data management solution</p> -->
+  </div>
+
+  <div class="dashboard-content">
+    <div class="stats-header">
+      <h2>Production Details</h2>
+      <div class="status-indicator">
+        <span class="status-dot" [class.active]="!isLoading && !hasError"></span>
+        <span class="status-text">
+          {{ isLoading ? 'Loading...' : hasError ? 'Error' : 'Updated on' }}
+        </span>
+        <span class="last-updated" *ngIf="lastUpdated && !isLoading && !hasError">
+          : {{ lastUpdated }} 
+        </span>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <!-- Total Production Card -->
+      <div class="stat-card production-card">
+        <div class="stat-icon production-icon">🏭</div>
+        <div class="stat-info">
+          <h3>Total Production</h3>
+          <p class="stat-number" *ngIf="!isLoading && !hasError">{{ productionData.totalPartCount }}</p>
+          <p class="stat-loading" *ngIf="isLoading">Loading...</p>
+          <p class="stat-error" *ngIf="hasError && !isLoading">N/A</p>
+        </div>
+      </div>
+
+      <!-- OK Parts Card -->
+      <div class="stat-card parts-card ok-parts-card">
+        <div class="stat-icon parts-icon ok-icon">✅</div>
+        <div class="stat-info">
+          <h3>OK Parts</h3>
+          <p class="stat-number" *ngIf="!isLoading && !hasError">{{ productionData.okCount }}</p>
+          <p class="stat-loading" *ngIf="isLoading">Loading...</p>
+          <p class="stat-error" *ngIf="hasError && !isLoading">N/A</p>
+        </div>
+      </div>
+
+      <!-- NOTOK Parts Card -->
+      <div class="stat-card parts-card notok-parts-card">
+        <div class="stat-icon parts-icon notok-icon">❌</div>
+        <div class="stat-info">
+          <h3>NOT OK Parts</h3>
+          <p class="stat-number" *ngIf="!isLoading && !hasError">{{ productionData.notOkCount }}</p>
+          <p class="stat-loading" *ngIf="isLoading">Loading...</p>
+          <p class="stat-error" *ngIf="hasError && !isLoading">N/A</p>
+        </div>
+      </div> 
+      <!-- Current Shift Card -->
+      <div class="stat-card sku-card">
+        <div class="stat-icon sku-icon">📦</div>
+        <div class="stat-info">
+          <h3>Current SKU</h3>
+          <p class="stat-number" *ngIf="!isLoading && !hasError">{{ productionData.sku }}</p>
+          <p class="stat-loading" *ngIf="isLoading">Loading...</p>
+          <p class="stat-error" *ngIf="hasError && !isLoading">N/A</p>
+        </div>
+      </div>
+          
+
+      <!-- Current Shift Card -->
+      <div class="stat-card shift-card">
+        <div class="stat-icon shift-icon">⚡</div>
+        <div class="stat-info">
+          <h3>Current Shift</h3>
+          <p class="stat-number" *ngIf="!isLoading && !hasError">{{ productionData.shift }}</p>
+          <p class="stat-loading" *ngIf="isLoading">Loading...</p>
+          <p class="stat-error" *ngIf="hasError && !isLoading">N/A</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="parameter-details-card" *ngIf="!isLoading && !hasError">
+      <h3>Parameter Details</h3>
+
+      <div class="details-layout">
+        <div class="common-card">
+          <!-- <div class="section-title">Common Details</div> -->
+          <div class="details-grid">
+            <div class="detail-item">
+              <label>Barcode</label>
+              <input readonly [value]="productionData.barcode || 'N/A'" />
+            </div>
+            <div class="detail-item">
+              <label>Operator</label>
+              <input readonly [value]="productionData.operatorName || 'N/A'" />
+            </div>
+            <div class="detail-item">
+              <label>Start Time</label>
+              <input readonly [value]="productionData.cycleStartTime ? (productionData.cycleStartTime | date:'short') : 'N/A'" />
+            </div>
+            <div class="detail-item">
+              <label>End Time</label>
+              <input readonly [value]="productionData.productionDateTime ? (productionData.productionDateTime | date:'short') : 'N/A'" />
+            </div>
+            <div class="detail-item">
+              <label>Cycle Time</label>
+              <input readonly [value]="productionData.cycleTime !== undefined ? productionData.cycleTime + ' sec' : 'N/A'" />
+            </div>
+            <div class="detail-item">
+              <label>Final Status</label>
+              <input
+                readonly
+                [value]="productionData.finalStatus === 1 ? '✅ OK' : productionData.finalStatus === 0 ? '❌ NOT OK' : 'N/A'"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="process-card">
+          <div class="section-title">Process 1</div>
+          <div class="details-grid">
+            <div class="details-row">
+              <div class="detail-item">
+                <label>Before Glue</label>
+                <input readonly [value]="getProcessStatusLabel(1, 'beforeGlueStatus')" />
+              </div>
+              <div class="detail-item">
+                <label>After Glue</label>
+                <input readonly [value]="getProcessStatusLabel(1, 'afterGlueStatus')" />
+              </div>
+              <div class="detail-item">
+                <label>Load Min / Max</label>
+                <input readonly [value]="getProcessRangeValue(1, 'toxLoadMin', 'toxLoadMax')" />
+              </div>
+            </div>
+
+            <div class="details-row">
+              <div class="detail-item">
+                <label>Load Actual</label>
+                <input readonly [value]="getProcessValue(1, 'toxLoadActual')" />
+              </div>
+              <div class="detail-item">
+                <label>Displacement Min / Max</label>
+                <input readonly [value]="getProcessRangeValue(1, 'toxDisplacementMin', 'toxDisplacementMax')" />
+              </div>
+              <div class="detail-item">
+                <label>Displacement Actual</label>
+                <input readonly [value]="getProcessValue(1, 'toxDisplacementActual')" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="process-card" *ngIf="shouldShowSecondProcess()">
+          <div class="section-title">Process 2</div>
+          <div class="details-grid">
+            <div class="details-row">
+              <div class="detail-item">
+                <label>Before Glue</label>
+                <input readonly [value]="getProcessStatusLabel(2, 'beforeGlueStatus')" />
+              </div>
+              <div class="detail-item">
+                <label>After Glue</label>
+                <input readonly [value]="getProcessStatusLabel(2, 'afterGlueStatus')" />
+              </div>
+              <div class="detail-item">
+                <label>Load Min / Max</label>
+                <input readonly [value]="getProcessRangeValue(2, 'toxLoadMin', 'toxLoadMax')" />
+              </div>
+            </div>
+
+            <div class="details-row">
+              <div class="detail-item">
+                <label>Load Actual</label>
+                <input readonly [value]="getProcessValue(2, 'toxLoadActual')" />
+              </div>
+              <div class="detail-item">
+                <label>Displacement Min / Max</label>
+                <input readonly [value]="getProcessRangeValue(2, 'toxDisplacementMin', 'toxDisplacementMax')" />
+              </div>
+              <div class="detail-item">
+                <label>Displacement Actual</label>
+                <input readonly [value]="getProcessValue(2, 'toxDisplacementActual')" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="error-message" *ngIf="hasError && !isLoading">
+        <p>{{ errorMessage }}</p>
+        <button class="retry-btn" (click)="retryLoad()">Retry</button>
+      </div>
+    </div>
+  </div>
+</div>

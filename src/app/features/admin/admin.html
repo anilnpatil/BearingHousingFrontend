@@ -1,0 +1,143 @@
+<div class="admin-container">
+ 
+
+  <div class="content-section">  
+
+    <!-- ============ USER MANAGEMENT CARD ============ -->
+    <div class="card">
+      <div class="card-header">
+        <div class="header-content">
+          <h2>User Management</h2>
+          <p>Manage user accounts and permissions</p>
+        </div>
+        <button class="btn btn-primary" (click)="toggleRegisterForm()">
+          <span *ngIf="!showRegisterForm()">+ New User</span>
+          <span *ngIf="showRegisterForm()">Cancel</span>
+        </button>
+      </div>
+
+      <!-- Success Message -->
+      <div class="alert alert-success" *ngIf="registrationSuccess()">
+        <span>{{ registrationSuccess() }}</span>
+      </div>
+
+      <!-- Register Form Component -->
+      <div class="register-form-container" *ngIf="showRegisterForm()">
+        <app-register 
+          [disableRedirect]="true" 
+          (registrationSuccess)="onRegistrationSuccess($event)">
+        </app-register>
+      </div>
+
+      <!-- User List (hidden when registration form is showing) -->
+      <ng-container *ngIf="!showRegisterForm()">
+        <!-- User List Loading -->
+        <div class="loading-state" *ngIf="isLoadingUsers()">
+          <div class="spinner"></div>
+          <p>Loading users...</p>
+        </div>
+
+        <!-- User List Error -->
+        <div class="alert alert-error" *ngIf="userError()">
+          <span>{{ userError() }}</span>
+          <button class="close-btn" (click)="loadUsers()">Retry</button>
+        </div>
+
+        <!-- User List Empty -->
+        <div class="empty-state" *ngIf="!isLoadingUsers() && !userError() && users().length === 0">
+          <p>No users found</p>
+        </div>
+
+        <!-- User List Controls -->
+        <div class="list-controls" *ngIf="!isLoadingUsers() && users().length > 0">
+          <div class="control-group">
+            <label for="sort-by">Sort by:</label>
+            <select id="sort-by" [(ngModel)]="sortBy">
+              <option value="id">ID</option>
+              <option value="username">Username</option>
+              <option value="role">Role</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label for="filter-role">Filter by Role:</label>
+            <select id="filter-role" [(ngModel)]="filterRole">
+              <option value="ALL">All Roles</option>
+              <option value="ADMIN">Admin</option>
+              <option value="USER">User</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- User List Table -->
+        <div class="user-list" *ngIf="!isLoadingUsers() && !userError() && (getFilteredUsers() | slice:0).length > 0">
+        <div class="table-header">
+          <div class="table-row header-row">
+            <div class="col col-id">ID</div>
+            <div class="col col-username">Username</div>
+            <div class="col col-role">Role</div>
+            <div class="col col-actions">Actions</div>
+          </div>
+        </div>
+
+        <div class="table-body">
+          <div class="table-row" *ngFor="let user of getFilteredUsers()">
+            <div class="col col-id">{{ user.id }}</div>
+            <div class="col col-username">{{ user.username }}</div>
+            <div class="col col-role">
+              <span class="badge" [ngClass]="getRoleColor(user.role)">{{ user.role }}</span>
+            </div>
+            <div class="col col-actions">
+              <button
+                class="btn btn-danger btn-sm"
+                (click)="initiateDeleteUser(user)"
+                [disabled]="isDeleting()"
+                title="Delete user"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-footer">
+          <p>Total: {{ getFilteredUsers().length }} user(s)</p>
+        </div>
+      </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal-overlay" *ngIf="userToDelete()" (click)="cancelDelete()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="modal-body">
+      <h3>Delete User</h3>
+      <p>Are you sure you want to delete <strong>{{ userToDelete()?.username }}</strong>?</p>
+      <p class="warning-text">This action cannot be undone.</p>
+
+      <div class="alert alert-error" *ngIf="deleteError()">
+        {{ deleteError() }}
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button
+        class="btn btn-secondary"
+        (click)="cancelDelete()"
+        [disabled]="isDeleting()"
+      >
+        Cancel
+      </button>
+      <button
+        class="btn btn-danger"
+        (click)="confirmDeleteUser()"
+        [disabled]="isDeleting()"
+      >
+        <span *ngIf="isDeleting()">Deleting...</span>
+        <span *ngIf="!isDeleting()">Delete User</span>
+      </button>
+    </div>
+  </div>
+</div>

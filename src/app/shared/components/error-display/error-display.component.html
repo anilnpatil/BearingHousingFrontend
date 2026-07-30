@@ -1,0 +1,16 @@
+<div 
+  class="error-overlay" 
+  *ngIf="error$().hasError"
+  @enterLeave>
+  <div class="error-container">
+    <div class="error-icon">⚠️</div>
+    <h2 class="error-title">Error</h2>
+    <p class="error-message">{{ error$().message }}</p>
+    <p class="error-details" *ngIf="error$().details">
+      {{ error$().details }}
+    </p>
+    <button class="dismiss-btn" (click)="dismissError()">
+      Dismiss
+    </button>
+  </div>
+</div>

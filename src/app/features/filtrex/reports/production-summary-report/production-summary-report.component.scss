@@ -1,0 +1,406 @@
+.page {
+  padding: 12px;
+  background: #f6f8fb;
+  height: calc(100vh - 60px);
+  position: relative;
+  overflow-y: auto;
+  margin-top: auto;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ================= LOADING & ERROR STATES ================= */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+
+  p {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #666;
+  }
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #2563eb;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-banner {
+  background: #fee2e2;
+  border-left: 4px solid #dc3545;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.error-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #991b1b;
+
+  .error-icon {
+    font-size: 1.3rem;
+  }
+
+  .error-text {
+    flex: 1;
+    font-size: 0.95rem;
+  }
+
+  .retry-link {
+    background: none;
+    border: none;
+    color: #2563eb;
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: rgba(37, 99, 235, 0.1);
+    }
+  }
+}
+
+.no-data-message {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* ================= VIEW TOGGLE ================= */
+.view-toggle-inline {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+
+  label {
+    cursor: pointer;
+  }
+
+  input {
+    display: none;
+  }
+
+  span {
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: #f1f5f9;
+    font-size: 13px;
+    transition: .4s;
+  }
+
+  input:checked + span {
+    background: #2563eb;
+    color: #fff;
+  }
+}
+
+.no-result {
+  margin-top: 20px;
+  padding: 24px;
+  background: #fff;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+/* ================= SUMMARY view ================= */  
+/* ================= SUMMARY MATRIX ================= */
+.summary-matrix {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: 220px 180px repeat(3, 1fr);
+  gap: 10px;
+  max-height: calc(115vh - 260px);
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+/* ================= DATE GROUP WRAPPER ================= */
+.date-group {
+  display: contents; /* keeps grid intact */
+}
+
+/* ================= HEADER ================= */
+.matrix-header {
+  display: contents;
+
+  div {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+
+    background: #e0e7ff;
+    color: #1e293b;
+    padding: 10px;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 0px;
+    font-size: 19px;
+
+    /* subtle separation */
+    border-bottom: 2px solid #e5e7eb;
+  }
+}
+
+/* ================= DATE CELL ================= */
+.date-cell {
+  background: #ffffff;
+  border-bottom: 1px solid #2563eb;
+  border-radius: 1px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: background 0.4s ease;
+  align-items: center;
+}
+
+.date-group:nth-child(even) .date-cell {
+  border-bottom-color: #16a34a;
+  background: #f9fafb;
+}
+
+/* ================= DATE TEXT ================= */
+.date-text {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+/* ================= DATE TOTALS ================= */
+.date-totals {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 14px;
+
+  .total { color: #ca8a04; }
+  .ok { color: #15803d; }
+  .nok { color: #b91c1c; }
+}
+
+/* ================= SKU CELL ================= */
+.sku-cell {
+  background: #ffffff;
+  padding: 12px;
+  font-weight: 900;
+  color: #0b0e0c;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  transition: background 0.4s ease;
+}
+
+/* ================= SHIFT CELL ================= */
+.shift-cell {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.2s ease;
+}
+
+/* ================= METRICS ================= */
+.metrics {
+  display: flex;
+  gap: 8px;
+  font-weight: 700;
+
+  span {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 13px;
+  }
+
+  .total { background: #fef9c3; color:#ca8a04}
+  .ok { background: #dcfce7; color: #15803d; }
+  .nok { background: #fee2e2; color: #b91c1c; }
+}
+
+/* ================= NO DATA ================= */
+.no-data {
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+/* ================= DATE GROUP HOVER ================= */
+.date-group:hover .date-cell,
+.date-group:hover .sku-cell,
+.date-group:hover .shift-cell {
+  background: #eef2ff;
+  border-bottom: 0.1px solid #2563eb;
+}
+
+/* ================= VISUAL DATE SEPARATOR ================= */
+.date-group {
+  border-bottom: 1px dashed #e5e7eb;
+  padding-bottom: 6px;
+}
+
+/* ================= TABLE ================= */
+.table-wrapper {
+  margin-top: 16px;
+  background: #fff;
+  border-radius: 12px;
+  max-height: calc(100vh - 240px);
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead {
+    position: sticky;
+    top: 0;
+    background: #f1f5f9;
+    z-index: 2;
+  }
+
+  th, td {
+    padding: 10px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: center;
+    font-size: 13px;
+  }
+
+  .sku { font-weight: 600; }
+  .total { color: #ca8a04; font-weight: 700; }
+  .ok { color: #15803d; font-weight: 700; }
+  .nok { color: #b91c1c; font-weight: 700; }
+}
+
+/* ================= DATE CELL ================= */
+.date-cell {
+  background: #ffffff;  
+  border-bottom: 1px solid #2563eb;  
+  border-radius: 1px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: background 0.4s ease;
+}
+
+.date-group:nth-child(even) .date-cell {
+  // border-left-color: #16a34a;
+  border-bottom-color: #16a34a;
+  // border-top-color: #16a34a;
+  background: #f9fafb;
+}
+
+/* ================= DATE TEXT ================= */
+.date-text {
+  font-size: 19px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+/* ================= DATE TOTALS ================= */
+.date-totals {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 15px;
+
+  .total { background: #fef9c3; color:#ca8a04}
+  .ok { background: #dcfce7; color: #15803d; }
+  .nok { background: #fee2e2; color: #b91c1c; }
+}
+
+/* ================= SKU CELL ================= */
+.sku-cell {
+  background: #ffffff;
+  padding: 12px;
+  font-weight: 900;
+  color: #0b0e0c;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  transition: background 0.4s ease;
+}
+
+/* ================= SHIFT CELL ================= */
+.shift-cell {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.4s ease;
+}
+
+/* ================= METRICS ================= */
+.metrics {
+  display: flex;
+  gap: 20px;
+  font-weight: 700;
+
+  span {
+    padding: 4px 30px;
+    border-radius: 6px;
+    font-size: 17px;
+    ;
+  }
+
+  .total { background: #fef9c3; color:#ca8a04}
+  .ok { background: #dcfce7; color: #15803d; }
+  .nok { background: #fee2e2; color: #b91c1c; }
+}
+
+/* ================= NO DATA ================= */
+.no-data {
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+/* ================= DATE GROUP HOVER ================= */
+.date-group:hover .date-cell,
+.date-group:hover .sku-cell,
+.date-group:hover .shift-cell {
+  background: #eef2ff;
+  border-bottom: 0.1px solid #2563eb;
+}
+
+/* ================= VISUAL DATE SEPARATOR ================= */
+.date-group {
+  border-bottom: 1px dashed #e5e7eb;
+  padding-bottom: 6px;
+}

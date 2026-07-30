@@ -1,0 +1,145 @@
+<!-- ERROR STATE -->
+<div class="error-banner" *ngIf="errorMessage && !loading">
+  <div class="error-content">
+    <span class="error-icon">⚠️</span>
+    <span class="error-text">{{ errorMessage }}</span>
+    <button class="retry-link" (click)="apply()" type="button">Retry</button>
+  </div>
+</div>
+
+<!-- TABLE WRAPPER -->
+<div class="table-wrapper" *ngIf="!errorMessage">
+  <table class="report-table" *ngIf="data.length">
+    <thead>
+      <tr>
+        <th class="productionDateTime-col">ProductionDateTime</th>
+        <th class="barcode-col">Barcode</th>
+        <th class="shift-col">Shift</th>
+        <th class="operatorName-col">OperatorName</th>
+        <th class="finalStatus-col">FinalStatus</th>
+
+        <th class="p1-beforeGlueStatus-col">P1_BeforeGlueStatus</th>
+        <th class="p1-afterGlueStatus-col">P1_AfterGlueStatus</th>
+        <th class="p1-toxLoadMax-col">P1_ToxLoadMax</th>
+        <th class="p1-toxLoadActual-col">P1_ToxLoadActual</th>
+        <th class="p1-toxLoadMin-col">P1_ToxLoadMin</th>
+        <th class="p1-toxDisplacementMax-col">P1_ToxDisplacementMax</th>
+        <th class="p1-toxDisplacementActual-col">P1_ToxDisplacementActual</th>
+        <th class="p1-toxDisplacementMin-col">P1_ToxDisplacementMin</th>
+
+        <th class="p2-beforeGlueStatus-col" *ngIf="shouldShowSecondProcess()">P2_BeforeGlueStatus</th>
+        <th class="p2-afterGlueStatus-col" *ngIf="shouldShowSecondProcess()">P2_AfterGlueStatus</th>
+        <th class="p2-toxLoadMax-col" *ngIf="shouldShowSecondProcess()">P2_ToxLoadMax</th>
+        <th class="p2-toxLoadActual-col" *ngIf="shouldShowSecondProcess()">P2_ToxLoadActual</th>
+        <th class="p2-toxLoadMin-col" *ngIf="shouldShowSecondProcess()">P2_ToxLoadMin</th>
+        <th class="p2-toxDisplacementMax-col" *ngIf="shouldShowSecondProcess()">P2_ToxDisplacementMax</th>
+        <th class="p2-toxDisplacementActual-col" *ngIf="shouldShowSecondProcess()">P2_ToxDisplacementActual</th>
+        <th class="p2-toxDisplacementMin-col" *ngIf="shouldShowSecondProcess()">P2_ToxDisplacementMin</th>
+
+        <!-- <th class="cycleStartTime-col">CycleStartTime</th>
+        <th class="cycleEndTime-col">CycleEndTime</th> -->
+        <th class="cycleTime-col">CycleTime</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <tr *ngFor="let d of data" (click)="openBarcode(d)" role="button" tabindex="0" class="clickable-row">
+        <td class="productionDateTime-col">{{ d.productionDateTime | date:'dd-MM-yyyy HH:mm' }}</td>
+        <td class="barcode-col">{{ d.barcode }}</td>
+        <td class="shift-col">{{ d.shift }}</td>
+        <td class="operatorName-col">{{ d.operatorName }}</td>
+        <td class="finalStatus-col">
+          <span class="status"
+                [class.ok]="d.finalStatus === 1"
+                [class.notok]="d.finalStatus !== 1">
+            {{ d.finalStatus === 1 ? 'OK' : 'NOT OK' }}
+          </span>
+        </td>
+
+        <td class="p1-beforeGlueStatus-col">
+          <span class="status"
+                [class.ok]="isProcessStatusOk(d, 1, 'beforeGlueStatus')"
+                [class.notok]="!isProcessStatusOk(d, 1, 'beforeGlueStatus')">
+            {{ getProcessStatusLabel(d, 1, 'beforeGlueStatus') }}
+          </span>
+        </td>
+        <td class="p1-afterGlueStatus-col">
+          <span class="status"
+                [class.ok]="isProcessStatusOk(d, 1, 'afterGlueStatus')"
+                [class.notok]="!isProcessStatusOk(d, 1, 'afterGlueStatus')">
+            {{ getProcessStatusLabel(d, 1, 'afterGlueStatus') }}
+          </span>
+        </td>
+        <td class="p1-toxLoadMax-col">{{ getProcessValue(d, 1, 'toxLoadMax') }}</td>
+        <td class="p1-toxLoadActual-col">{{ getProcessValue(d, 1, 'toxLoadActual') }}</td>
+        <td class="p1-toxLoadMin-col">{{ getProcessValue(d, 1, 'toxLoadMin') }}</td>
+        <td class="p1-toxDisplacementMax-col">{{ getProcessValue(d, 1, 'toxDisplacementMax') }}</td>
+        <td class="p1-toxDisplacementActual-col">{{ getProcessValue(d, 1, 'toxDisplacementActual') }}</td>
+        <td class="p1-toxDisplacementMin-col">{{ getProcessValue(d, 1, 'toxDisplacementMin') }}</td>
+
+        <td class="p2-beforeGlueStatus-col" *ngIf="shouldShowSecondProcess() && shouldShowProcess(d, 2)">
+          <span class="status"
+                [class.ok]="isProcessStatusOk(d, 2, 'beforeGlueStatus')"
+                [class.notok]="!isProcessStatusOk(d, 2, 'beforeGlueStatus')">
+            {{ getProcessStatusLabel(d, 2, 'beforeGlueStatus') }}
+          </span>
+        </td>
+        <td class="p2-afterGlueStatus-col" *ngIf="shouldShowSecondProcess() && shouldShowProcess(d, 2)">
+          <span class="status"
+                [class.ok]="isProcessStatusOk(d, 2, 'afterGlueStatus')"
+                [class.notok]="!isProcessStatusOk(d, 2, 'afterGlueStatus')">
+            {{ getProcessStatusLabel(d, 2, 'afterGlueStatus') }}
+          </span>
+        </td>
+        <td class="p2-toxLoadMax-col" *ngIf="shouldShowSecondProcess() && shouldShowProcess(d, 2)">{{ getProcessValue(d, 2, 'toxLoadMax') }}</td>
+        <td class="p2-toxLoadActual-col" *ngIf="shouldShowSecondProcess() && shouldShowProcess(d, 2)">{{ getProcessValue(d, 2, 'toxLoadActual') }}</td>
+        <td class="p2-toxLoadMin-col" *ngIf="shouldShowSecondProcess() && shouldShowProcess(d, 2)">{{ getProcessValue(d, 2, 'toxLoadMin') }}</td>
+        <td class="p2-toxDisplacementMax-col" *ngIf="shouldShowSecondProcess() && shouldShowProcess(d, 2)">{{ getProcessValue(d, 2, 'toxDisplacementMax') }}</td>
+        <td class="p2-toxDisplacementActual-col" *ngIf="shouldShowSecondProcess() && shouldShowProcess(d, 2)">{{ getProcessValue(d, 2, 'toxDisplacementActual') }}</td>
+        <td class="p2-toxDisplacementMin-col" *ngIf="shouldShowSecondProcess() && shouldShowProcess(d, 2)">{{ getProcessValue(d, 2, 'toxDisplacementMin') }}</td>
+
+        <!-- <td class="cycleStartTime-col">{{ d.cycleStartTime | date:'dd-MM-yyyy HH:mm' }}</td>
+        <td class="cycleEndTime-col">{{ d.cycleEndTime | date:'dd-MM-yyyy HH:mm' }}</td> -->
+        <td class="cycleTime-col">{{ d.cycleTime }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="empty" *ngIf="!loading && !data.length">
+    No records found
+  </div>
+</div>
+
+<!-- PAGINATION -->
+<div class="pagination" *ngIf="!errorMessage">
+  <button (click)="prev()" [disabled]="page === 0" type="button">Prev</button>
+
+  <span>
+    Page {{ page + 1 }} of {{ totalPages }}
+    ({{ totalElements }} records)
+  </span>
+
+  <button (click)="next()" [disabled]="page >= totalPages - 1" type="button">
+    Next
+  </button>
+
+  <div class="page-entry">
+    <label for="pageInput">Go to page</label>
+    <input
+      id="pageInput"
+      type="number"
+      min="1"
+      [max]="totalPages"
+      [(ngModel)]="pageInput"
+      (keyup.enter)="goToPage()"
+      [disabled]="loading || totalPages === 0"
+    />
+    <button
+      (click)="goToPage()"
+      [disabled]="loading || totalPages === 0"
+      type="button"
+    >
+       Go
+    </button>
+  </div>  
+</div>

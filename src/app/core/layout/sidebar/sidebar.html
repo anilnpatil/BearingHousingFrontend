@@ -1,0 +1,44 @@
+<aside class="sidebar" [class.open]="open()">
+  <nav>
+    <a routerLink="/dashboard" routerLinkActive="active" (click)="close.emit()">
+      🖥️ Dashboard
+    </a>
+
+    <!-- <a routerLink="/realtimedata" routerLinkActive="active" (click)="close.emit()">
+      🕒 Real-time Data
+    </a> -->
+
+    <!-- <a routerLink="/production-report" routerLinkActive="active" (click)="close.emit()">
+      📜 Production Report
+    </a> -->
+
+    <!-- <a routerLink="/production-totals-report" routerLinkActive="active" (click)="close.emit()">
+      📈 Production Totals
+    </a> -->
+
+    <a routerLink="/view-reports" routerLinkActive="active" (click)="close.emit()">
+      👁 Parameter Reports
+    </a>
+
+    <a routerLink="/barcode-search-report" routerLinkActive="active" (click)="close.emit()">
+      🔍 Barcode Search Report
+    </a>
+
+    <!-- <a routerLink="/graphical-reports" routerLinkActive="active" (click)="close.emit()">
+      📊 Graphical Reports
+    </a> -->
+
+
+
+    <a *ngIf="isAdmin()"
+       routerLink="/admin"
+       routerLinkActive="active"
+       (click)="close.emit()">
+      ⚙️ Admin
+    </a>    
+
+    <button class="logout" (click)="logout()">
+      🚪 Logout
+    </button>
+  </nav>
+</aside>

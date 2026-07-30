@@ -1,0 +1,121 @@
+<div class="page">
+
+  <!-- LOADING STATE -->
+  <div class="loading-overlay" *ngIf="loading">
+    <div class="loading-content">
+      <div class="loading-spinner"></div>
+      <p>Loading report data...</p>
+    </div>
+  </div>
+
+  <!-- ERROR STATE -->
+  <div class="error-banner" *ngIf="errorMessage && !loading">
+    <div class="error-content">
+      <span class="error-icon">⚠️</span>
+      <span class="error-text">{{ errorMessage }}</span>
+      <button class="retry-link" (click)="load()">Retry</button>
+    </div>
+  </div>
+
+  <!-- ================= SUMMARY VIEW ================= -->
+  <div class="view-wrapper" *ngIf="mode === 'SUMMARY' && !errorMessage">
+    <div class="summary-matrix" *ngIf="summaryData.length > 0; else noData">
+      <!-- HEADER -->
+      <div class="matrix-header">
+        <div>Date</div>
+        <div>SKU</div>
+        <div>Shift 1</div>
+        <div>Shift 2</div>
+        <div>Shift 3</div>
+      </div>
+
+      <!-- BODY -->
+      <div class="date-group" *ngFor="let day of summaryData; let i = index">
+
+
+        <!-- DATE CELL (spans all SKU rows) -->
+        <div
+          class="date-cell"
+          [class.alt]="i % 2 === 1"
+          [style.gridRow]="'span ' + day.skus.length"
+        >
+          <div class="date-text">{{ day.date }}</div>
+
+          <div class="date-totals">
+            <span class="total">Total: {{ day.total }}</span>
+            <span class="ok">OK: {{ day.ok }}</span>
+            <span class="nok">NOT OK: {{ day.notOk }}</span>
+          </div>
+        </div>
+
+        <!-- SKU ROWS -->
+        <ng-container *ngFor="let sku of day.skus">
+
+          <div class="sku-cell" [class.alt]="i % 2 === 1">
+            {{ sku.sku }}
+          </div>
+
+          <div
+            class="shift-cell"
+            *ngFor="let shift of [1,2,3]"
+            [class.alt]="i % 2 === 1"
+          >
+            <ng-container *ngIf="sku.shifts[shift]; else empty">
+              <div class="metrics">
+                <span class="total">{{ sku.shifts[shift].total }}</span>
+                <span class="ok">{{ sku.shifts[shift].ok }}</span>
+                <span class="nok">{{ sku.shifts[shift].notOk }}</span>
+              </div>
+            </ng-container>
+
+            <ng-template #empty>
+              <span class="no-data">—</span>
+            </ng-template>
+          </div>
+
+        </ng-container>
+
+      </div>
+    </div>
+
+    <ng-template #noData>
+      <div class="no-data-message">
+        <p>No data available for the selected filters</p>
+      </div>
+    </ng-template>
+  </div>
+
+
+  <!-- ================= TABLE VIEW ================= -->
+  <!-- <div class="view-wrapper" *ngIf="mode === 'TABLE' && !errorMessage">
+    <div class="table-wrapper" *ngIf="viewData.length > 0; else noData">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>SKU</th>
+            <th>Shift</th>
+            <th>Total</th>
+            <th>OK</th>
+            <th>NOT OK</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let r of viewData">
+            <td>{{ r.key }}</td>
+            <td class="sku">{{ r.sku }}</td>
+            <td>Shift {{ r.shift }}</td>
+            <td class="total">{{ r.totalCount }}</td>
+            <td class="ok">{{ r.okCount }}</td>
+            <td class="nok">{{ r.notOkCount }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <ng-template #noData>
+      <div class="no-data">
+        <p>No production data available for the selected date range</p>
+      </div>
+    </ng-template>
+  </div>
+</div> -->

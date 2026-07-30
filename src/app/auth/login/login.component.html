@@ -1,0 +1,56 @@
+<div class="login-wrapper">
+  <div class="login-card">
+    <div class="login-header">
+      <h3>Welcome to SFL Bearing Housing assembly</h3>
+      <p>Please Sign In to continue...</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          id="username"
+          type="text"
+          formControlName="username"
+          placeholder="Enter your username"
+          [class.error]="username?.invalid && username?.touched"
+        />
+        <div class="error-message" *ngIf="username?.invalid && username?.touched">
+          <span *ngIf="username?.errors?.['required']">Username is required</span>
+          <span *ngIf="username?.errors?.['minlength']">Username must be at least 3 characters</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="Enter your password"
+          [class.error]="password?.invalid && password?.touched"
+        />
+        <div class="error-message" *ngIf="password?.invalid && password?.touched">
+          <span *ngIf="password?.errors?.['required']">Password is required</span>
+          <span *ngIf="password?.errors?.['minlength']">Password must be at least 6 characters</span>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="login-btn"
+        [disabled]="isLoading"
+      >
+        <span *ngIf="isLoading" class="spinner"></span>
+        {{ isLoading ? 'Signing In...' : 'Sign In' }}
+      </button>
+
+      <div class="error-message" *ngIf="error">
+        {{ error }}
+      </div>
+    </form>
+    <!-- <div class="register-link">
+      <p>Don't have an account? <a routerLink="/register">Sign Up</a></p>
+    </div> -->   
+  </div>
+</div>

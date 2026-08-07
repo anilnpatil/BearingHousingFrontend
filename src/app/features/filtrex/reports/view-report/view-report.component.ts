@@ -130,20 +130,16 @@ export class ViewReportComponent implements OnInit, OnDestroy {
         value: this.sku,
         options: [
           { label: '0) ALL', value: 0 },
-          { label: '1) SP210', value: 1 },
-          { label: '2) DFC Nano', value: 2 },
-          { label: '3) 10" STD MATRIKX models', value: 3 },
-          { label: '4) DFC Inline RO', value: 4 },
-          { label: '5) Havells carbon block', value: 5 },
-          { label: '6) Ecowater078', value: 6 },
-          { label: '7) Ecowater108', value: 7 },
-          { label: '8) DFC Chemiblock', value: 8 },
-          { label: '9) Nova family(I Nova & G nova)', value: 9 },
-          { label: '10) Livpure', value: 10 },
-          { label: '11) Ecowater055', value: 11 },
-          { label: '12) DFC MCHPS', value: 12 },
-          { label: '13) Aquatru pre', value: 13 },
-          { label: '14) Aquatru post', value: 14 }
+          { label: '1) LEGEND TOP MOUNT', value: "LEGEND TOP MOUNT" },
+          { label: '2) SABRE', value: "SABRE" },
+          { label: '3) LEXINGTON', value: "LEXINGTON" },
+          { label: '4) LATITUDE', value: "LATITUDE" },
+          { label: '5) COYOTO', value: "COYOTO" },
+          { label: '6) COLORADO', value: "COLORADO" },
+          { label: '7) BARRACUDA TOP MOUNT', value: "BARRACUDA TOP MOUNT" },
+          { label: '8) BARRACUDA SIDE MOUNT', value: "BARRACUDA SIDE MOUNT" },
+          { label: '9) KINETIC', value: "KINETIC" },
+          { label: '10) NTV', value: "NTV" }
         ],
         onChange: (value) => {
           this.sku = value;          
@@ -308,21 +304,6 @@ export class ViewReportComponent implements OnInit, OnDestroy {
     window.URL.revokeObjectURL(url);
   }
 
-  // buildDownloadFilename(): string {
-  //   const now = new Date();
-  //   const stamp = now.toISOString().replace(/[:.]/g, '-');
-  //   const parts = ['report', this.startDate || 'all', this.endDate || 'all'];
-
-  //   if (this.shift !== 0) {
-  //     parts.push(`shift-${this.shift}`);
-  //   }
-
-  //   if (this.sku !== 0) {
-  //     parts.push(`sku-${this.sku}`);
-  //   }
-
-  //   return `${parts.join('-')}-${stamp}.csv`;
-  // }
 
   buildDownloadFilename(): string {
   const now = new Date();

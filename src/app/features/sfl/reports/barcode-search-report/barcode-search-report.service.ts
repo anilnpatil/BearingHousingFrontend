@@ -48,7 +48,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { API_CONFIG } from '../../api.config';
-import { ProductionSummary } from '../../filtrex-api.service';
+import { ProductionSummary } from '../../sfl-api.service';
 
 export interface BarcodeImageInfo {
   status: string;

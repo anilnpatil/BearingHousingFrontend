@@ -385,7 +385,15 @@
   border-radius: 999px;
   font-size: 0.75rem;
   color: #ffffff;
+  background: #64748b;
+}
+
+.status-tag.ok {
   background: #16a34a;
+}
+
+.status-tag.notok {
+  background: #dc2626;
 }
 
 .image-card-header .status-tag:empty {

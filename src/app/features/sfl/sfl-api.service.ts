@@ -51,19 +51,21 @@ export interface ProductionSummary {
   p1_afterGlueStatus?: number;
   p1_toxLoadActual?: number;
   p1_toxLoadMin?: number;
-  p1_toxLoadMax?: number;
-  p1_toxDisplacementActual?: number;
+  p1_toxLoadMax?: number;  
   p1_toxDisplacementMin?: number;
   p1_toxDisplacementMax?: number;
+  p1_toxDisplacementActual?: number;
+  p1_graphStatus?: number;
 
   p2_beforeGlueStatus?: number;
   p2_afterGlueStatus?: number;
   p2_toxLoadActual?: number;
   p2_toxLoadMin?: number;
-  p2_toxLoadMax?: number;
-  p2_toxDisplacementActual?: number;
+  p2_toxLoadMax?: number;  
   p2_toxDisplacementMin?: number;
   p2_toxDisplacementMax?: number;
+  p2_toxDisplacementActual?: number;
+  p2_graphStatus?: number;
 }
 
 // Pagination response model

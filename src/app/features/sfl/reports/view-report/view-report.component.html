@@ -27,6 +27,7 @@
         <th class="p1-toxDisplacementMax-col">P1_ToxDisplacementMax</th>
         <th class="p1-toxDisplacementActual-col">P1_ToxDisplacementActual</th>
         <th class="p1-toxDisplacementMin-col">P1_ToxDisplacementMin</th>
+        <th class="p1-graphStatus-col">P1_GraphStatus</th>
 
         <th class="p2-beforeGlueStatus-col" *ngIf="shouldShowSecondProcess()">P2_BeforeGlueStatus</th>
         <th class="p2-afterGlueStatus-col" *ngIf="shouldShowSecondProcess()">P2_AfterGlueStatus</th>
@@ -36,6 +37,7 @@
         <th class="p2-toxDisplacementMax-col" *ngIf="shouldShowSecondProcess()">P2_ToxDisplacementMax</th>
         <th class="p2-toxDisplacementActual-col" *ngIf="shouldShowSecondProcess()">P2_ToxDisplacementActual</th>
         <th class="p2-toxDisplacementMin-col" *ngIf="shouldShowSecondProcess()">P2_ToxDisplacementMin</th>
+        <th class="p2-graphStatus-col" *ngIf="shouldShowSecondProcess()">P2_GraphStatus</th>
 
         <!-- <th class="cycleStartTime-col">CycleStartTime</th>
         <th class="cycleEndTime-col">CycleEndTime</th> -->
@@ -78,6 +80,13 @@
         <td class="p1-toxDisplacementMax-col">{{ getProcessValue(d, 1, 'toxDisplacementMax') }}</td>
         <td class="p1-toxDisplacementActual-col">{{ getProcessValue(d, 1, 'toxDisplacementActual') }}</td>
         <td class="p1-toxDisplacementMin-col">{{ getProcessValue(d, 1, 'toxDisplacementMin') }}</td>
+        <td class="p1-graphStatus-col">
+          <span class="status"
+                [class.ok]="getGraphStatusValue(d, 1) === 1"
+                [class.notok]="getGraphStatusValue(d, 1) !== 1">
+            {{ getGraphStatusLabel(d, 1) }}
+          </span>
+        </td>
 
         <td class="p2-beforeGlueStatus-col" *ngIf="shouldShowSecondProcess() && shouldShowProcess(d, 2)">
           <span class="status"
@@ -99,6 +108,13 @@
         <td class="p2-toxDisplacementMax-col" *ngIf="shouldShowSecondProcess() && shouldShowProcess(d, 2)">{{ getProcessValue(d, 2, 'toxDisplacementMax') }}</td>
         <td class="p2-toxDisplacementActual-col" *ngIf="shouldShowSecondProcess() && shouldShowProcess(d, 2)">{{ getProcessValue(d, 2, 'toxDisplacementActual') }}</td>
         <td class="p2-toxDisplacementMin-col" *ngIf="shouldShowSecondProcess() && shouldShowProcess(d, 2)">{{ getProcessValue(d, 2, 'toxDisplacementMin') }}</td>
+        <td class="p2-graphStatus-col" *ngIf="shouldShowSecondProcess() && shouldShowProcess(d, 2)">
+          <span class="status"
+                [class.ok]="getGraphStatusValue(d, 2) === 1"
+                [class.notok]="getGraphStatusValue(d, 2) !== 1">
+            {{ getGraphStatusLabel(d, 2) }}
+          </span>
+        </td>
 
         <!-- <td class="cycleStartTime-col">{{ d.cycleStartTime | date:'dd-MM-yyyy HH:mm' }}</td>
         <td class="cycleEndTime-col">{{ d.cycleEndTime | date:'dd-MM-yyyy HH:mm' }}</td> -->

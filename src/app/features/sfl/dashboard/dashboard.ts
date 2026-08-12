@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Subject, interval } from 'rxjs';
 import { takeUntil, startWith, switchMap } from 'rxjs/operators';
-import { FiltrexApiService, ProductionSummary } from '../filtrex-api.service';
+import { FiltrexApiService, ProductionSummary } from '../sfl-api.service';
 import { ErrorService } from '../../../core/services/error.service';
 
 @Component({

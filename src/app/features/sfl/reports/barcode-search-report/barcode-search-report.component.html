@@ -1,148 +1,3 @@
-<!-- <div class="page">
-  <div class="loading-overlay" *ngIf="loading">
-    <div class="loading-content">
-      <div class="loading-spinner"></div>
-      <p>Searching for barcode report...</p>
-    </div>
-  </div>
-
-  <div class="error-banner" *ngIf="errorMessage && !loading">
-    <div class="error-content">
-      <span class="error-icon">⚠️</span>
-      <span class="error-text">{{ errorMessage }}</span>
-      <button class="retry-link" (click)="searchBarcode()" type="button">Retry</button>
-    </div>
-  </div>
-
-  <div class="content" *ngIf="!errorMessage">
-    <section class="production-data" *ngIf="productionData">
-      <div class="table-scroll">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>Barcode</th>
-              <th>p1_BeforeGlueStatus</th>
-              <th>p1_AfterGlueStatus</th>
-              <th>p1_ToxLoadMax</th>
-              <th>p1_ToxLoadActual</th>
-              <th>p1_ToxLoadMin</th>
-              <th>p1_ToxDisplacementMax</th>
-              <th>p1_ToxDisplacementActual</th>
-              <th>p1_ToxDisplacementMin</th>
-              <th>p2_BeforeGlueStatus</th>
-              <th>p2_AfterGlueStatus</th>
-              <th>p2_ToxLoadMax</th>
-              <th>p2_ToxLoadActual</th>
-              <th>p2_ToxLoadMin</th>
-              <th>p2_ToxDisplacementMax</th>
-              <th>p2_ToxDisplacementActual</th>
-              <th>p2_ToxDisplacementMin</th>
-              <th>FinalStatus</th>
-              <th>CycleStartTime</th>
-              <!-- <th>CycleEndTime</th> >
-              <th>CycleTime</th>
-              <th>ProductionDateTime</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{{ productionData.barcode }}</td>
-              <td>{{ productionData.p1_beforeGlueStatus === 1 ? 'OK' : 'NOT OK' }}</td>
-              <td>{{ productionData.p1_afterGlueStatus === 1 ? 'OK' : 'NOT OK' }}</td>
-              <td>{{ productionData.p1_toxLoadMax }}</td>
-              <td>{{ productionData.p1_toxLoadActual }}</td>
-              <td>{{ productionData.p1_toxLoadMin }}</td>
-              <td>{{ productionData.p1_toxDisplacementMax }}</td>
-              <td>{{ productionData.p1_toxDisplacementActual }}</td>
-              <td>{{ productionData.p1_toxDisplacementMin }}</td>
-              <td>{{ productionData.p2_beforeGlueStatus === 1 ? 'OK' : 'NOT OK' }}</td>
-              <td>{{ productionData.p2_afterGlueStatus === 1 ? 'OK' : 'NOT OK' }}</td>
-              <td>{{ productionData.p2_toxLoadMax }}</td>
-              <td>{{ productionData.p2_toxLoadActual }}</td>
-              <td>{{ productionData.p2_toxLoadMin }}</td>
-              <td>{{ productionData.p2_toxDisplacementMax }}</td>
-              <td>{{ productionData.p2_toxDisplacementActual }}</td>
-              <td>{{ productionData.p2_toxDisplacementMin }}</td>
-              <td>{{ productionData.finalStatus === 1 ? 'OK' : 'NOT OK' }}</td>
-              <td>{{ productionData.cycleStartTime | date:'dd-MM-yyyy HH:mm' }}</td>
-              <!-- <td>{{ productionData.cycleEndTime | date:'dd-MM-yyyy HH:mm' }}</td> ->
-              <td>{{ productionData.cycleTime }}</td>
-              <td>{{ productionData.productionDateTime | date:'dd-MM-yyyy HH:mm' }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <div class="empty-state" *ngIf="!loading && !productionData">
-      <p>Search a barcode to view the report, production data, and images.</p>
-    </div>
-
-    <section class="image-grid" *ngIf="processImageSets.length">
-      <div class="image-set" *ngFor="let processSet of processImageSets">
-        <div class="image-set-header">{{ processSet.label }}</div>
-
-        <div class="image-card">
-          <div class="image-card-header">
-            <span>Before Image</span>
-            <span class="status-tag">{{ processSet.beforeImageStatus }}</span>
-          </div>
-          <div class="image-frame">
-            <img
-              *ngIf="processSet.beforeImageUrl"
-              [src]="processSet.beforeImageUrl"
-              alt="Before barcode image"
-              loading="lazy"
-            />
-            <div class="image-placeholder" *ngIf="!processSet.beforeImageUrl">Loading before image…</div>
-          </div>
-        </div>
-
-        <div class="image-card">
-          <div class="image-card-header">
-            <span>After Image</span>
-            <span class="status-tag">{{ processSet.afterImageStatus }}</span>
-          </div>
-          <div class="image-frame">
-            <img
-              *ngIf="processSet.afterImageUrl"
-              [src]="processSet.afterImageUrl"
-              alt="After barcode image"
-              loading="lazy"
-            />
-            <div class="image-placeholder" *ngIf="!processSet.afterImageUrl">Loading after image…</div>
-          </div>
-        </div>
-
-        <div class="image-card">
-          <div class="image-card-header">
-            <span>Graph PDF</span>
-            <span class="status-tag">{{ processSet.graphImageStatus }}</span>
-          </div>
-          <div class="image-frame pdf-viewer-frame">
-            
-            <iframe
-                *ngIf="processSet.graphImageUrl"
-                class="pdf-frame"
-                [src]="processSet.graphImageUrl">
-            </iframe>
-            <a
-              *ngIf="processSet.graphImageUrl"
-              class="pdf-link"
-              [href]="processSet.graphImageUrl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Open Graph PDF
-            </a>
-            <div class="image-placeholder" *ngIf="!processSet.graphImageUrl">Loading graph PDF…</div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-</div> -->
-
 <div class="page">
   <div class="loading-overlay" *ngIf="loading">
     <div class="loading-content">
@@ -177,8 +32,9 @@
               <th>p1_ToxLoadActual</th>
               <th>p1_ToxLoadMin</th>
               <th>p1_ToxDisplacementMax</th>
-              <th>p1_ToxDisplacementActual</th>
+              <th>p1_ToxDisplacementActual</th>              
               <th>p1_ToxDisplacementMin</th>
+              <th>p1_GraphStatus</th>
               <th>p2_BeforeGlueStatus</th>
               <th>p2_AfterGlueStatus</th>
               <th>p2_ToxLoadMax</th>
@@ -187,7 +43,7 @@
               <th>p2_ToxDisplacementMax</th>
               <th>p2_ToxDisplacementActual</th>
               <th>p2_ToxDisplacementMin</th>
-              
+              <th>p2_GraphStatus</th>              
               <th>CycleStartTime</th>
               <th>CycleEndTime</th>
               <th>CycleTime</th>              
@@ -209,6 +65,7 @@
               <td>{{ productionData.p1_toxDisplacementMax }}</td>
               <td>{{ productionData.p1_toxDisplacementActual }}</td>
               <td>{{ productionData.p1_toxDisplacementMin }}</td>
+              <td>{{ productionData.p1_graphStatus === 1 ? 'OK' : 'NOT OK' }}</td>
               <td>{{ productionData.p2_beforeGlueStatus === 1 ? 'OK' : 'NOT OK' }}</td>
               <td>{{ productionData.p2_afterGlueStatus === 1 ? 'OK' : 'NOT OK' }}</td>
               <td>{{ productionData.p2_toxLoadMax }}</td>
@@ -217,11 +74,10 @@
               <td>{{ productionData.p2_toxDisplacementMax }}</td>
               <td>{{ productionData.p2_toxDisplacementActual }}</td>
               <td>{{ productionData.p2_toxDisplacementMin }}</td>
-              
+              <td>{{ productionData.p2_graphStatus === 1 ? 'OK' : 'NOT OK' }}</td>
               <td>{{ productionData.cycleStartTime | date:'dd-MM-yyyy HH:mm' }}</td>
               <td>{{ productionData.productionDateTime | date:'dd-MM-yyyy HH:mm' }}</td>
-              <td>{{ productionData.cycleTime }}</td>
-              
+              <td>{{ productionData.cycleTime }}</td>              
             </tr>
           </tbody>
         </table>
@@ -240,7 +96,11 @@
         <div class="image-card">
           <div class="image-card-header">
             <span>Before Image</span>
-            <span class="status-tag">{{ processSet.beforeImageStatus }}</span>
+            <span class="status-tag"
+                  [class.ok]="isOkStatus(processSet.beforeImageStatus)"
+                  [class.notok]="!isOkStatus(processSet.beforeImageStatus)">
+              {{ processSet.beforeImageStatus }}
+            </span>
           </div>
           <div class="image-frame">
             <img
@@ -258,7 +118,11 @@
         <div class="image-card">
           <div class="image-card-header">
             <span>After Image</span>
-            <span class="status-tag">{{ processSet.afterImageStatus }}</span>
+            <span class="status-tag"
+                  [class.ok]="isOkStatus(processSet.afterImageStatus)"
+                  [class.notok]="!isOkStatus(processSet.afterImageStatus)">
+              {{ processSet.afterImageStatus }}
+            </span>
           </div>
           <div class="image-frame">
             <img
@@ -276,7 +140,11 @@
         <div class="image-card">
           <div class="image-card-header">
             <span>Graph PDF</span>
-            <span class="status-tag">{{ processSet.graphImageStatus }}</span>
+            <span class="status-tag"
+                  [class.ok]="isOkStatus(processSet.graphImageStatus)"
+                  [class.notok]="!isOkStatus(processSet.graphImageStatus)">
+              {{ processSet.graphImageStatus }}
+            </span>
           </div>
           <div class="image-frame pdf-viewer-frame">
             <div *ngIf="processSet.graphDownloadUrl || processSet.graphImageUrl" class="pdf-container">

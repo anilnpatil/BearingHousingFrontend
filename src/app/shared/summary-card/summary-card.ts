@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductionReportViewRow } from '../../features/filtrex/reports/models';
+import { ProductionReportViewRow } from '../../features/sfl/reports/models';
 
 @Component({
   selector: 'app-summary-card',

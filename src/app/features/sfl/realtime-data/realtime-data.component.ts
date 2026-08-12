@@ -9,7 +9,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { interval, Subject } from 'rxjs';
 import { startWith, switchMap, takeUntil } from 'rxjs/operators';
-import { FiltrexApiService, LiveData } from '../filtrex-api.service';
+import { FiltrexApiService, LiveData } from '../sfl-api.service';
 import { ErrorService } from '../../../core/services/error.service';
 
 @Component({

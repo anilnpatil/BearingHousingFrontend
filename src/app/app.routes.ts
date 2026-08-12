@@ -1,21 +1,21 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { Dashboard } from './features/filtrex/dashboard/dashboard';
+import { Dashboard } from './features/sfl/dashboard/dashboard';
 import { Admin } from './features/admin/admin';
-import { User } from './features/filtrex/user/user';
+import { User } from './features/sfl/user/user';
 import { LayoutComponent } from './core/layout/layout/layout';
 import { authGuard } from './auth/auth.guard';
 import { roleGuard } from './auth/role.guard';
-import { RealtimeDataComponent } from './features/filtrex/realtime-data/realtime-data.component';
-import { ViewReportComponent } from './features/filtrex/reports/view-report/view-report.component';
-import { ViewGraphicalReport } from './features/filtrex/reports/view-graphical-report/view-graphical-report';
-import { ProductionReportComponent } from './features/filtrex/reports/production-summary-report/production-summary-report.component';
-import { ProductionTotalsReportsComponent } from './features/filtrex/reports/production-totals-reports/production-totals-reports.component';
-import { ProductionQualityChartComponent } from './features/filtrex/reports/production-quality-chart/production-quality-chart.component';
-import { ProductionTrendChartComponent } from './features/filtrex/reports/production-trend-chart/production-trend-chart.component';
-import { RejectionGraphComponent } from './features/filtrex/reports/rejection-graph/rejection-graph.component';
-import { BarcodeSearchReportComponent } from './features/filtrex/reports/barcode-search-report/barcode-search-report.component';
+import { RealtimeDataComponent } from './features/sfl/realtime-data/realtime-data.component';
+import { ViewReportComponent } from './features/sfl/reports/view-report/view-report.component';
+import { ViewGraphicalReport } from './features/sfl/reports/view-graphical-report/view-graphical-report';
+import { ProductionReportComponent } from './features/sfl/reports/production-summary-report/production-summary-report.component';
+import { ProductionTotalsReportsComponent } from './features/sfl/reports/production-totals-reports/production-totals-reports.component';
+import { ProductionQualityChartComponent } from './features/sfl/reports/production-quality-chart/production-quality-chart.component';
+import { ProductionTrendChartComponent } from './features/sfl/reports/production-trend-chart/production-trend-chart.component';
+import { RejectionGraphComponent } from './features/sfl/reports/rejection-graph/rejection-graph.component';
+import { BarcodeSearchReportComponent } from './features/sfl/reports/barcode-search-report/barcode-search-report.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },

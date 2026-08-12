@@ -15,7 +15,7 @@ import {
   FiltrexApiService,
   ProductionSummary,
   PagedResponse
-} from '../../filtrex-api.service';
+} from '../../sfl-api.service';
 import { HeaderContentService, FilterConfig } from '../../../../core/services/header-content.service';
 import { ReportFullscreenService } from '../../../../core/services/report-fullscreen.service';
 
@@ -230,6 +230,28 @@ export class ViewReportComponent implements OnInit, OnDestroy {
     return 'N/A';
   }
 
+  getGraphStatusLabel(row: ProductionSummary, processNumber: number): string {
+    const value = this.getGraphStatusValue(row, processNumber);
+
+    if (value === 1) {
+      return 'OK';
+    }
+
+    if (value === 0) {
+      return 'NOT OK';
+    }
+
+    return 'N/A';
+  }
+
+  getGraphStatusValue(row: ProductionSummary, processNumber: number): number | undefined {
+    const key = `p${processNumber}_graphStatus`;
+    const rowData = row as unknown as Record<string, unknown>;
+    const value = rowData[key];
+
+    return typeof value === 'number' ? value : undefined;
+  }
+
   getProcessValue(
     row: ProductionSummary,
     processNumber: number,
@@ -282,6 +304,7 @@ export class ViewReportComponent implements OnInit, OnDestroy {
       P1_ToxDisplacementMax: this.getProcessValue(row, 1, 'toxDisplacementMax'),
       P1_ToxDisplacementActual: this.getProcessValue(row, 1, 'toxDisplacementActual'),
       P1_ToxDisplacementMin: this.getProcessValue(row, 1, 'toxDisplacementMin'),
+      P1_GraphStatus: this.getProcessValue(row, 1, 'graphStatus'),
       P2_BeforeGlueStatus: this.getProcessStatusLabel(row, 2, 'beforeGlueStatus'),
       P2_AfterGlueStatus: this.getProcessStatusLabel(row, 2, 'afterGlueStatus'),
       P2_ToxLoadMax: this.getProcessValue(row, 2, 'toxLoadMax'),
@@ -290,6 +313,7 @@ export class ViewReportComponent implements OnInit, OnDestroy {
       P2_ToxDisplacementMax: this.getProcessValue(row, 2, 'toxDisplacementMax'),
       P2_ToxDisplacementActual: this.getProcessValue(row, 2, 'toxDisplacementActual'),
       P2_ToxDisplacementMin: this.getProcessValue(row, 2, 'toxDisplacementMin'),
+      P2_GraphStatus: this.getProcessValue(row, 2, 'graphStatus'),
       cycleTime: row.cycleTime ?? ''
     }));
 

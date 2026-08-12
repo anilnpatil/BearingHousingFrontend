@@ -87,15 +87,15 @@
               <input readonly [value]="productionData.barcode || 'N/A'" />
             </div>
             <div class="detail-item">
-              <label>Operator</label>
+              <label>Operator Name</label>
               <input readonly [value]="productionData.operatorName || 'N/A'" />
             </div>
             <div class="detail-item">
-              <label>Start Time</label>
+              <label>Cycle Start Time</label>
               <input readonly [value]="productionData.cycleStartTime ? (productionData.cycleStartTime | date:'short') : 'N/A'" />
             </div>
             <div class="detail-item">
-              <label>End Time</label>
+              <label>Cycle End Time</label>
               <input readonly [value]="productionData.productionDateTime ? (productionData.productionDateTime | date:'short') : 'N/A'" />
             </div>
             <div class="detail-item">
@@ -117,30 +117,30 @@
           <div class="details-grid">
             <div class="details-row">
               <div class="detail-item">
-                <label>Before Glue</label>
+                <label>Before Glue Status</label>
                 <input readonly [value]="getProcessStatusLabel(1, 'beforeGlueStatus')" />
+              </div>             
+              <div class="detail-item">
+                <label>Load Min / Max Value</label>
+                <input readonly [value]="getProcessRangeValue(1, 'toxLoadMin', 'toxLoadMax')" />
               </div>
               <div class="detail-item">
-                <label>After Glue</label>
+                <label>Load Actual Value</label>
+                <input readonly [value]="getProcessValue(1, 'toxLoadActual')" />
+              </div>              
+            </div>
+
+            <div class="details-row">              
+              <div class="detail-item">
+                <label>After Glue Status</label>
                 <input readonly [value]="getProcessStatusLabel(1, 'afterGlueStatus')" />
               </div>
               <div class="detail-item">
-                <label>Load Min / Max</label>
-                <input readonly [value]="getProcessRangeValue(1, 'toxLoadMin', 'toxLoadMax')" />
-              </div>
-            </div>
-
-            <div class="details-row">
-              <div class="detail-item">
-                <label>Load Actual</label>
-                <input readonly [value]="getProcessValue(1, 'toxLoadActual')" />
-              </div>
-              <div class="detail-item">
-                <label>Displacement Min / Max</label>
+                <label>Displacement Min / Max Value</label>
                 <input readonly [value]="getProcessRangeValue(1, 'toxDisplacementMin', 'toxDisplacementMax')" />
               </div>
               <div class="detail-item">
-                <label>Displacement Actual</label>
+                <label>Displacement Actual Value</label>
                 <input readonly [value]="getProcessValue(1, 'toxDisplacementActual')" />
               </div>
             </div>
@@ -154,28 +154,28 @@
               <div class="detail-item">
                 <label>Before Glue</label>
                 <input readonly [value]="getProcessStatusLabel(2, 'beforeGlueStatus')" />
-              </div>
-              <div class="detail-item">
-                <label>After Glue</label>
-                <input readonly [value]="getProcessStatusLabel(2, 'afterGlueStatus')" />
-              </div>
+              </div>              
               <div class="detail-item">
                 <label>Load Min / Max</label>
                 <input readonly [value]="getProcessRangeValue(2, 'toxLoadMin', 'toxLoadMax')" />
               </div>
-            </div>
-
-            <div class="details-row">
               <div class="detail-item">
-                <label>Load Actual</label>
+                <label>Actual Load Value</label>
                 <input readonly [value]="getProcessValue(2, 'toxLoadActual')" />
               </div>
+            </div>
+
+            <div class="details-row">              
               <div class="detail-item">
-                <label>Displacement Min / Max</label>
+                <label>After Glue Status</label>
+                <input readonly [value]="getProcessStatusLabel(2, 'afterGlueStatus')" />
+              </div>
+              <div class="detail-item">
+                <label>Displacement Min / Max Value</label>
                 <input readonly [value]="getProcessRangeValue(2, 'toxDisplacementMin', 'toxDisplacementMax')" />
               </div>
               <div class="detail-item">
-                <label>Displacement Actual</label>
+                <label>Displacement Actual Value</label>
                 <input readonly [value]="getProcessValue(2, 'toxDisplacementActual')" />
               </div>
             </div>

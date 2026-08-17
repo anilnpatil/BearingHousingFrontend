@@ -13,7 +13,8 @@ export class AuthService {
   private role = signal<UserRole | null>(null);
   private token = signal<string | null>(null);
 
-  private apiUrl = 'http://localhost:8083/api/auth'; 
+  // private apiUrl = 'http://localhost:8083/api/auth';
+  private apiUrl = `http://${window.location.hostname}:8083/api/auth`; 
 
   constructor(private http: HttpClient) {    
     const storedToken = localStorage.getItem('token');

@@ -298,7 +298,7 @@ export class BarcodeSearchReportComponent
       return false;
     }
     const normalized = status.trim().toUpperCase();
-    return normalized === 'AOK' || normalized === 'BOK' || normalized === 'OK';
+    return normalized === 'A_OK' || normalized === 'B_OK' || normalized === 'OK';
   }
 
   /**

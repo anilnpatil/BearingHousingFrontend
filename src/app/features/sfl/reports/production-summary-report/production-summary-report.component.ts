@@ -33,7 +33,7 @@ export class ProductionReportComponent implements OnInit, OnDestroy {
   from!: string;
   to!: string;
   year = new Date().getFullYear();
-  sku = 0;
+  sku = 'ALL';
   shift = 0;
   view: ViewType = 'DAY';
   mode: 'TABLE' | 'SUMMARY' = 'SUMMARY';
@@ -41,7 +41,7 @@ export class ProductionReportComponent implements OnInit, OnDestroy {
   summaryData: SummaryDateBlock[] = [];
   rawData: ProductionReportRow[] = [];
   viewData: ProductionReportViewRow[] = [];
-  skuOptions: number[] = [];
+  skuOptions: string[] = [];
 
   loading = false;
   errorMessage: string | null = null;
@@ -122,27 +122,23 @@ export class ProductionReportComponent implements OnInit, OnDestroy {
         name: 'sku',
         type: 'select',
         label: 'SKU',
+        placeholder: 'ALL',
         value: this.sku,
         options: [
-          { label: '0) ALL', value: 0 },
-          { label: '1) SP210', value: 1 },
-          { label: '2) DFC Nano', value: 2 },
-          { label: '3) 10" STD MATRIKX models', value: 3 },
-          { label: '4) DFC Inline RO', value: 4 },
-          { label: '5) Havells carbon block', value: 5 },
-          { label: '6) Ecowater078', value: 6 },
-          { label: '7) Ecowater108', value: 7 },
-          { label: '8) DFC Chemiblock', value: 8 },
-          { label: '9) Nova family(I Nova & G nova)', value: 9 },
-          { label: '10) Livpure', value: 10 },
-          { label: '11) Ecowater055', value: 11 },
-          { label: '12) DFC MCHPS', value: 12 },
-          { label: '13) Aquatru pre', value: 13 },
-          { label: '14) Aquatru post', value: 14 }
-          // other SKUs can be added dynamically by skuOptions
+          { label: '0) ALL', value: "ALL"},
+          { label: '1) LEGEND TOP MOUNT', value: "LEGEND TOP MOUNT" },
+          { label: '2) SABRE', value: "SABRE" },
+          { label: '3) LEXINGTON', value: "LEXINGTON" },
+          { label: '4) LATITUDE', value: "LATITUDE" },
+          { label: '5) COYOTO', value: "COYOTO" },
+          { label: '6) COLORADO', value: "COLORADO" },
+          { label: '7) BARRACUDA TOP MOUNT', value: "BARRACUDA TOP MOUNT" },
+          { label: '8) BARRACUDA SIDE MOUNT', value: "BARRACUDA SIDE MOUNT" },
+          { label: '9) KINETIC', value: "KINETIC" },
+          { label: '10) NTV', value: "NTV" }
         ],
         onChange: (value) => {
-          this.sku = value;
+          this.sku = this.normalizeSku(value);
           this.loadData();
         }
       },
@@ -188,6 +184,7 @@ export class ProductionReportComponent implements OnInit, OnDestroy {
 
   private loadData(): void {
     const shiftParam = this.shift === 0 ? null : Number(this.shift);
+    const skuParam = this.normalizeSku(this.sku);
 
     this.loading = true;
     this.errorMessage = null;
@@ -195,11 +192,11 @@ export class ProductionReportComponent implements OnInit, OnDestroy {
 
     let request$;
     if (this.view === 'DAY') {
-      request$ = this.service.fetchDay(this.from, this.to, this.sku, shiftParam);
+      request$ = this.service.fetchDay(this.from, this.to, skuParam, shiftParam);
     } else if (this.view === 'WEEK') {
-      request$ = this.service.fetchWeek(this.year, this.sku, shiftParam);
+      request$ = this.service.fetchWeek(this.year, skuParam, shiftParam);
     } else {
-      request$ = this.service.fetchMonth(this.year, this.sku, shiftParam);
+      request$ = this.service.fetchMonth(this.year, skuParam, shiftParam);
     }
 
     request$
@@ -333,5 +330,13 @@ export class ProductionReportComponent implements OnInit, OnDestroy {
     d.setUTCDate(d.getUTCDate() + 4 - dayNum);
     const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
     return Math.ceil((((d.getTime() - yearStart.getTime()) / 86400000) + 1) / 7);
+  }
+
+  private normalizeSku(value: string | number | null | undefined): string {
+    if (value === null || value === undefined || value === '' || value === 0 || value === '0') {
+      return 'ALL';
+    }
+
+    return String(value);
   }
 }

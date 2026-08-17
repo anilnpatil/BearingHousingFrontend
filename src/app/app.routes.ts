@@ -7,7 +7,6 @@ import { User } from './features/sfl/user/user';
 import { LayoutComponent } from './core/layout/layout/layout';
 import { authGuard } from './auth/auth.guard';
 import { roleGuard } from './auth/role.guard';
-import { RealtimeDataComponent } from './features/sfl/realtime-data/realtime-data.component';
 import { ViewReportComponent } from './features/sfl/reports/view-report/view-report.component';
 import { ViewGraphicalReport } from './features/sfl/reports/view-graphical-report/view-graphical-report';
 import { ProductionReportComponent } from './features/sfl/reports/production-summary-report/production-summary-report.component';
@@ -27,7 +26,6 @@ export const routes: Routes = [
     canActivate: [authGuard],
     children: [
       { path: 'dashboard', component: Dashboard, data: { title: 'Dashboard' } },
-      { path: 'realtimedata', component: RealtimeDataComponent, data: { title: 'Realtime Data' } },
       { path: 'view-reports', component: ViewReportComponent, data: { title: 'Parameter Reports' } },
       { path: 'production-report', component: ProductionReportComponent, data: { title: 'Production Summary Report' } },
       { path: 'graphical-reports', component: ViewGraphicalReport, data: { title: 'Graphical Reports' } },

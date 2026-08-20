@@ -56,7 +56,11 @@
         <div class="stat-icon sku-icon">📦</div>
         <div class="stat-info">
           <h3>Current SKU</h3>
-          <p class="stat-number" *ngIf="!isLoading && !hasError">{{ productionData.sku }}</p>
+          <p
+            class="stat-number"
+            *ngIf="!isLoading && !hasError"
+            [style.font-size.rem]="getSkuFontSize()"
+          >{{ productionData.sku }}</p>
           <p class="stat-loading" *ngIf="isLoading">Loading...</p>
           <p class="stat-error" *ngIf="hasError && !isLoading">N/A</p>
         </div>

@@ -109,6 +109,11 @@ export class Dashboard implements OnInit, OnDestroy {
     return (this.productionData.numberofProcess ?? 1) > 1;
   }
 
+  getSkuFontSize(): number {
+    const skuLength = this.productionData.sku?.length ?? 0;
+    return Math.max(0.85, Math.min(2, 2 - Math.max(0, skuLength - 10) * 0.08));
+  }
+
   getProcessStatusLabel(processNumber: number, statusField: 'beforeGlueStatus' | 'afterGlueStatus'): string {
     const processKey = `p${processNumber}_${statusField}`;
     const legacyKey = statusField as keyof ProductionSummary;

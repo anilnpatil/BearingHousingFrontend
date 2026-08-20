@@ -186,6 +186,20 @@ body {
   }
 }
 
+.sku-card {
+  .stat-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .stat-number {
+    line-height: 1.15;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
 .parameter-details-card {
   background: rgba(255, 255, 255, 0.95);
   border-radius: 15px;

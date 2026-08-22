@@ -21,9 +21,9 @@
 
         <th class="p1-beforeGlueStatus-col">P1_BeforeGlueStatus</th>
         <th class="p1-afterGlueStatus-col">P1_AfterGlueStatus</th>
-        <th class="p1-toxLoadMax-col">P1_ToxLoadMax</th>
+        <!-- <th class="p1-toxLoadMax-col">P1_ToxLoadMax</th> -->
         <th class="p1-toxLoadActual-col">P1_ToxLoadActual</th>
-        <th class="p1-toxLoadMin-col">P1_ToxLoadMin</th>
+        <!-- <th class="p1-toxLoadMin-col">P1_ToxLoadMin</th> -->
         <th class="p1-toxDisplacementMax-col">P1_ToxDisplacementMax</th>
         <th class="p1-toxDisplacementActual-col">P1_ToxDisplacementActual</th>
         <th class="p1-toxDisplacementMin-col">P1_ToxDisplacementMin</th>
@@ -31,9 +31,9 @@
 
         <th class="p2-beforeGlueStatus-col" *ngIf="shouldShowSecondProcess()">P2_BeforeGlueStatus</th>
         <th class="p2-afterGlueStatus-col" *ngIf="shouldShowSecondProcess()">P2_AfterGlueStatus</th>
-        <th class="p2-toxLoadMax-col" *ngIf="shouldShowSecondProcess()">P2_ToxLoadMax</th>
+        <!-- <th class="p2-toxLoadMax-col" *ngIf="shouldShowSecondProcess()">P2_ToxLoadMax</th> -->
         <th class="p2-toxLoadActual-col" *ngIf="shouldShowSecondProcess()">P2_ToxLoadActual</th>
-        <th class="p2-toxLoadMin-col" *ngIf="shouldShowSecondProcess()">P2_ToxLoadMin</th>
+        <!-- <th class="p2-toxLoadMin-col" *ngIf="shouldShowSecondProcess()">P2_ToxLoadMin</th> -->
         <th class="p2-toxDisplacementMax-col" *ngIf="shouldShowSecondProcess()">P2_ToxDisplacementMax</th>
         <th class="p2-toxDisplacementActual-col" *ngIf="shouldShowSecondProcess()">P2_ToxDisplacementActual</th>
         <th class="p2-toxDisplacementMin-col" *ngIf="shouldShowSecondProcess()">P2_ToxDisplacementMin</th>
@@ -74,9 +74,9 @@
             {{ getProcessStatusLabel(d, 1, 'afterGlueStatus') }}
           </span>
         </td>
-        <td class="p1-toxLoadMax-col">{{ getProcessValue(d, 1, 'toxLoadMax') }}</td>
+        <!-- <td class="p1-toxLoadMax-col">{{ getProcessValue(d, 1, 'toxLoadMax') }}</td> -->
         <td class="p1-toxLoadActual-col">{{ getProcessValue(d, 1, 'toxLoadActual') }}</td>
-        <td class="p1-toxLoadMin-col">{{ getProcessValue(d, 1, 'toxLoadMin') }}</td>
+        <!-- <td class="p1-toxLoadMin-col">{{ getProcessValue(d, 1, 'toxLoadMin') }}</td> -->
         <td class="p1-toxDisplacementMax-col">{{ getProcessValue(d, 1, 'toxDisplacementMax') }}</td>
         <td class="p1-toxDisplacementActual-col">{{ getProcessValue(d, 1, 'toxDisplacementActual') }}</td>
         <td class="p1-toxDisplacementMin-col">{{ getProcessValue(d, 1, 'toxDisplacementMin') }}</td>
@@ -102,9 +102,9 @@
             {{ getProcessStatusLabel(d, 2, 'afterGlueStatus') }}
           </span>
         </td>
-        <td class="p2-toxLoadMax-col" *ngIf="shouldShowSecondProcess() && shouldShowProcess(d, 2)">{{ getProcessValue(d, 2, 'toxLoadMax') }}</td>
+        <!-- <td class="p2-toxLoadMax-col" *ngIf="shouldShowSecondProcess() && shouldShowProcess(d, 2)">{{ getProcessValue(d, 2, 'toxLoadMax') }}</td> -->
         <td class="p2-toxLoadActual-col" *ngIf="shouldShowSecondProcess() && shouldShowProcess(d, 2)">{{ getProcessValue(d, 2, 'toxLoadActual') }}</td>
-        <td class="p2-toxLoadMin-col" *ngIf="shouldShowSecondProcess() && shouldShowProcess(d, 2)">{{ getProcessValue(d, 2, 'toxLoadMin') }}</td>
+        <!-- <td class="p2-toxLoadMin-col" *ngIf="shouldShowSecondProcess() && shouldShowProcess(d, 2)">{{ getProcessValue(d, 2, 'toxLoadMin') }}</td> -->
         <td class="p2-toxDisplacementMax-col" *ngIf="shouldShowSecondProcess() && shouldShowProcess(d, 2)">{{ getProcessValue(d, 2, 'toxDisplacementMax') }}</td>
         <td class="p2-toxDisplacementActual-col" *ngIf="shouldShowSecondProcess() && shouldShowProcess(d, 2)">{{ getProcessValue(d, 2, 'toxDisplacementActual') }}</td>
         <td class="p2-toxDisplacementMin-col" *ngIf="shouldShowSecondProcess() && shouldShowProcess(d, 2)">{{ getProcessValue(d, 2, 'toxDisplacementMin') }}</td>

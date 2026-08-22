@@ -123,29 +123,33 @@
               <div class="detail-item">
                 <label>Before Glue Status</label>
                 <input readonly [value]="getProcessStatusLabel(1, 'beforeGlueStatus')" />
-              </div>             
+              </div>
               <div class="detail-item">
+                <label>After Glue Status</label>
+                <input readonly [value]="getProcessStatusLabel(1, 'afterGlueStatus')" />
+              </div>             
+              <!-- <div class="detail-item">
                 <label>Load Min / Max Value</label>
                 <input readonly [value]="getProcessRangeValue(1, 'toxLoadMin', 'toxLoadMax')" />
-              </div>
+              </div> -->
               <div class="detail-item">
                 <label>Load Actual Value</label>
                 <input readonly [value]="getProcessValue(1, 'toxLoadActual')" />
               </div>              
             </div>
 
-            <div class="details-row">              
+            <div class="details-row">             
               <div class="detail-item">
-                <label>After Glue Status</label>
-                <input readonly [value]="getProcessStatusLabel(1, 'afterGlueStatus')" />
-              </div>
-              <div class="detail-item">
-                <label>Displacement Min / Max Value</label>
-                <input readonly [value]="getProcessRangeValue(1, 'toxDisplacementMin', 'toxDisplacementMax')" />
+                <label>Max Value</label>
+                <input readonly [value]="getProcessValue(1, 'toxDisplacementMax')" />
               </div>
               <div class="detail-item">
                 <label>Displacement Actual Value</label>
                 <input readonly [value]="getProcessValue(1, 'toxDisplacementActual')" />
+              </div>
+              <div class="detail-item">
+                <label>Displacement Min</label>
+                <input readonly [value]="getProcessValue(1, 'toxDisplacementMin')" />
               </div>
             </div>
           </div>
@@ -158,29 +162,32 @@
               <div class="detail-item">
                 <label>Before Glue</label>
                 <input readonly [value]="getProcessStatusLabel(2, 'beforeGlueStatus')" />
-              </div>              
+              </div>
               <div class="detail-item">
+                <label>After Glue Status</label>
+                <input readonly [value]="getProcessStatusLabel(2, 'afterGlueStatus')" />
+              </div>              
+              <!-- <div class="detail-item">
                 <label>Load Min / Max</label>
                 <input readonly [value]="getProcessRangeValue(2, 'toxLoadMin', 'toxLoadMax')" />
-              </div>
+              </div> -->
               <div class="detail-item">
                 <label>Actual Load Value</label>
                 <input readonly [value]="getProcessValue(2, 'toxLoadActual')" />
               </div>
             </div>
-
-            <div class="details-row">              
+            <div class="details-row">               
               <div class="detail-item">
-                <label>After Glue Status</label>
-                <input readonly [value]="getProcessStatusLabel(2, 'afterGlueStatus')" />
-              </div>
-              <div class="detail-item">
-                <label>Displacement Min / Max Value</label>
-                <input readonly [value]="getProcessRangeValue(2, 'toxDisplacementMin', 'toxDisplacementMax')" />
+                <label> Max Value</label>
+                <input readonly [value]="getProcessValue(2, 'toxDisplacementMax')" />
               </div>
               <div class="detail-item">
                 <label>Displacement Actual Value</label>
                 <input readonly [value]="getProcessValue(2, 'toxDisplacementActual')" />
+              </div>                            
+              <div class="detail-item">
+                <label>Displacement Min</label>
+                <input readonly [value]="getProcessValue(2, 'toxDisplacementMin')" />
               </div>
             </div>
           </div>

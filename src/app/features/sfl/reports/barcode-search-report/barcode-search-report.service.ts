@@ -28,4 +28,11 @@ export class BarcodeSearchReportService {
       `${API_CONFIG.FILTREX.BARCODE_SEARCH_REPORT}/${barcode}`
     );
   }
+
+  publishBarcodeScan(barcode: string): Observable<void> {
+    return this.http.post<void>(
+      '/api/bearing-housing/barcode-scan',
+      { barcode }
+    );
+  }
 }

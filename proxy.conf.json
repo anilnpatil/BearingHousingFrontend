@@ -3,7 +3,14 @@
     "target": "http://localhost:8083",
     "secure": false,
     "changeOrigin": true,
-     "logLevel": "debug"
+    "logLevel": "debug"
+  },
+  "/ws": {
+    "target": "http://localhost:8083",
+    "secure": false,
+    "changeOrigin": true,
+    "ws": true,
+    "logLevel": "debug"
   }
 }
 

@@ -37,5 +37,9 @@ export class Header {
       filter.onChange(newValue);
     }
   }
+
+  onFilterFocus(filter: any): void {
+    filter.onFocus?.();
+  }
 }
 

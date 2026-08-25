@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { BarcodeWebsocketService } from './core/services/barcode-websocket.service';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +10,8 @@ import { RouterOutlet } from '@angular/router';
 })
 export class App {
   protected readonly title = signal('NextFirstFiltrexFrontend');
+
+  constructor(barcodeWebsocketService: BarcodeWebsocketService) {
+    barcodeWebsocketService.connect();
+  }
 }

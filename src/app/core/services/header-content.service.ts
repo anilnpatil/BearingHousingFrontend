@@ -10,6 +10,7 @@ export interface FilterConfig {
   visible?: boolean;
   disabled?: boolean;
   onChange?: (value: any) => void;
+  onFocus?: () => void;
 }
 
 export interface HeaderContent {

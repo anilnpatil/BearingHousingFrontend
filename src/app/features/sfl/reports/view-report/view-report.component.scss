@@ -1,11 +1,13 @@
 /*    HOST  */
 :host {
   display: block;
-  height: 100vh;
+  position: relative;
+  height: 100%;
+  min-height: 100%;
   background: #f1f5f9;
   overflow: hidden;
   font-family: "Segoe UI", Roboto, Arial, sans-serif;
-  --app-header-height: 60px;
+  --report-pagination-height: 52px;
   padding: 0;
   margin: 0;
 }
@@ -58,8 +60,8 @@
   position: fixed;
   top: var(--app-header-height, 60px);
   left: 0;
-  right: 0;  
-  bottom: 72px;
+  right: 0;
+  bottom: calc(var(--app-footer-height, 40px) + var(--report-pagination-height, 52px));
   overflow: auto;
   background: #f8fafc;  
   padding: 0 1px 2px 3px;
@@ -180,11 +182,12 @@
 /*    PAGINATION (FIXED)  */
 .pagination {
   position: fixed;
-  bottom: 0;
+  bottom: var(--app-footer-height, 40px);
   left: 0;
   right: 0;
-  height: 51px;
-  margin-bottom: 28px;
+  min-height: var(--report-pagination-height, 52px);
+  box-sizing: border-box;
+  margin: 0;
 
   background: #ffffff;
   border-top: 1px solid #e5e7eb;
@@ -274,7 +277,7 @@
   }
 
   .table-wrapper {
-    top: 120px;
+    top: var(--app-header-height, 60px);
   }
 
   .error-content {
@@ -284,5 +287,42 @@
     .error-text {
       margin: 0;
     }
+  }
+}
+
+@media (max-width: 640px) {
+  :host {
+    --report-pagination-height: 104px;
+  }
+
+  .pagination {
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 6px 8px;
+  }
+
+  .pagination button {
+    margin-bottom: 0;
+    min-height: 34px;
+  }
+
+  .pagination span {
+    order: 3;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+  }
+
+  .pagination .page-entry {
+    order: 4;
+    min-width: 0;
+    width: 100%;
+    border-left: 0;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 5px;
+  }
+
+  .pagination .page-entry input {
+    margin-bottom: 0;
   }
 }

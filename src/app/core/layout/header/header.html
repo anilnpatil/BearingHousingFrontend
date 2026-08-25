@@ -20,7 +20,10 @@
   <div class="header-filters" *ngIf="headerContent$().filters?.length">
     <div class="filters-group">
       <ng-container *ngFor="let filter of headerContent$().filters">
-        <div class="filter-item" *ngIf="filter.visible !== false">
+        <div
+          class="filter-item"
+          [class]="'filter-item filter-' + filter.type"
+          *ngIf="filter.visible !== false">
           <label *ngIf="filter.label">{{ filter.label }}</label>
           
           <!-- Select Filter -->
@@ -61,6 +64,7 @@
             [placeholder]="filter.placeholder || ''"
             [disabled]="filter.disabled ?? false"
             (change)="onFilterChange(filter, filter.value)"
+            (focus)="onFilterFocus(filter)"
             class="filter-input">
 
           <!-- Button Filter -->
@@ -68,6 +72,7 @@
             *ngIf="filter.type === 'button'"
             [disabled]="filter.disabled ?? false"
             (click)="onFilterChange(filter, filter.value)"
+            [class.scan-btn]="filter.name === 'scan'"
             class="filter-btn">
             {{ filter.label || 'Apply' }}
           </button>

@@ -1,4 +1,20 @@
 <div class="page">
+  <div class="scanner-backdrop" *ngIf="scannerOpen" (click)="closeScanner()">
+    <section class="scanner-dialog" role="dialog" aria-modal="true" aria-labelledby="scanner-title" (click)="$event.stopPropagation()">
+      <div class="scanner-header">
+        <h2 id="scanner-title">Scan barcode</h2>
+        <button class="scanner-close" type="button" aria-label="Close scanner" (click)="closeScanner()">&times;</button>
+      </div>
+      <div class="scanner-video-frame">
+        <video #scannerVideo autoplay muted playsinline></video>
+        <div class="scanner-guide" aria-hidden="true"></div>
+      </div>
+      <p class="scanner-message" *ngIf="!scannerError">Point your camera at the barcode or QR code.</p>
+      <p class="scanner-error" *ngIf="scannerError">{{ scannerError }}</p>
+      <button class="scanner-manual" type="button" (click)="closeScanner()">Enter barcode manually</button>
+    </section>
+  </div>
+
   <div class="loading-overlay" *ngIf="loading">
     <div class="loading-content">
       <div class="loading-spinner"></div>

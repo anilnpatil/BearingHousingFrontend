@@ -1,20 +1,21 @@
 .dashboard-container {
-  height: 100%;
+  width: 100%;
   min-height: 100%;
-  overflow: hidden;
+  overflow: visible;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 20px;
+  padding: clamp(12px, 2vw, 24px);
   box-sizing: border-box;
 }
 
 .dashboard-header {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: clamp(12px, 2vw, 20px);
   color: rgb(255, 255, 255);
 
   h1 {
-    font-size: 2.9rem;
-    margin-bottom: 25px;
+    font-size: clamp(1.6rem, 3.5vw, 2.9rem);
+    line-height: 1.2;
+    margin: 0 0 clamp(12px, 2vw, 25px);
     font-weight: 800;
   }
 
@@ -36,12 +37,12 @@
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  margin-bottom: 20px;
+  margin-bottom: clamp(12px, 2vw, 20px);
 
   h2 {
-    margin: 25px 0;
+    margin: clamp(12px, 2vw, 25px) 0;
     color: rgb(255, 255, 255);
-    font-size: 2.0rem;
+    font-size: clamp(1.35rem, 2.5vw, 2rem);
     font-weight: 700;
   }
 }
@@ -67,13 +68,13 @@
 
   .status-text {
     color: white;
-    font-size: 1.3rem;
+    font-size: clamp(0.9rem, 1.5vw, 1.3rem);
     font-weight: 500;
   }
 
   .last-updated {
     color: rgba(255, 255, 255, 0.8);
-    font-size: 1.25rem;
+    font-size: clamp(0.85rem, 1.4vw, 1.25rem);
     font-weight: 400;
   }
 }
@@ -93,14 +94,14 @@
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
-  gap: 20px;
+  gap: clamp(10px, 1.5vw, 20px);
   margin-bottom: 4px;
 }
 
 .stat-card {
   background: rgba(255, 255, 255, 0.95);
-  border-radius: 15px;
-  padding: 25px;
+  border-radius: 12px;
+  padding: clamp(12px, 2vw, 25px);
   display: flex;
   align-items: center;
   min-width: 0;
@@ -115,8 +116,8 @@
 }
 
 .stat-icon {
-  font-size: 2.5rem;
-  margin-right: 20px;
+  font-size: clamp(1.6rem, 3vw, 2.5rem);
+  margin-right: clamp(10px, 1.5vw, 20px);
 }
 
 .stat-info {
@@ -196,17 +197,17 @@
 .parameter-details-card {
   background: rgba(255, 255, 255, 0.95);
   border-radius: 15px;
-  padding: 20px;
+  padding: clamp(12px, 2vw, 20px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(12px);
-  margin-top: 40px;
+  margin-top: clamp(16px, 3vw, 40px);
   min-width: 0;
 }
 
 .parameter-details-card h3 {
   margin: 0 0 16px 0;
   color: #0c0c0c;
-  font-size: 2.0rem;
+  font-size: clamp(1.35rem, 2.5vw, 2rem);
   font-weight: 750;
 }
 
@@ -232,7 +233,7 @@
 }
 
 .section-title {
-  font-size: 1.92rem;
+  font-size: clamp(1.15rem, 2.2vw, 1.92rem);
   font-weight: 780;
   color: #1f2937;
   margin-bottom: 12px; 
@@ -252,14 +253,14 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin-top: 40px;
+  margin-top: clamp(12px, 3vw, 40px);
 }
 
 .details-row {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
-  margin-top: 20px;
+  margin-top: clamp(10px, 2vw, 20px);
 }
 
 .detail-item {
@@ -269,10 +270,10 @@
 }
 
 .detail-item label {
-  font-size: 1.1rem;
+  font-size: clamp(0.78rem, 1.2vw, 1.1rem);
   font-weight: 710;
   color: #6b7280;
-  margin-bottom: 10px;
+  margin-bottom: clamp(4px, 0.8vw, 10px);
   // text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -280,10 +281,10 @@
 .detail-item input {
   border: 1.1px solid #88edf6;
   border-radius: 10px;
-  padding: 12px 14px;
+  padding: clamp(7px, 1vw, 12px) clamp(8px, 1.2vw, 14px);
   background: #ffffff;
   color: #0852dc;
-  font-size: 1.12rem;
+  font-size: clamp(0.8rem, 1.2vw, 1.12rem);
   font-weight: 650;
   width: 100%;
   box-sizing: border-box;
@@ -329,7 +330,7 @@
 
 @media (max-width: 640px) {
   .dashboard-container {
-    padding: 12px;
+    padding: 10px;
   }
 
   .dashboard-header {
@@ -362,7 +363,7 @@
   }
 
   .stat-card {
-    padding: 16px;
+    padding: 14px;
   }
 
   .stat-icon {
@@ -372,7 +373,7 @@
 
   .parameter-details-card {
     margin-top: 20px;
-    padding: 14px;
+    padding: 12px;
   }
 
   .parameter-details-card h3 {
@@ -384,13 +385,13 @@
   }
 
   .common-card .details-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
   }
 
   .details-row {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 8px;
-    margin-top: 10px;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 12px;
   }
 
   .parameter-details-card {
@@ -409,7 +410,7 @@
   }
 
   .detail-item label {
-    font-size: 0.72rem;
+    font-size: 0.8rem;
     line-height: 1.1;
     margin-bottom: 4px;
     letter-spacing: 0;
@@ -417,8 +418,8 @@
 
   .detail-item input {
     border-radius: 6px;
-    padding: 7px 6px;
-    font-size: 0.72rem;
+    padding: 8px 9px;
+    font-size: 0.82rem;
     font-weight: 600;
   }
 }

@@ -4,7 +4,9 @@ import {
   OnInit,
   OnDestroy,
   ChangeDetectorRef,
-  inject
+  inject,
+  ElementRef,
+  ViewChild
 } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
@@ -26,10 +28,12 @@ import {
 } from '../../../../core/services/header-content.service';
 
 import { ReportFullscreenService } from '../../../../core/services/report-fullscreen.service';
+import { BarcodeWebsocketService } from '../../../../core/services/barcode-websocket.service';
 import {
   DomSanitizer,
   SafeResourceUrl
 } from '@angular/platform-browser';
+import type { BrowserMultiFormatReader, IScannerControls } from '@zxing/browser';
 
 interface ProcessImageSet {
   label: string;
@@ -56,8 +60,12 @@ interface ProcessImageSet {
 export class BarcodeSearchReportComponent
   implements OnInit, OnDestroy {
 
+  @ViewChild('scannerVideo') private scannerVideo?: ElementRef<HTMLVideoElement>;
+
   barcode = '';
   loading = false;
+  scannerOpen = false;
+  scannerError: string | null = null;
   errorMessage: string | null = null;
   productionData: ProductionSummary | null = null;
   processImageSets: ProcessImageSet[] = [];
@@ -66,14 +74,25 @@ export class BarcodeSearchReportComponent
   private service = inject(BarcodeSearchReportService);
   private headerContentService = inject(HeaderContentService);
   private reportFullscreenService = inject(ReportFullscreenService);
+  private barcodeWebsocketService = inject(BarcodeWebsocketService);
   private cdr = inject(ChangeDetectorRef);
   private router = inject(Router);
   private sanitizer = inject(DomSanitizer);
   private readonly pdfObjectUrls = new Set<string>();
+  private scanner?: BrowserMultiFormatReader;
+  private scannerControls?: IScannerControls;
 
   ngOnInit(): void {
     this.reportFullscreenService.setFullscreen(true);
     this.setupHeaderFilters();
+    this.barcodeWebsocketService.connect();
+    this.barcodeWebsocketService.barcode$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((receivedBarcode) => {
+        this.barcode = receivedBarcode;
+        this.updateBarcodeFilterValue();
+        this.searchBarcode();
+      });
 
     const navState: any = history.state || {};
     if (navState?.barcode) {
@@ -87,6 +106,7 @@ export class BarcodeSearchReportComponent
   ngOnDestroy(): void {
     this.headerContentService.resetHeaderContent();
     this.reportFullscreenService.setFullscreen(false);
+    this.stopScanner();
     this.pdfObjectUrls.forEach((objectUrl) => URL.revokeObjectURL(objectUrl));
     this.pdfObjectUrls.clear();
     this.destroy$.next();
@@ -106,6 +126,15 @@ export class BarcodeSearchReportComponent
         }
       },
       {
+        name: 'scan',
+        type: 'button',
+        label: 'Scan',
+        disabled: this.loading,
+        onChange: () => {
+          void this.openScanner();
+        }
+      },
+      {
         name: 'search',
         type: 'button',
         label: this.loading ? 'Searching...' : 'Search',
@@ -119,6 +148,89 @@ export class BarcodeSearchReportComponent
     this.headerContentService.setFilters(filters);
   }
 
+  async openScanner(): Promise<void> {
+    if (this.scannerOpen || this.loading) {
+      return;
+    }
+
+    if (!window.isSecureContext || !navigator.mediaDevices?.getUserMedia) {
+      this.scannerOpen = true;
+      this.scannerError = 'Camera scanning requires a secure browser context. Use localhost or HTTPS, then allow camera access.';
+      this.cdr.markForCheck();
+      return;
+    }
+
+    this.scannerOpen = true;
+    this.scannerError = null;
+    this.cdr.markForCheck();
+
+    await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+
+    if (!this.scannerVideo?.nativeElement) {
+      this.scannerError = 'Unable to open the barcode scanner.';
+      this.cdr.markForCheck();
+      return;
+    }
+
+    try {
+      const cameraStream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: { ideal: 'environment' } },
+        audio: false
+      });
+      cameraStream.getTracks().forEach(track => track.stop());
+
+      const { BrowserMultiFormatReader } = await import('@zxing/browser');
+      this.scanner = new BrowserMultiFormatReader();
+      this.scannerControls = await this.scanner.decodeFromConstraints(
+        { video: { facingMode: { ideal: 'environment' } }, audio: false },
+        this.scannerVideo.nativeElement,
+        (result) => {
+          const scannedValue = result?.getText().trim();
+          if (!scannedValue) {
+            return;
+          }
+
+          this.barcode = scannedValue;
+          this.updateBarcodeFilterValue();
+          this.stopScanner();
+          this.service
+            .publishBarcodeScan(scannedValue)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+              error: (error) => console.error('Unable to broadcast barcode scan:', error)
+            });
+          this.searchBarcode();
+        }
+      );
+    } catch (error) {
+      console.error('Unable to start barcode scanner:', error);
+      const errorName = error instanceof DOMException ? error.name : '';
+      this.scannerError = errorName === 'NotAllowedError'
+        ? 'Camera permission was denied. Allow camera access in the browser settings and try again.'
+        : 'Camera is unavailable on this device. Enter the barcode manually.';
+      this.cdr.markForCheck();
+    }
+  }
+
+  closeScanner(): void {
+    this.stopScanner();
+  }
+
+  private stopScanner(): void {
+    this.scannerControls?.stop();
+    this.scannerControls = undefined;
+    this.scanner = undefined;
+    this.scannerOpen = false;
+    this.cdr.markForCheck();
+  }
+
+  private updateBarcodeFilterValue(): void {
+    const barcodeFilter = this.headerContentService.headerContent().filters?.find(filter => filter.name === 'barcode');
+    if (barcodeFilter) {
+      barcodeFilter.value = this.barcode;
+    }
+  }
+
   private updateFilterButtons(): void {
     const filters = this.headerContentService.headerContent().filters;
     if (!filters?.length) {
@@ -126,12 +238,16 @@ export class BarcodeSearchReportComponent
     }
 
     const searchButton = filters.find(f => f.name === 'search');
+    const scanButton = filters.find(f => f.name === 'scan');
     if (!searchButton) {
       return;
     }
 
     searchButton.label = this.loading ? 'Searching...' : 'Search';
     searchButton.disabled = this.loading;
+    if (scanButton) {
+      scanButton.disabled = this.loading;
+    }
   }
 
   searchBarcode(): void {

@@ -2,6 +2,8 @@
 :host {
   display: block;
   height: 100vh;
+  --app-header-height: 60px;
+  --app-footer-height: 40px;
 }
 
 .overlay {
@@ -46,6 +48,19 @@
   //     background: #555;
   //   }
   // }
+}
+
+@media (max-width: 1024px) {
+  :host {
+    --app-header-height: 104px;
+  }
+}
+
+@media (max-width: 640px) {
+  :host {
+    --app-header-height: 96px;
+    --app-footer-height: 56px;
+  }
 }
 
 app-footer {

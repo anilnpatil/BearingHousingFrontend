@@ -111,7 +111,7 @@ export class Dashboard implements OnInit, OnDestroy {
 
   getSkuFontSize(): number {
     const skuLength = this.productionData.sku?.length ?? 0;
-    return Math.max(0.85, Math.min(2, 2 - Math.max(0, skuLength - 10) * 0.08));
+    return Math.max(0.65, Math.min(2, 2 - Math.max(0, skuLength - 10) * 0.1));
   }
 
   getProcessStatusLabel(processNumber: number, statusField: 'beforeGlueStatus' | 'afterGlueStatus'): string {

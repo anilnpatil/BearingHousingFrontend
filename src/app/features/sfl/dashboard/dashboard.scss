@@ -188,9 +188,7 @@
 
   .stat-number {
     line-height: 1.15;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    overflow-wrap: anywhere;
   }
 }
 

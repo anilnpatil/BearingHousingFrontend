@@ -110,7 +110,8 @@
               <label>Final Status</label>
               <input
                 readonly
-                [value]="productionData.finalStatus === 1 ? '✅ OK' : productionData.finalStatus === 0 ? '❌ NOT OK' : 'N/A'"
+                [class]="getFinalStatusClass()"
+                [value]="getFinalStatusLabel()"
               />
             </div>
           </div>
@@ -122,18 +123,18 @@
             <div class="details-row">
               <div class="detail-item">
                 <label>Before Glue Status</label>
-                <input readonly [value]="getProcessStatusLabel(1, 'beforeGlueStatus')" />
+                <input readonly [class]="getProcessStatusClass(1, 'beforeGlueStatus')" [value]="getProcessStatusLabel(1, 'beforeGlueStatus')" />
               </div>
               <div class="detail-item">
                 <label>After Glue Status</label>
-                <input readonly [value]="getProcessStatusLabel(1, 'afterGlueStatus')" />
+                <input readonly [class]="getProcessStatusClass(1, 'afterGlueStatus')" [value]="getProcessStatusLabel(1, 'afterGlueStatus')" />
               </div>             
               <!-- <div class="detail-item">
                 <label>Load Min / Max Value</label>
                 <input readonly [value]="getProcessRangeValue(1, 'toxLoadMin', 'toxLoadMax')" />
               </div> -->
               <div class="detail-item">
-                <label>Load Actual Value</label>
+                <label>Actual Load Value</label>
                 <input readonly [value]="getProcessValue(1, 'toxLoadActual')" />
               </div>              
             </div>
@@ -160,12 +161,12 @@
           <div class="details-grid">
             <div class="details-row">
               <div class="detail-item">
-                <label>Before Glue</label>
-                <input readonly [value]="getProcessStatusLabel(2, 'beforeGlueStatus')" />
+                <label>Before Glue Status</label>
+                <input readonly [class]="getProcessStatusClass(2, 'beforeGlueStatus')" [value]="getProcessStatusLabel(2, 'beforeGlueStatus')" />
               </div>
               <div class="detail-item">
                 <label>After Glue Status</label>
-                <input readonly [value]="getProcessStatusLabel(2, 'afterGlueStatus')" />
+                <input readonly [class]="getProcessStatusClass(2, 'afterGlueStatus')" [value]="getProcessStatusLabel(2, 'afterGlueStatus')" />
               </div>              
               <!-- <div class="detail-item">
                 <label>Load Min / Max</label>

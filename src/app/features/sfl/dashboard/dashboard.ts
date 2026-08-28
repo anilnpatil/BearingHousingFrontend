@@ -120,7 +120,14 @@ export class Dashboard implements OnInit, OnDestroy {
     const data = this.productionData as unknown as Record<string, unknown>;
     const status = data[processKey] ?? this.productionData[legacyKey];
 
-    return this.getStatusLabel(typeof status === 'number' ? status : undefined);
+    return this.getStatusLabel(status);
+  }
+
+  getProcessStatusClass(processNumber: number, statusField: 'beforeGlueStatus' | 'afterGlueStatus'): string {
+    const processKey = `p${processNumber}_${statusField}`;
+    const legacyKey = statusField as keyof ProductionSummary;
+    const data = this.productionData as unknown as Record<string, unknown>;
+    return this.getStatusClass(data[processKey] ?? this.productionData[legacyKey]);
   }
 
   getProcessValue(processNumber: number, field: string): string {
@@ -146,14 +153,28 @@ export class Dashboard implements OnInit, OnDestroy {
     return `${minValue} / ${maxValue}`;
   }
 
-  getStatusLabel(status?: number): string {
-    if (status === 1) {
+  getStatusLabel(status?: unknown): string {
+    if (status === 1 || String(status).trim().toLowerCase() === 'pass') {
       return 'Pass';
     }
-    if (status === 0) {
+    if (status === 0 || String(status).trim().toLowerCase() === 'fail') {
       return 'Fail';
     }
     return 'N/A';
+  }
+
+  getStatusClass(status: unknown): string {
+    const label = this.getStatusLabel(status);
+    return label === 'Pass' ? 'status-pass' : label === 'Fail' ? 'status-fail' : 'status-unknown';
+  }
+
+  getFinalStatusClass(): string {
+    return this.getStatusClass(this.productionData.finalStatus);
+  }
+
+  getFinalStatusLabel(): string {
+    const label = this.getStatusLabel(this.productionData.finalStatus);
+    return label === 'Pass' ? '✅ OK' : label === 'Fail' ? '❌ NOT OK' : 'N/A';
   }
 
   private getCurrentShift(): number {

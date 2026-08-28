@@ -225,10 +225,14 @@ export class BarcodeSearchReportComponent
   }
 
   private updateBarcodeFilterValue(): void {
-    const barcodeFilter = this.headerContentService.headerContent().filters?.find(filter => filter.name === 'barcode');
-    if (barcodeFilter) {
-      barcodeFilter.value = this.barcode;
+    const filters = this.headerContentService.headerContent().filters;
+    if (!filters?.length) {
+      return;
     }
+
+    this.headerContentService.setFilters(filters.map(filter =>
+      filter.name === 'barcode' ? { ...filter, value: this.barcode } : filter
+    ));
   }
 
   private updateFilterButtons(): void {
@@ -237,17 +241,15 @@ export class BarcodeSearchReportComponent
       return;
     }
 
-    const searchButton = filters.find(f => f.name === 'search');
-    const scanButton = filters.find(f => f.name === 'scan');
-    if (!searchButton) {
-      return;
-    }
-
-    searchButton.label = this.loading ? 'Searching...' : 'Search';
-    searchButton.disabled = this.loading;
-    if (scanButton) {
-      scanButton.disabled = this.loading;
-    }
+    this.headerContentService.setFilters(filters.map(filter => {
+      if (filter.name === 'search') {
+        return { ...filter, label: this.loading ? 'Searching...' : 'Search', disabled: this.loading };
+      }
+      if (filter.name === 'scan') {
+        return { ...filter, disabled: this.loading };
+      }
+      return filter;
+    }));
   }
 
   searchBarcode(): void {

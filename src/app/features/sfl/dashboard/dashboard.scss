@@ -291,6 +291,27 @@
   min-width: 0;
 }
 
+.detail-item input.status-pass {
+  color: #15803d;
+  border-color: #86efac;
+  background: #f0fdf4;
+}
+
+.detail-item input.status-fail {
+  color: #b91c1c;
+  border-color: #fca5a5;
+  background: #fef2f2;
+}
+
+.detail-item input.status-unknown {
+  color: #6b7280;
+}
+
+.detail-item input.status-pass[value^="✅"],
+.detail-item input.status-fail[value^="❌"] {
+  font-size: clamp(0.76rem, 1.1vw, 1rem);
+}
+
 .detail-item input:focus {
   outline: none;
   border-color: #3498db;

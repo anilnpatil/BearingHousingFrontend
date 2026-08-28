@@ -520,14 +520,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: clamp(160px, 24vw, 300px);
+  min-height: clamp(220px, 30vw, 360px);
   min-width: 0;
   box-sizing: border-box;
 }
 
 .image-frame img {
+  width: min(100%, 560px);
+  height: clamp(220px, 28vw, 340px);
   max-width: 100%;
-  max-height: clamp(180px, 35vw, 420px);
+  max-height: 100%;
   object-fit: contain;
   border-radius: 10px;
   background: #f8fafc;
@@ -672,6 +674,12 @@
 
   .image-frame {
     padding: 10px;
+    min-height: clamp(200px, 58vw, 300px);
+  }
+
+  .image-frame img {
+    width: 100%;
+    height: clamp(200px, 54vw, 280px);
   }
 
   .pdf-actions {

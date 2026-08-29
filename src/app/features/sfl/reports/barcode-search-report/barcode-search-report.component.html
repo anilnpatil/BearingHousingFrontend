@@ -67,7 +67,7 @@
           </thead>
           <tbody>
             <tr>
-              <td>{{ productionData.productionDateTime | date:'dd-MM-yyyy HH:mm' }}</td>
+              <td>{{ productionData.productionDateTime | date:'dd-MM-yyyy HH:mm:ss' }}</td>
               <td>{{ productionData.barcode }}</td>
               <td>{{ productionData.shift }}</td>
               <td>{{ productionData.sku }}</td>
@@ -91,7 +91,7 @@
               <td>{{ productionData.p2_toxDisplacementActual }}</td>
               <td>{{ productionData.p2_toxDisplacementMin }}</td>
               <td>{{ productionData.p2_graphStatus === 1 ? 'OK' : 'NOT OK' }}</td>
-              <td>{{ productionData.cycleStartTime | date:'dd-MM-yyyy HH:mm' }}</td>
+              <td>{{ productionData.cycleStartTime || 'N/A' }}</td>
               <td>{{ productionData.productionDateTime | date:'dd-MM-yyyy HH:mm' }}</td>
               <td>{{ productionData.cycleTime }}</td>              
             </tr>

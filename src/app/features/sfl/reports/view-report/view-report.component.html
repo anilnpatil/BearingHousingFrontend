@@ -22,21 +22,21 @@
         <th class="p1-beforeGlueStatus-col">P1_BeforeGlueStatus</th>
         <th class="p1-afterGlueStatus-col">P1_AfterGlueStatus</th>
         <!-- <th class="p1-toxLoadMax-col">P1_ToxLoadMax</th> -->
-        <th class="p1-toxLoadActual-col">P1_ToxLoadActual</th>
+        <th class="p1-toxLoadActual-col">P1_ToxLoadActual(kn)</th>
         <!-- <th class="p1-toxLoadMin-col">P1_ToxLoadMin</th> -->
-        <th class="p1-toxDisplacementMax-col">P1_ToxDisplacementMax</th>
-        <th class="p1-toxDisplacementActual-col">P1_ToxDisplacementActual</th>
-        <th class="p1-toxDisplacementMin-col">P1_ToxDisplacementMin</th>
+        <th class="p1-toxDisplacementMax-col">P1_ToxDisplacementMax(mm)</th>
+        <th class="p1-toxDisplacementActual-col">P1_ToxDisplacementActual(mm)</th>
+        <th class="p1-toxDisplacementMin-col">P1_ToxDisplacementMin(mm)</th>
         <th class="p1-graphStatus-col">P1_GraphStatus</th>
 
         <th class="p2-beforeGlueStatus-col" *ngIf="shouldShowSecondProcess()">P2_BeforeGlueStatus</th>
         <th class="p2-afterGlueStatus-col" *ngIf="shouldShowSecondProcess()">P2_AfterGlueStatus</th>
         <!-- <th class="p2-toxLoadMax-col" *ngIf="shouldShowSecondProcess()">P2_ToxLoadMax</th> -->
-        <th class="p2-toxLoadActual-col" *ngIf="shouldShowSecondProcess()">P2_ToxLoadActual</th>
+        <th class="p2-toxLoadActual-col" *ngIf="shouldShowSecondProcess()">P2_ToxLoadActual(kn)</th>
         <!-- <th class="p2-toxLoadMin-col" *ngIf="shouldShowSecondProcess()">P2_ToxLoadMin</th> -->
-        <th class="p2-toxDisplacementMax-col" *ngIf="shouldShowSecondProcess()">P2_ToxDisplacementMax</th>
-        <th class="p2-toxDisplacementActual-col" *ngIf="shouldShowSecondProcess()">P2_ToxDisplacementActual</th>
-        <th class="p2-toxDisplacementMin-col" *ngIf="shouldShowSecondProcess()">P2_ToxDisplacementMin</th>
+        <th class="p2-toxDisplacementMax-col" *ngIf="shouldShowSecondProcess()">P2_ToxDisplacementMax(mm)</th>
+        <th class="p2-toxDisplacementActual-col" *ngIf="shouldShowSecondProcess()">P2_ToxDisplacementActual(mm)</th>
+        <th class="p2-toxDisplacementMin-col" *ngIf="shouldShowSecondProcess()">P2_ToxDisplacementMin(mm)</th>
         <th class="p2-graphStatus-col" *ngIf="shouldShowSecondProcess()">P2_GraphStatus</th>
 
         <!-- <th class="cycleStartTime-col">CycleStartTime</th>
@@ -47,7 +47,7 @@
     
     <tbody>
       <tr *ngFor="let d of data" (click)="openBarcode(d)" role="button" tabindex="0" class="clickable-row">
-        <td class="productionDateTime-col">{{ d.productionDateTime | date:'dd-MM-yyyy HH:mm' }}</td>
+        <td class="productionDateTime-col">{{ d.productionDateTime | date:'dd-MM-yyyy HH:mm:ss' }}</td>
         <td class="barcode-col">{{ d.barcode }}</td>
         <td class="shift-col">{{ d.shift }}</td>
         <td class="sku-col">{{ d.sku }}</td>

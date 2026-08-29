@@ -69,7 +69,7 @@
 
       <!-- Current Shift Card -->
       <div class="stat-card shift-card">
-        <div class="stat-icon shift-icon">⚡</div>
+        <div class="stat-icon shift-icon">🕚</div>
         <div class="stat-info">
           <h3>Current Shift</h3>
           <p class="stat-number" *ngIf="!isLoading && !hasError">{{ productionData.shift }}</p>
@@ -96,7 +96,7 @@
             </div>
             <div class="detail-item">
               <label>Cycle Start Time</label>
-              <input readonly [value]="productionData.cycleStartTime ? (productionData.cycleStartTime | date:'short') : 'N/A'" />
+              <input readonly [value]="productionData.cycleStartTime || 'N/A'" />
             </div>
             <div class="detail-item">
               <label>Cycle End Time</label>
@@ -134,22 +134,22 @@
                 <input readonly [value]="getProcessRangeValue(1, 'toxLoadMin', 'toxLoadMax')" />
               </div> -->
               <div class="detail-item">
-                <label>Actual Load Value</label>
+                <label>Actual Load Value(kn)</label>
                 <input readonly [value]="getProcessValue(1, 'toxLoadActual')" />
               </div>              
             </div>
 
             <div class="details-row">             
               <div class="detail-item">
-                <label>Max Displacement Value</label>
+                <label>Max Displacement Value(mm)</label>
                 <input readonly [value]="getProcessValue(1, 'toxDisplacementMax')" />
               </div>
               <div class="detail-item">
-                <label>Actual Displacement Value</label>
+                <label>Actual Displacement Value(mm)</label>
                 <input readonly [value]="getProcessValue(1, 'toxDisplacementActual')" />
               </div>
               <div class="detail-item">
-                <label>Min Displacement Value</label>
+                <label>Min Displacement Value(mm)</label>
                 <input readonly [value]="getProcessValue(1, 'toxDisplacementMin')" />
               </div>
             </div>
@@ -173,21 +173,21 @@
                 <input readonly [value]="getProcessRangeValue(2, 'toxLoadMin', 'toxLoadMax')" />
               </div> -->
               <div class="detail-item">
-                <label>Actual Load Value</label>
+                <label>Actual Load Value(kn)</label>
                 <input readonly [value]="getProcessValue(2, 'toxLoadActual')" />
               </div>
             </div>
             <div class="details-row">               
               <div class="detail-item">
-                <label> Max Displacement Value</label>
+                <label> Max Displacement Value(mm)</label>
                 <input readonly [value]="getProcessValue(2, 'toxDisplacementMax')" />
               </div>
               <div class="detail-item">
-                <label>Actual Displacement Value</label>
+                <label>Actual Displacement Value(mm)</label>
                 <input readonly [value]="getProcessValue(2, 'toxDisplacementActual')" />
               </div>                            
               <div class="detail-item">
-                <label>Min Displacement Value</label>
+                <label>Min Displacement Value(mm)</label>
                 <input readonly [value]="getProcessValue(2, 'toxDisplacementMin')" />
               </div>
             </div>

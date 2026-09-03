@@ -3,36 +3,32 @@ import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AngularServiceService, AngularServiceResponse } from '../../../core/services/angular-service.service';
 
-/**
- * Service Configuration
- * Add new services here by following this pattern:
- * {
- *   name: 'Service Name',
- *   id: 'service-id',
- *   description: 'Service description',
- *   port: 1234
- * }
- */
 interface ServiceConfig {
   name: string;
   id: string;
   description: string;
   port: number;
 }
-
+// Define the services to be managed
 const SERVICES: ServiceConfig[] = [
-  // TODO: Add Spring Boot service
-  // { name: 'Spring Boot', id: 'spring-boot', description: 'BearingHousingBackend API Service', port: 8083 },
   
-  // TODO: Add Node-RED service
-   { name: 'BearingHousingNoderedService', id: 'node-red', description: 'BearingHousing Node-RED Flow Editor', port: 1880 },
-  
-  {
-    name: 'Angular',
-    id: 'angular',
-    description: 'BearingHousing Angular Application Service',
-    port: 4200
-  }
+   {
+     name: 'BearingHousingBackendService', 
+     id: 'spring-boot', 
+     description: 'BearingHousingBackend API Service', 
+     port: 8083 },
+
+   { 
+    name: 'BearingHousingNoderedService', 
+     id: 'node-red', 
+     description: 'BearingHousing Node-RED Flow Editor', 
+     port: 1880 },  
+    {
+      name: 'BearingHousingFrontendService',
+      id: 'angular',
+      description: 'BearingHousing Angular Application Service',
+      port: 4200
+    }
 ];
 
 @Component({
@@ -65,11 +61,9 @@ export class AngularServiceControlComponent {
     this.initializeServiceStatus();
     // Load the QR code without restarting any service
     this.generateQrCode();
-  }
+  } 
 
-  /**
-   * Initialize service status map with default values
-   */
+  //Initialize service status map with default values   
   private initializeServiceStatus(): void {
     const statusMap = new Map<string, { status: string; isRunning: boolean }>();
     this.services().forEach(service => {
@@ -77,10 +71,8 @@ export class AngularServiceControlComponent {
     });
     this.serviceStatus.set(statusMap);
   }
-
-  /**
-  * Generate the Angular QR code without changing service state.
-   */
+  
+  // Generate the Angular QR code without changing service state.  
   generateQrCode(): void {
     this.isLoadingQr.set(true);
     this.error.set(null);
@@ -103,13 +95,9 @@ export class AngularServiceControlComponent {
       }
     });
   }
-
-  /**
-   * Check status of a specific service
-   * @param serviceId - The ID of the service to check
-   */
-  checkServiceStatus(serviceId: string): void {
-    // Create a copy of the map to update
+  
+  // Check status of a specific service    
+  checkServiceStatus(serviceId: string): void {    
     const checkingMap = new Map(this.isCheckingService());
     checkingMap.set(serviceId, true);
     this.isCheckingService.set(checkingMap);
@@ -144,11 +132,8 @@ export class AngularServiceControlComponent {
       }
     });
   }
-
-  /**
-   * Restart a specific service (currently only Angular)
-   * @param serviceId - The ID of the service to restart
-   */
+  
+  // Restart a specific serviceId - The ID of the service to restart  
   restartService(serviceId: string): void {
     const restartingMap = new Map(this.isRestarting());
     restartingMap.set(serviceId, true);
@@ -184,44 +169,32 @@ export class AngularServiceControlComponent {
     });
   }
 
-  /**
-   * Regenerate QR code manually without restarting any service.
-   */
+  // Regenerate QR code manually without restarting any service.   
   regenerateQrCode(): void {
     this.generateQrCode();
   }
-
-  /**
-   * Get service status by ID
-   */
+  
+  // Get service status by ID  
   getServiceStatus(serviceId: string): { status: string; isRunning: boolean } {
     return this.serviceStatus().get(serviceId) || { status: 'Unknown', isRunning: false };
   }
-
-  /**
-   * Check if a service is currently checking
-   */
+  
+  //Check if a service is currently checking   
   isServiceChecking(serviceId: string): boolean {
     return this.isCheckingService().get(serviceId) || false;
   }
-
-  /**
-   * Check if a service is currently restarting
-   */
+  
+  // Check if a service is currently restarting  
   isServiceRestarting(serviceId: string): boolean {
     return this.isRestarting().get(serviceId) || false;
   }
 
-  /**
-   * Dismiss error message
-   */
+  // Dismiss error message  
   dismissError(): void {
     this.error.set(null);
   }
-
-  /**
-   * Dismiss success message
-   */
+  
+  // Dismiss success message  
   dismissSuccess(): void {
     this.successMessage.set(null);
   }

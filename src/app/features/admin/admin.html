@@ -1,10 +1,35 @@
 <div class="admin-container">
- 
+  <header class="admin-header">
+    <div>
+      <p class="eyebrow">Administration</p>
+      <h1>Control Center</h1>
+    </div>
+    <nav class="section-switcher" aria-label="Admin sections">
+      <button
+        type="button"
+        class="section-button"
+        [class.active]="activeSection() === 'users'"
+        [attr.aria-current]="activeSection() === 'users' ? 'page' : null"
+        (click)="selectSection('users')">
+        <span class="section-icon" aria-hidden="true">&#128101;</span>
+        User Management
+      </button>
+      <button
+        type="button"
+        class="section-button"
+        [class.active]="activeSection() === 'services'"
+        [attr.aria-current]="activeSection() === 'services' ? 'page' : null"
+        (click)="selectSection('services')">
+        <span class="section-icon" aria-hidden="true">&#9881;</span>
+        Service Management
+      </button>
+    </nav>
+  </header>
 
   <div class="content-section">  
 
     <!-- ============ USER MANAGEMENT CARD ============ -->
-    <div class="card">
+    <div class="card" *ngIf="activeSection() === 'users'">
       <div class="card-header">
         <div class="header-content">
           <h2>User Management</h2>
@@ -106,6 +131,9 @@
       </div>
       </ng-container>
     </div>
+
+    <!-- Angular Service Control Component -->
+    <app-angular-service-control *ngIf="activeSection() === 'services'"></app-angular-service-control>
   </div>
 </div>
 

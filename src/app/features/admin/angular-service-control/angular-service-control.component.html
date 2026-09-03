@@ -1,0 +1,118 @@
+<div class="service-control">
+  <div class="service-card">
+    <!-- Header -->
+    <div class="card-header">
+      <h2>Service Management</h2>
+      <p class="subtitle">Manage application services and network access</p>
+    </div>
+
+    <!-- Messages Section -->
+    <div *ngIf="error() || successMessage()" class="messages-section">
+      <!-- Error Message -->
+      <div *ngIf="error()" class="alert alert-error">
+        <div class="alert-content">
+          <span class="alert-icon">⚠️</span>
+          <span class="alert-text">{{ error() }}</span>
+          <button class="alert-close" (click)="dismissError()">✕</button>
+        </div>
+      </div>
+
+      <!-- Success Message -->
+      <div *ngIf="successMessage()" class="alert alert-success">
+        <div class="alert-content">
+          <span class="alert-icon">✓</span>
+          <span class="alert-text">{{ successMessage() }}</span>
+          <button class="alert-close" (click)="dismissSuccess()">✕</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Services List Section -->
+    <div class="services-section">
+      <h3>Service Status</h3>
+      <p class="section-description">Check and restart services as needed</p>
+      
+      <div class="services-list">
+        <!-- Service Item Template -->
+        <!-- TODO: Add more services in component.ts SERVICES array -->
+        <div *ngFor="let service of services()" class="service-item">
+          <div class="service-header">
+            <div class="service-info">
+              <h4 class="service-name">{{ service.name }}</h4>
+              <p class="service-description">{{ service.description }}</p>
+            </div>
+            <div class="service-status-badge" 
+                 [class.running]="getServiceStatus(service.id).isRunning"
+                 [class.stopped]="!getServiceStatus(service.id).isRunning"
+                 [class.checking]="isServiceChecking(service.id)">
+              <span class="status-indicator"></span>
+              <span class="status-text">{{ getServiceStatus(service.id).status }}</span>
+            </div>
+          </div>
+
+          <div class="service-actions">
+            <button
+              class="btn btn-check"
+              (click)="checkServiceStatus(service.id)"
+              [disabled]="isServiceChecking(service.id)"
+              [class.loading]="isServiceChecking(service.id)"
+              title="Check service status"
+            >
+              <span class="btn-icon">🔍</span>
+              <span class="btn-text">Check Status</span>
+            </button>
+
+            <button
+              class="btn btn-restart"
+              (click)="restartService(service.id)"
+              [disabled]="isServiceRestarting(service.id)"
+              [class.loading]="isServiceRestarting(service.id)"
+              title="Restart service"
+            >
+              <span class="btn-icon">🔄</span>
+              <span class="btn-text">Restart</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QR Code Section -->
+    <div class="qr-section">
+      <h3>Mobile Access</h3>
+      <p class="section-description">
+        Scan QR code to access Angular app on mobile. Service will be restarted automatically to handle network changes.
+      </p>
+
+      <div class="qr-container">
+        <div *ngIf="isLoadingQr()" class="qr-loading">
+          <div class="spinner"></div>
+          <p>Generating QR code and restarting service...</p>
+        </div>
+
+        <div *ngIf="qrCode() && !isLoadingQr()" class="qr-box">
+          <img [src]="qrCode()" alt="Angular App QR Code" class="qr-image" />
+          <p class="qr-url" *ngIf="angularUrl()">{{ angularUrl() }}</p>
+        </div>
+
+        <button
+          class="btn btn-secondary"
+          (click)="regenerateQrCode()"
+          [disabled]="isLoadingQr()"
+          [class.loading]="isLoadingQr()"
+        >
+          <span class="btn-icon">🔄</span>
+          <span class="btn-text">Regenerate QR Code</span>
+        </button>
+      </div>
+
+      <div class="qr-info">
+        <span class="info-icon">ℹ️</span>
+        <span class="info-text">
+          Ensure your mobile device is connected to the same network as this PC. 
+          QR code regeneration will restart the Angular service to adapt to network changes.
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

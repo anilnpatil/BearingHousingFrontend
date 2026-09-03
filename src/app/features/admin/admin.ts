@@ -3,16 +3,19 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../auth/auth.service';
 import { RegisterComponent } from '../../auth/register/register.component';
+import { AngularServiceControlComponent } from './angular-service-control/angular-service-control.component';
 import { User } from '../../auth/models/user.model';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [CommonModule, FormsModule, RegisterComponent],
+  imports: [CommonModule, FormsModule, RegisterComponent, AngularServiceControlComponent],
   templateUrl: './admin.html',
   styleUrl: './admin.scss',
 })
 export class Admin implements OnInit {
+  activeSection = signal<'users' | 'services'>('users');
+
   // User Management
   users = signal<User[]>([]);
   isLoadingUsers = signal(false);
@@ -32,6 +35,10 @@ export class Admin implements OnInit {
   filterRole = signal<'ALL' | 'ADMIN' | 'USER'>('ALL');
 
   constructor(private authService: AuthService) {}
+
+  selectSection(section: 'users' | 'services'): void {
+    this.activeSection.set(section);
+  }
 
   ngOnInit(): void {
     this.loadUsers();

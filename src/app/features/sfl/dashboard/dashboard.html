@@ -23,7 +23,7 @@
       <div class="stat-card production-card">
         <div class="stat-icon production-icon">🏭</div>
         <div class="stat-info">
-          <h3>Total Production</h3>
+          <h3>Total Shift Production</h3>
           <p class="stat-number" *ngIf="!isLoading && !hasError">{{ productionData.totalPartCount }}</p>
           <p class="stat-loading" *ngIf="isLoading">Loading...</p>
           <p class="stat-error" *ngIf="hasError && !isLoading">N/A</p>
@@ -34,7 +34,7 @@
       <div class="stat-card parts-card ok-parts-card">
         <div class="stat-icon parts-icon ok-icon">✅</div>
         <div class="stat-info">
-          <h3>OK Parts</h3>
+          <h3>Shift OK Parts</h3>
           <p class="stat-number" *ngIf="!isLoading && !hasError">{{ productionData.okCount }}</p>
           <p class="stat-loading" *ngIf="isLoading">Loading...</p>
           <p class="stat-error" *ngIf="hasError && !isLoading">N/A</p>
@@ -134,7 +134,7 @@
                 <input readonly [value]="getProcessRangeValue(1, 'toxLoadMin', 'toxLoadMax')" />
               </div> -->
               <div class="detail-item">
-                <label>Actual Load Value(kn)</label>
+                <label>Actual Load Value(kg)</label>
                 <input readonly [value]="getProcessValue(1, 'toxLoadActual')" />
               </div>              
             </div>
@@ -173,7 +173,7 @@
                 <input readonly [value]="getProcessRangeValue(2, 'toxLoadMin', 'toxLoadMax')" />
               </div> -->
               <div class="detail-item">
-                <label>Actual Load Value(kn)</label>
+                <label>Actual Load Value(kg)</label>
                 <input readonly [value]="getProcessValue(2, 'toxLoadActual')" />
               </div>
             </div>

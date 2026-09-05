@@ -1,0 +1,229 @@
+:host {
+  --sku-ink: #172033;
+  --sku-muted: #64748b;
+  --sku-border: #dbe3ee;
+  --sku-surface: #ffffff;
+  --sku-subtle: #f7f9fc;
+  --sku-primary: #0f766e;
+  --sku-primary-dark: #115e59;
+  --sku-danger: #b42318;
+  display: block;
+  color: var(--sku-ink);
+}
+
+.card {
+  width: 100%;
+  box-sizing: border-box;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  background: var(--sku-surface);
+  border: 1px solid var(--sku-border);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(23, 32, 51, 0.07);
+}
+
+.card-header {
+  margin-bottom: 1.5rem;
+}
+
+.header-content {
+  h2 {
+    margin: 0;
+    color: var(--sku-ink);
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    line-height: 1.25;
+  }
+
+  p {
+    max-width: 62ch;
+    margin: 0.5rem 0 0;
+    color: var(--sku-muted);
+    font-size: 0.9375rem;
+    line-height: 1.55;
+  }
+}
+
+.sku-form {
+  display: grid;
+  grid-template-columns: auto minmax(12rem, 1fr) auto;
+  align-items: end;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+
+  label {
+    padding-bottom: 0.7rem;
+    color: var(--sku-ink);
+    font-size: 0.875rem;
+    font-weight: 650;
+  }
+
+  input {
+    min-width: 0;
+    min-height: 2.75rem;
+    box-sizing: border-box;
+    padding: 0.65rem 0.8rem;
+    border: 1px solid #b9c5d6;
+    border-radius: 7px;
+    background: #fff;
+    color: var(--sku-ink);
+    font: inherit;
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+
+    &:focus {
+      outline: none;
+      border-color: var(--sku-primary);
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.16);
+    }
+
+    &::placeholder {
+      color: #8a98aa;
+    }
+  }
+}
+
+.btn {
+  min-height: 2.75rem;
+  padding: 0.65rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 650;
+  cursor: pointer;
+  transition: background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+
+  &:focus-visible {
+    outline: 3px solid rgba(15, 118, 110, 0.28);
+    outline-offset: 2px;
+  }
+
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.btn-primary {
+  background: var(--sku-primary);
+  color: #fff;
+
+  &:hover:not(:disabled) {
+    background: var(--sku-primary-dark);
+    box-shadow: 0 4px 10px rgba(15, 118, 110, 0.22);
+  }
+}
+
+.btn-danger {
+  background: #fff;
+  border-color: #f1b5ae;
+  color: var(--sku-danger);
+
+  &:hover:not(:disabled) {
+    background: #fff5f4;
+    border-color: #df8b82;
+  }
+}
+
+.alert {
+  margin-bottom: 1rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 7px;
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+.alert-error {
+  border: 1px solid #f1b5ae;
+  background: #fff5f4;
+  color: #8f1d14;
+}
+
+.alert-success {
+  border: 1px solid #9bd8c2;
+  background: #f0fbf6;
+  color: #176342;
+}
+
+.loading-state,
+.empty-state {
+  padding: 2.5rem 1rem;
+  border: 1px dashed var(--sku-border);
+  border-radius: 8px;
+  color: var(--sku-muted);
+  text-align: center;
+}
+
+.table-body {
+  overflow: hidden;
+  border: 1px solid var(--sku-border);
+  border-radius: 8px;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 5rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  min-height: 3.5rem;
+  padding: 0.7rem 1rem;
+  background: var(--sku-surface);
+  border-bottom: 1px solid var(--sku-border);
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  &:hover {
+    background: var(--sku-subtle);
+  }
+}
+
+.col {
+  min-width: 0;
+}
+
+.col-id {
+  color: var(--sku-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.col-username {
+  overflow: hidden;
+  color: var(--sku-ink);
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.col-actions {
+  text-align: right;
+}
+
+@media (max-width: 640px) {
+  .sku-form {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+    gap: 0.45rem;
+
+    label {
+      padding-bottom: 0.1rem;
+    }
+  }
+
+  .sku-form .btn {
+    width: 100%;
+  }
+
+  .table-row {
+    grid-template-columns: 3rem minmax(0, 1fr) auto;
+    gap: 0.65rem;
+    padding-inline: 0.75rem;
+  }
+
+  .btn-sm {
+    padding-inline: 0.7rem;
+  }
+}

@@ -12,6 +12,7 @@ import { Subject, takeUntil } from 'rxjs';
 
 import { ProductionReportService } from './production-summary-report.service';
 import { HeaderContentService, FilterConfig } from '../../../../core/services/header-content.service';
+import { SkuOptionService } from '../../../../core/services/sku-option.service';
 import {
   ProductionReportRow,
   ProductionReportViewRow,
@@ -41,13 +42,14 @@ export class ProductionReportComponent implements OnInit, OnDestroy {
   summaryData: SummaryDateBlock[] = [];
   rawData: ProductionReportRow[] = [];
   viewData: ProductionReportViewRow[] = [];
-  skuOptions: string[] = [];
+  skuOptions: Array<{ label: string; value: string | number }> = [{ label: '0) ALL', value: 0 }];
 
   loading = false;
   errorMessage: string | null = null;
 
   private destroy$ = new Subject<void>();
   private service = inject(ProductionReportService);
+  private skuOptionService = inject(SkuOptionService);
   private headerContentService = inject(HeaderContentService);
   private cdr = inject(ChangeDetectorRef);
 
@@ -58,6 +60,7 @@ export class ProductionReportComponent implements OnInit, OnDestroy {
     this.year = new Date().getFullYear();
 
     this.setupHeaderFilters();
+    this.loadSkuOptions();
     this.load();
   }
 
@@ -124,19 +127,7 @@ export class ProductionReportComponent implements OnInit, OnDestroy {
         label: 'SKU',
         placeholder: 'ALL',
         value: this.sku,
-        options: [
-          { label: '0) ALL', value: "ALL"},
-          { label: '1) LEGEND TOP MOUNT', value: "LEGEND TOP MOUNT" },
-          { label: '2) SABRE', value: "SABRE" },
-          { label: '3) LEXINGTON', value: "LEXINGTON" },
-          { label: '4) LATITUDE', value: "LATITUDE" },
-          { label: '5) COYOTO', value: "COYOTO" },
-          { label: '6) COLORADO', value: "COLORADO" },
-          { label: '7) BARRACUDA TOP MOUNT', value: "BARRACUDA TOP MOUNT" },
-          { label: '8) BARRACUDA SIDE MOUNT', value: "BARRACUDA SIDE MOUNT" },
-          { label: '9) KINETIC', value: "KINETIC" },
-          { label: '10) NTV', value: "NTV" }
-        ],
+        options: this.skuOptions,
         onChange: (value) => {
           this.sku = this.normalizeSku(value);
           this.loadData();
@@ -169,6 +160,28 @@ export class ProductionReportComponent implements OnInit, OnDestroy {
     ];
 
     this.headerContentService.setFilters(filters);
+  }
+
+  private loadSkuOptions(): void {
+    this.skuOptionService
+      .getAll()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: options => {
+          this.skuOptions = [
+            { label: '0) ALL', value: 0 },
+            ...options.map((option, index) => ({
+              label: `${index + 1}) ${option.value}`,
+              value: option.value
+            }))
+          ];
+          this.setupHeaderFilters();
+          this.cdr.markForCheck();
+        },
+        error: error => {
+          console.error('SKU options error:', error);
+        }
+      });
   }
 
   private updateFilterButtons(): void {
@@ -204,7 +217,6 @@ export class ProductionReportComponent implements OnInit, OnDestroy {
       .subscribe({
         next: data => {
           this.rawData = data ?? [];
-          this.skuOptions = [...new Set(this.rawData.map(r => r.sku))];
           this.aggregate();
           this.buildSummary();
           this.loading = false;

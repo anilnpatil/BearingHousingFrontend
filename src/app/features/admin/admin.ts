@@ -5,16 +5,17 @@ import { AuthService } from '../../auth/auth.service';
 import { RegisterComponent } from '../../auth/register/register.component';
 import { AngularServiceControlComponent } from './angular-service-control/angular-service-control.component';
 import { User } from '../../auth/models/user.model';
+import { SkuOptionControlComponent } from './sku-option-control/sku-option-control.component';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [CommonModule, FormsModule, RegisterComponent, AngularServiceControlComponent],
+  imports: [CommonModule, FormsModule, RegisterComponent, AngularServiceControlComponent, SkuOptionControlComponent],
   templateUrl: './admin.html',
   styleUrl: './admin.scss',
 })
 export class Admin implements OnInit {
-  activeSection = signal<'users' | 'services'>('users');
+  activeSection = signal<'users' | 'services' | 'skus'>('users');
 
   // User Management
   users = signal<User[]>([]);
@@ -36,7 +37,7 @@ export class Admin implements OnInit {
 
   constructor(private authService: AuthService) {}
 
-  selectSection(section: 'users' | 'services'): void {
+  selectSection(section: 'users' | 'services' | 'skus'): void {
     this.activeSection.set(section);
   }
 

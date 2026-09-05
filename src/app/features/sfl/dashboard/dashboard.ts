@@ -71,7 +71,7 @@ export class Dashboard implements OnInit, OnDestroy {
       .pipe(
         startWith(0),
         takeUntil(this.destroy$),
-        switchMap(() => this.api.getProductionSummaryByShift(this.getCurrentShift()))
+        switchMap(() => this.api.getLatestProductionSummary())
       )
       .subscribe({
         next: (data) => {
@@ -177,16 +177,4 @@ export class Dashboard implements OnInit, OnDestroy {
     return label === 'Pass' ? '✅ OK' : label === 'Fail' ? '❌ NOT OK' : 'N/A';
   }
 
-  private getCurrentShift(): number {
-    const now = new Date();
-    const hour = now.getHours();
-
-    if (hour >= 6 && hour < 14) {
-      return 1; // Morning shift: 6 AM to 2 PM
-    } else if (hour >= 14 && hour < 22) {
-      return 2; // Afternoon shift: 2 PM to 10 PM
-    } else {
-      return 3; // Night shift: 10 PM to 6 AM
-    }
-  }
 }

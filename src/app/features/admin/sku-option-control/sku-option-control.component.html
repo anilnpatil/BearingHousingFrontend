@@ -1,0 +1,29 @@
+<section class="card">
+  <div class="card-header">
+    <div class="header-content">
+      <h2>SKU Management</h2>
+      <p>Add or remove SKU values used by production reports. Existing production records are not changed.</p>
+    </div>
+  </div>
+
+  <form class="sku-form" (ngSubmit)="add()">
+    <label for="new-sku">New SKU</label>
+    <input id="new-sku" name="sku" [(ngModel)]="value" maxlength="120" placeholder="Example: 7000000 NEW MODEL">
+    <button class="btn btn-primary" type="submit" [disabled]="saving()">{{ saving() ? 'Adding...' : 'Add SKU' }}</button>
+  </form>
+
+  <div class="alert alert-error" *ngIf="error()">{{ error() }}</div>
+  <div class="alert alert-success" *ngIf="message()">{{ message() }}</div>
+
+  <div class="loading-state" *ngIf="loading()">Loading SKUs...</div>
+  <div class="empty-state" *ngIf="!loading() && options().length === 0">No SKU values found.</div>
+  <div class="table-body" *ngIf="!loading() && options().length > 0">
+    <div class="table-row" *ngFor="let option of options()">
+      <div class="col col-id">{{ option.id }}</div>
+      <div class="col col-username">{{ option.value }}</div>
+      <div class="col col-actions">
+        <button class="btn btn-danger btn-sm" type="button" (click)="delete(option)">Delete</button>
+      </div>
+    </div>
+  </div>
+</section>

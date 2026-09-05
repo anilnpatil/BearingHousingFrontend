@@ -68,6 +68,11 @@ export interface ProductionSummary {
   p2_graphStatus?: number;
 }
 
+export interface SkuOption {
+  id: number;
+  value: string;
+}
+
 // Pagination response model
 export interface PagedResponse<T> {
   content: T[];
@@ -107,6 +112,10 @@ export class FiltrexApiService {
     );
   }
 
+  getLatestProductionSummary(): Observable<ProductionSummary> {
+    return this.http.get<ProductionSummary>(API_CONFIG.FILTREX.PRODUCTION_LATEST);
+  }
+
   //PAGINATED PRODUCTION REPORT (SPRING PAGE)
   getPagedReportByDateRange(
     start: string,
@@ -136,5 +145,9 @@ export class FiltrexApiService {
       API_CONFIG.FILTREX.REPORT_BY_DATE_RANGE,
       { params }
     );
+  }
+
+  getSkuOptions(): Observable<SkuOption[]> {
+    return this.http.get<SkuOption[]>(API_CONFIG.FILTREX.SKU_OPTIONS);
   }
 }

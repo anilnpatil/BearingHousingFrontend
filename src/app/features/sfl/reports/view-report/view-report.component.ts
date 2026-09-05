@@ -33,6 +33,7 @@ export class ViewReportComponent implements OnInit, OnDestroy {
   endDate: string = '';
   shift = 0;
   sku = 0;
+  skuOptions: Array<{ label: string; value: string | number }> = [{ label: '0) ALL', value: 0 }];
 
   data: ProductionSummary[] = [];
   loading = false;
@@ -69,7 +70,17 @@ export class ViewReportComponent implements OnInit, OnDestroy {
     this.page = Number.isInteger(pageNumber) && pageNumber > 0 ? pageNumber - 1 : 0;
     this.pageInput = this.page + 1;
 
-    this.setupHeaderFilters();
+    this.api.getSkuOptions().pipe(takeUntil(this.destroy$)).subscribe({
+      next: (options) => {
+        this.skuOptions = [
+          { label: '0) ALL', value: 0 },
+          ...options.map((option, index) => ({ label: `${index + 1}) ${option.value}`, value: option.value }))
+        ];
+        this.setupHeaderFilters();
+        this.cdr.markForCheck();
+      },
+      error: () => this.setupHeaderFilters()
+    });
     this.fetchData(false);
   }
 
@@ -128,19 +139,7 @@ export class ViewReportComponent implements OnInit, OnDestroy {
         label: 'SKU',
         placeholder: 'ALL',
         value: this.sku,
-        options: [
-          { label: '0) ALL', value: 0 },
-          { label: '1) LEGEND TOP MOUNT', value: "LEGEND TOP MOUNT" },
-          { label: '2) SABRE', value: "SABRE" },
-          { label: '3) LEXINGTON', value: "LEXINGTON" },
-          { label: '4) LATITUDE', value: "LATITUDE" },
-          { label: '5) COYOTO', value: "COYOTO" },
-          { label: '6) COLORADO', value: "COLORADO" },
-          { label: '7) BARRACUDA TOP MOUNT', value: "BARRACUDA TOP MOUNT" },
-          { label: '8) BARRACUDA SIDE MOUNT', value: "BARRACUDA SIDE MOUNT" },
-          { label: '9) KINETIC', value: "KINETIC" },
-          { label: '10) NTV', value: "NTV" }
-        ],
+        options: this.skuOptions,
         onChange: (value) => {
           this.sku = value;          
           this.fetchData(true);

@@ -23,6 +23,15 @@
         <span class="section-icon" aria-hidden="true">&#9881;</span>
         Service Management
       </button>
+      <button
+        type="button"
+        class="section-button"
+        [class.active]="activeSection() === 'skus'"
+        [attr.aria-current]="activeSection() === 'skus' ? 'page' : null"
+        (click)="selectSection('skus')">
+        <span class="section-icon" aria-hidden="true">#</span>
+        SKU Management
+      </button>
     </nav>
   </header>
 
@@ -134,6 +143,7 @@
 
     <!-- Angular Service Control Component -->
     <app-angular-service-control *ngIf="activeSection() === 'services'"></app-angular-service-control>
+    <app-sku-option-control *ngIf="activeSection() === 'skus'"></app-sku-option-control>
   </div>
 </div>
 

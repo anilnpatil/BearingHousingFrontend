@@ -59,7 +59,8 @@
               <th>p2_ToxDisplacementMax</th>
               <th>p2_ToxDisplacementActual</th>
               <th>p2_ToxDisplacementMin</th>
-              <th>p2_GraphStatus</th>              
+              <th>p2_GraphStatus</th>
+              <th>CupConsumed</th>              
               <th>CycleStartTime</th>
               <th>CycleEndTime</th>
               <th>CycleTime</th>              
@@ -91,6 +92,7 @@
               <td>{{ productionData.p2_toxDisplacementActual }}</td>
               <td>{{ productionData.p2_toxDisplacementMin }}</td>
               <td>{{ productionData.p2_graphStatus === 1 ? 'OK' : 'NOT OK' }}</td>
+              <td>{{ productionData.cupConsumed }}</td>
               <td>{{ productionData.cycleStartTime || 'N/A' }}</td>
               <td>{{ productionData.productionDateTime | date:'dd-MM-yyyy HH:mm' }}</td>
               <td>{{ productionData.cycleTime }}</td>              

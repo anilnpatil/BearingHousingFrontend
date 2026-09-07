@@ -313,6 +313,9 @@ export class ViewReportComponent implements OnInit, OnDestroy {
       P2_ToxDisplacementActual: this.getProcessValue(row, 2, 'toxDisplacementActual'),
       P2_ToxDisplacementMin: this.getProcessValue(row, 2, 'toxDisplacementMin'),
       P2_GraphStatus: this.getProcessValue(row, 2, 'graphStatus'),
+      CupConsumed: row.cupConsumed ?? '',
+      CycleStartTime: row.cycleStartTime ?? '',
+      CycleEndTime: row.productionDateTime ?? '',
       cycleTime: row.cycleTime ?? ''
     }));
 

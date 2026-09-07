@@ -66,6 +66,7 @@ export interface ProductionSummary {
   p2_toxDisplacementMax?: number;
   p2_toxDisplacementActual?: number;
   p2_graphStatus?: number;
+  cupConsumed?: number;
 }
 
 export interface SkuOption {

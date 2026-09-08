@@ -37,7 +37,7 @@
         <th class="p2-toxDisplacementActual-col" *ngIf="shouldShowSecondProcess()">P2_ToxDisplacementActual(mm)</th>
         <th class="p2-toxDisplacementMin-col" *ngIf="shouldShowSecondProcess()">P2_ToxDisplacementMin(mm)</th>
         <th class="p2-graphStatus-col" *ngIf="shouldShowSecondProcess()">P2_GraphStatus</th>
-        <th class="cupConsumed-col" *ngIf="shouldShowSecondProcess()">CupConsumed</th>
+        <th class="cupConsumed-col">CupConsumed</th>
 
         <th class="cycleStartTime-col">CycleStartTime</th>
         <th class="cycleEndTime-col">CycleEndTime</th>
@@ -55,22 +55,22 @@
         <td class="finalStatus-col">
           <span class="status"
                 [class.ok]="d.finalStatus === 1"
-                [class.notok]="d.finalStatus !== 1">
-            {{ d.finalStatus === 1 ? 'OK' : 'NOT OK' }}
+                [class.notok]="d.finalStatus === 2">
+            {{ d.finalStatus === 1 ? 'OK' : d.finalStatus === 2 ? 'NOT OK' : 'N/A' }}
           </span>
         </td>
 
         <td class="p1-beforeGlueStatus-col">
           <span class="status"
                 [class.ok]="isProcessStatusOk(d, 1, 'beforeGlueStatus')"
-                [class.notok]="!isProcessStatusOk(d, 1, 'beforeGlueStatus')">
+                [class.notok]="isProcessStatusNotOk(d, 1, 'beforeGlueStatus')">
             {{ getProcessStatusLabel(d, 1, 'beforeGlueStatus') }}
           </span>
         </td>
         <td class="p1-afterGlueStatus-col">
           <span class="status"
                 [class.ok]="isProcessStatusOk(d, 1, 'afterGlueStatus')"
-                [class.notok]="!isProcessStatusOk(d, 1, 'afterGlueStatus')">
+                [class.notok]="isProcessStatusNotOk(d, 1, 'afterGlueStatus')">
             {{ getProcessStatusLabel(d, 1, 'afterGlueStatus') }}
           </span>
         </td>
@@ -83,7 +83,7 @@
         <td class="p1-graphStatus-col">
           <span class="status"
                 [class.ok]="getGraphStatusValue(d, 1) === 1"
-                [class.notok]="getGraphStatusValue(d, 1) !== 1">
+                [class.notok]="getGraphStatusValue(d, 1) === 2">
             {{ getGraphStatusLabel(d, 1) }}
           </span>
         </td>
@@ -91,14 +91,14 @@
         <td class="p2-beforeGlueStatus-col" *ngIf="shouldShowSecondProcess()">
           <span class="status"
                 [class.ok]="isProcessStatusOk(d, 2, 'beforeGlueStatus')"
-                [class.notok]="!isProcessStatusOk(d, 2, 'beforeGlueStatus')">
+                [class.notok]="isProcessStatusNotOk(d, 2, 'beforeGlueStatus')">
             {{ getProcessStatusLabel(d, 2, 'beforeGlueStatus') }}
           </span>
         </td>
         <td class="p2-afterGlueStatus-col" *ngIf="shouldShowSecondProcess()">
           <span class="status"
                 [class.ok]="isProcessStatusOk(d, 2, 'afterGlueStatus')"
-                [class.notok]="!isProcessStatusOk(d, 2, 'afterGlueStatus')">
+                [class.notok]="isProcessStatusNotOk(d, 2, 'afterGlueStatus')">
             {{ getProcessStatusLabel(d, 2, 'afterGlueStatus') }}
           </span>
         </td>
@@ -111,11 +111,11 @@
         <td class="p2-graphStatus-col" *ngIf="shouldShowSecondProcess()">
           <span class="status"
                 [class.ok]="getGraphStatusValue(d, 2) === 1"
-                [class.notok]="getGraphStatusValue(d, 2) !== 1">
+                [class.notok]="getGraphStatusValue(d, 2) === 2">
             {{ getGraphStatusLabel(d, 2) }}
           </span>
         </td>
-        <td class="cupConsumed-col" *ngIf="shouldShowSecondProcess()">{{ d.cupConsumed ?? 'N/A' }}</td>
+        <td class="cupConsumed-col">{{ d.cupConsumed ?? 'N/A' }}</td>
         <td class="cycleStartTime-col">{{ d.cycleStartTime || 'N/A' }}</td>
         <td class="cycleEndTime-col">{{ d.productionDateTime | date:'dd-MM-yyyy HH:mm:ss' }}</td>
         <td class="cycleTime-col">{{ d.cycleTime }}</td>

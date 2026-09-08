@@ -157,7 +157,7 @@ export class Dashboard implements OnInit, OnDestroy {
     if (status === 1 || String(status).trim().toLowerCase() === 'pass') {
       return 'Pass';
     }
-    if (status === 0 || String(status).trim().toLowerCase() === 'fail') {
+    if (status === 2 || String(status).trim().toLowerCase() === 'fail') {
       return 'Fail';
     }
     return 'N/A';

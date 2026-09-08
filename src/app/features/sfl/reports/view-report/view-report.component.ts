@@ -211,6 +211,14 @@ export class ViewReportComponent implements OnInit, OnDestroy {
     return this.getProcessStatusValue(row, processNumber, statusField) === 1;
   }
 
+  isProcessStatusNotOk(
+    row: ProductionSummary,
+    processNumber: number,
+    statusField: 'beforeGlueStatus' | 'afterGlueStatus'
+  ): boolean {
+    return this.getProcessStatusValue(row, processNumber, statusField) === 2;
+  }
+
   getProcessStatusLabel(
     row: ProductionSummary,
     processNumber: number,
@@ -222,7 +230,7 @@ export class ViewReportComponent implements OnInit, OnDestroy {
       return 'OK';
     }
 
-    if (status === 0) {
+    if (status === 2) {
       return 'NOT OK';
     }
 
@@ -236,7 +244,7 @@ export class ViewReportComponent implements OnInit, OnDestroy {
       return 'OK';
     }
 
-    if (value === 0) {
+    if (value === 2) {
       return 'NOT OK';
     }
 
@@ -294,7 +302,7 @@ export class ViewReportComponent implements OnInit, OnDestroy {
       barcode: row.barcode ?? '',
       shift: row.shift ?? '',
       operatorName: row.operatorName ?? '',
-      finalStatus: row.finalStatus === 1 ? 'OK' : 'NOT OK',
+      finalStatus: row.finalStatus === 1 ? 'OK' : row.finalStatus === 2 ? 'NOT OK' : 'N/A',
       P1_BeforeGlueStatus: this.getProcessStatusLabel(row, 1, 'beforeGlueStatus'),
       P1_AfterGlueStatus: this.getProcessStatusLabel(row, 1, 'afterGlueStatus'),
       P1_ToxLoadMax: this.getProcessValue(row, 1, 'toxLoadMax'),

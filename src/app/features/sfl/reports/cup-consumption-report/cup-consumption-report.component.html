@@ -1,0 +1,57 @@
+<div class="page">
+  <div class="loading-overlay" *ngIf="loading">
+    <div class="loading-content">
+      <div class="loading-spinner"></div>
+      <p>Loading cup consumption...</p>
+    </div>
+  </div>
+
+  <div class="error-banner" *ngIf="errorMessage && !loading">
+    <div class="error-content">
+      <span class="error-text">{{ errorMessage }}</span>
+      <button type="button" (click)="load()">Retry</button>
+    </div>
+  </div>
+
+  <section class="report-panel" *ngIf="!errorMessage">
+    <div class="report-heading">
+      <div>
+        <h2>Cup Consumption</h2>
+        <p>Consumption grouped by selected period and shift</p>
+      </div>
+      <div class="total-value">
+        <span>Total Cups</span>
+        <strong>{{ totalCupConsumed }}</strong>
+      </div>
+    </div>
+
+    <div class="table-wrapper" *ngIf="rows.length; else emptyState">
+      <table>
+        <thead>
+          <tr>
+            <th>Period</th>
+            <th>Shift</th>
+            <th>Cup Consumed</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of rows">
+            <td>{{ periodLabel(row.period) }}</td>
+            <td>Shift {{ row.shift }}</td>
+            <td class="cup-value">{{ row.cupConsumed }}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th colspan="2">Total</th>
+            <th class="cup-value">{{ totalCupConsumed }}</th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <ng-template #emptyState>
+      <div class="empty-state">No cup consumption records found for the selected filters.</div>
+    </ng-template>
+  </section>
+</div>

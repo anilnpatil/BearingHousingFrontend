@@ -114,7 +114,7 @@ export class Dashboard implements OnInit, OnDestroy {
     return Math.max(0.65, Math.min(2, 2 - Math.max(0, skuLength - 10) * 0.1));
   }
 
-  getProcessStatusLabel(processNumber: number, statusField: 'beforeGlueStatus' | 'afterGlueStatus'): string {
+  getProcessStatusLabel(processNumber: number, statusField: 'beforeGlueStatus' | 'afterGlueStatus' | 'graphStatus'): string {
     const processKey = `p${processNumber}_${statusField}`;
     const legacyKey = statusField as keyof ProductionSummary;
     const data = this.productionData as unknown as Record<string, unknown>;
@@ -123,7 +123,7 @@ export class Dashboard implements OnInit, OnDestroy {
     return this.getStatusLabel(status);
   }
 
-  getProcessStatusClass(processNumber: number, statusField: 'beforeGlueStatus' | 'afterGlueStatus'): string {
+  getProcessStatusClass(processNumber: number, statusField: 'beforeGlueStatus' | 'afterGlueStatus' | 'graphStatus'): string {
     const processKey = `p${processNumber}_${statusField}`;
     const legacyKey = statusField as keyof ProductionSummary;
     const data = this.productionData as unknown as Record<string, unknown>;

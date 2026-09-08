@@ -155,14 +155,18 @@
 // }
 
 /*    STATUS TAGS */
+.status {
+  font-size: 0.8rem;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
 .status.ok {
   color: #15803d;
-  font-weight: 700;
 }
 
 .status.notok {
   color: #b91c1c;
-  font-weight: 700;
 }
 
 .status1.ok {
@@ -176,7 +180,7 @@
   text-align: center;
   color: #64748b;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 /*    PAGINATION (FIXED)  */

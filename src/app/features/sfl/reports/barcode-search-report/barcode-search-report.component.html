@@ -40,6 +40,7 @@
               <th>Barcode</th>
               <th>Shift</th>
               <th>SKU</th>
+              <th>NumberOfProcesses</th>
               <th>OperatorName</th>
               <th>FinalStatus</th>
               <th>p1_BeforeGlueStatus</th>
@@ -72,26 +73,69 @@
               <td>{{ productionData.barcode }}</td>
               <td>{{ productionData.shift }}</td>
               <td>{{ productionData.sku }}</td>
+              <td>{{ productionData.numberofProcess ?? 'N/A' }}</td>
               <td>{{ productionData.operatorName }}</td>
-              <td>{{ productionData.finalStatus === 1 ? 'OK' : 'NOT OK' }}</td>
-              <td>{{ productionData.p1_beforeGlueStatus === 1 ? 'OK' : 'NOT OK' }}</td>
-              <td>{{ productionData.p1_afterGlueStatus === 1 ? 'OK' : 'NOT OK' }}</td>
+              <td>
+                <span class="status-tag"
+                      [class.ok]="isNumericStatusOk(productionData.finalStatus)"
+                      [class.notok]="isNumericStatusNotOk(productionData.finalStatus)">
+                  {{ getNumericStatusLabel(productionData.finalStatus) }}
+                </span>
+              </td>
+              <td>
+                <span class="status-tag"
+                      [class.ok]="isNumericStatusOk(productionData.p1_beforeGlueStatus)"
+                      [class.notok]="isNumericStatusNotOk(productionData.p1_beforeGlueStatus)">
+                  {{ getNumericStatusLabel(productionData.p1_beforeGlueStatus) }}
+                </span>
+              </td>
+              <td>
+                <span class="status-tag"
+                      [class.ok]="isNumericStatusOk(productionData.p1_afterGlueStatus)"
+                      [class.notok]="isNumericStatusNotOk(productionData.p1_afterGlueStatus)">
+                  {{ getNumericStatusLabel(productionData.p1_afterGlueStatus) }}
+                </span>
+              </td>
               <!-- <td>{{ productionData.p1_toxLoadMax }}</td> -->
               <td>{{ productionData.p1_toxLoadActual }}</td>
               <!-- <td>{{ productionData.p1_toxLoadMin }}</td> -->
               <td>{{ productionData.p1_toxDisplacementMax }}</td>
               <td>{{ productionData.p1_toxDisplacementActual }}</td>
               <td>{{ productionData.p1_toxDisplacementMin }}</td>
-              <td>{{ productionData.p1_graphStatus === 1 ? 'OK' : 'NOT OK' }}</td>
-              <td>{{ productionData.p2_beforeGlueStatus === 1 ? 'OK' : 'NOT OK' }}</td>
-              <td>{{ productionData.p2_afterGlueStatus === 1 ? 'OK' : 'NOT OK' }}</td>
+              <td>
+                <span class="status-tag"
+                      [class.ok]="isNumericStatusOk(productionData.p1_graphStatus)"
+                      [class.notok]="isNumericStatusNotOk(productionData.p1_graphStatus)">
+                  {{ getNumericStatusLabel(productionData.p1_graphStatus) }}
+                </span>
+              </td>
+              <td>
+                <span class="status-tag"
+                      [class.ok]="isNumericStatusOk(productionData.p2_beforeGlueStatus)"
+                      [class.notok]="isNumericStatusNotOk(productionData.p2_beforeGlueStatus)">
+                  {{ getNumericStatusLabel(productionData.p2_beforeGlueStatus) }}
+                </span>
+              </td>
+              <td>
+                <span class="status-tag"
+                      [class.ok]="isNumericStatusOk(productionData.p2_afterGlueStatus)"
+                      [class.notok]="isNumericStatusNotOk(productionData.p2_afterGlueStatus)">
+                  {{ getNumericStatusLabel(productionData.p2_afterGlueStatus) }}
+                </span>
+              </td>
               <!-- <td>{{ productionData.p2_toxLoadMax }}</td> -->
               <td>{{ productionData.p2_toxLoadActual }}</td>
               <!-- <td>{{ productionData.p2_toxLoadMin }}</td> -->
               <td>{{ productionData.p2_toxDisplacementMax }}</td>
               <td>{{ productionData.p2_toxDisplacementActual }}</td>
               <td>{{ productionData.p2_toxDisplacementMin }}</td>
-              <td>{{ productionData.p2_graphStatus === 1 ? 'OK' : 'NOT OK' }}</td>
+              <td>
+                <span class="status-tag"
+                      [class.ok]="isNumericStatusOk(productionData.p2_graphStatus)"
+                      [class.notok]="isNumericStatusNotOk(productionData.p2_graphStatus)">
+                  {{ getNumericStatusLabel(productionData.p2_graphStatus) }}
+                </span>
+              </td>
               <td>{{ productionData.cupConsumed }}</td>
               <td>{{ productionData.cycleStartTime || 'N/A' }}</td>
               <td>{{ productionData.productionDateTime | date:'dd-MM-yyyy HH:mm:ss' }}</td>
@@ -116,8 +160,8 @@
             <span>Before Image</span>
             <span class="status-tag"
                   [class.ok]="isOkStatus(processSet.beforeImageStatus)"
-                  [class.notok]="!isOkStatus(processSet.beforeImageStatus)">
-              {{ processSet.beforeImageStatus }}
+                  [class.notok]="isNotOkStatus(processSet.beforeImageStatus)">
+              {{ getImageStatusLabel(processSet.beforeImageStatus) }}
             </span>
           </div>
           <div class="image-frame">
@@ -138,8 +182,8 @@
             <span>After Image</span>
             <span class="status-tag"
                   [class.ok]="isOkStatus(processSet.afterImageStatus)"
-                  [class.notok]="!isOkStatus(processSet.afterImageStatus)">
-              {{ processSet.afterImageStatus }}
+                  [class.notok]="isNotOkStatus(processSet.afterImageStatus)">
+              {{ getImageStatusLabel(processSet.afterImageStatus) }}
             </span>
           </div>
           <div class="image-frame">
@@ -160,8 +204,8 @@
             <span>Graph PDF</span>
             <span class="status-tag"
                   [class.ok]="isOkStatus(processSet.graphImageStatus)"
-                  [class.notok]="!isOkStatus(processSet.graphImageStatus)">
-              {{ processSet.graphImageStatus }}
+                  [class.notok]="isNotOkStatus(processSet.graphImageStatus)">
+              {{ getImageStatusLabel(processSet.graphImageStatus) }}
             </span>
           </div>
           <div class="image-frame pdf-viewer-frame">

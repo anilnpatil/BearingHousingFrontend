@@ -419,6 +419,36 @@ export class BarcodeSearchReportComponent
     return normalized === 'A_OK' || normalized === 'B_OK' || normalized === 'OK';
   }
 
+  public isNotOkStatus(status: string | null | undefined): boolean {
+    if (!status) {
+      return false;
+    }
+    const normalized = status.trim().toUpperCase();
+    return normalized === 'A_NOT_OK' || normalized === 'B_NOT_OK' || normalized === 'NOT OK' || normalized === 'NOT_OK';
+  }
+
+  public isNumericStatusOk(status: number | null | undefined): boolean {
+    return status === 1;
+  }
+
+  public isNumericStatusNotOk(status: number | null | undefined): boolean {
+    return status === 2;
+  }
+
+  public getNumericStatusLabel(status: number | null | undefined): string {
+    return status === 1 ? 'OK' : status === 2 ? 'NOT OK' : 'N/A';
+  }
+
+  public getImageStatusLabel(status: string | null | undefined): string {
+    if (this.isOkStatus(status)) {
+      return 'OK';
+    }
+    if (this.isNotOkStatus(status)) {
+      return 'NOT OK';
+    }
+    return 'N/A';
+  }
+
   /**
    * Download the PDF directly from the backend.
    */

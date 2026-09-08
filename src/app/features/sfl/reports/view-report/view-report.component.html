@@ -16,6 +16,7 @@
         <th class="barcode-col">Barcode</th>
         <th class="shift-col">Shift</th>
         <th class="sku-col">SKU</th>
+        <th class="numberofProcess-col">NumberOfProcesses</th>
         <th class="operatorName-col">OperatorName</th>
         <th class="finalStatus-col">FinalStatus</th>
 
@@ -51,6 +52,7 @@
         <td class="barcode-col">{{ d.barcode }}</td>
         <td class="shift-col">{{ d.shift }}</td>
         <td class="sku-col">{{ d.sku }}</td>
+        <td class="numberofProcess-col">{{ d.numberofProcess ?? 'N/A' }}</td>
         <td class="operatorName-col">{{ d.operatorName }}</td>
         <td class="finalStatus-col">
           <span class="status"

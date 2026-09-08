@@ -100,7 +100,7 @@
             </div>
             <div class="detail-item">
               <label>Cycle End Time</label>
-              <input readonly [value]="productionData.productionDateTime ? (productionData.productionDateTime | date:'short') : 'N/A'" />
+              <input readonly [value]="productionData.productionDateTime ? (productionData.productionDateTime | date:'HH:mm:ss') : 'N/A'"  />
             </div>
             <div class="detail-item">
               <label>Cycle Time</label>
@@ -128,7 +128,7 @@
               <div class="detail-item">
                 <label>After Glue Status</label>
                 <input readonly [class]="getProcessStatusClass(1, 'afterGlueStatus')" [value]="getProcessStatusLabel(1, 'afterGlueStatus')" />
-              </div>             
+              </div>               
               <!-- <div class="detail-item">
                 <label>Load Min / Max Value</label>
                 <input readonly [value]="getProcessRangeValue(1, 'toxLoadMin', 'toxLoadMax')" />
@@ -151,6 +151,10 @@
               <div class="detail-item">
                 <label>Min Displacement Value(mm)</label>
                 <input readonly [value]="getProcessValue(1, 'toxDisplacementMin')" />
+              </div>
+              <div class="detail-item">
+                <label>Graph Status</label>
+                <input readonly [class]="getProcessStatusClass(1, 'graphStatus')" [value]="getProcessStatusLabel(1, 'graphStatus')" />
               </div>
             </div>
           </div>
@@ -189,6 +193,10 @@
               <div class="detail-item">
                 <label>Min Displacement Value(mm)</label>
                 <input readonly [value]="getProcessValue(2, 'toxDisplacementMin')" />
+              </div>
+              <div class="detail-item">
+                <label>Graph Status</label>
+                <input readonly [class]="getProcessStatusClass(2, 'graphStatus')" [value]="getProcessStatusLabel(2, 'graphStatus')" />
               </div>
             </div>
           </div>

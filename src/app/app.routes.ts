@@ -10,6 +10,7 @@ import { roleGuard } from './auth/role.guard';
 import { ViewReportComponent } from './features/sfl/reports/view-report/view-report.component';
 import { BarcodeSearchReportComponent } from './features/sfl/reports/barcode-search-report/barcode-search-report.component';
 import { ProductionReportComponent } from './features/sfl/reports/production-summary-report/production-summary-report.component';
+import { CupConsumptionReportComponent } from './features/sfl/reports/cup-consumption-report/cup-consumption-report.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -25,7 +26,8 @@ export const routes: Routes = [
       { path: 'admin', component: Admin, canActivate: [roleGuard('ADMIN')], data: { title: 'Admin' } },
       { path: 'user', component: User, canActivate: [roleGuard('USER')], data: { title: 'User' } },      
       { path: 'barcode-search-report', component: BarcodeSearchReportComponent, data: { title: 'Barcode Search Report' } },
-      { path: 'production-summary-report', component: ProductionReportComponent, data: { title: 'Production Summary Report' } }
+      { path: 'production-summary-report', component: ProductionReportComponent, data: { title: 'Production Summary Report' } },
+      { path: 'cup-consumption-report', component: CupConsumptionReportComponent, data: { title: 'Cup Consumption Report' } }
     ]
   },
   { path: '**', redirectTo: '/dashboard' }

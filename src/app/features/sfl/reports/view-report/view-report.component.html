@@ -49,16 +49,16 @@
     <tbody>
       <tr *ngFor="let d of data" (click)="openBarcode(d)" role="button" tabindex="0" class="clickable-row">
         <td class="productionDateTime-col">{{ d.productionDateTime | date:'dd-MM-yyyy HH:mm:ss' }}</td>
-        <td class="barcode-col">{{ d.barcode }}</td>
-        <td class="shift-col">{{ d.shift }}</td>
-        <td class="sku-col">{{ d.sku }}</td>
-        <td class="numberofProcess-col">{{ d.numberofProcess ?? 'N/A' }}</td>
-        <td class="operatorName-col">{{ d.operatorName }}</td>
+        <td class="barcode-col">{{ getProcessValue(d, 0, 'barcode') }}</td>
+        <td class="shift-col">{{ getProcessValue(d, 0, 'shift') }}</td>
+        <td class="sku-col">{{ getProcessValue(d, 0, 'sku') }}</td>
+        <td class="numberofProcess-col">{{ getProcessValue(d, 0, 'numberofProcess') }}</td>
+        <td class="operatorName-col">{{ getProcessValue(d, 0, 'operatorName') }}</td>
         <td class="finalStatus-col">
           <span class="status"
                 [class.ok]="d.finalStatus === 1"
                 [class.notok]="d.finalStatus === 2">
-            {{ d.finalStatus === 1 ? 'OK' : d.finalStatus === 2 ? 'NOT OK' : 'N/A' }}
+            {{ d.finalStatus === 1 ? 'OK' : d.finalStatus === 2 ? 'NOT OK' : '' }}
           </span>
         </td>
 
@@ -117,10 +117,10 @@
             {{ getGraphStatusLabel(d, 2) }}
           </span>
         </td>
-        <td class="cupConsumed-col">{{ d.cupConsumed ?? 'N/A' }}</td>
-        <td class="cycleStartTime-col">{{ d.cycleStartTime || 'N/A' }}</td>
+        <td class="cupConsumed-col">{{ getProcessValue(d, 0, 'cupConsumed') }}</td>
+        <td class="cycleStartTime-col">{{ d.cycleStartTime || '' }}</td>
         <td class="cycleEndTime-col">{{ d.productionDateTime | date:'dd-MM-yyyy HH:mm:ss' }}</td>
-        <td class="cycleTime-col">{{ d.cycleTime }}</td>
+        <td class="cycleTime-col">{{ getProcessValue(d, 0, 'cycleTime') }}</td>
       </tr>
     </tbody>
   </table>

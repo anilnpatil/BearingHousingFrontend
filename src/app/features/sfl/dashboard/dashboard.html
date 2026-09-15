@@ -24,9 +24,9 @@
         <div class="stat-icon production-icon">🏭</div>
         <div class="stat-info">
           <h3>Total Shift Production</h3>
-          <p class="stat-number" *ngIf="!isLoading && !hasError">{{ productionData.totalPartCount }}</p>
+          <p class="stat-number" *ngIf="!isLoading && !hasError">{{ getDisplayValue(productionData.totalPartCount) }}</p>
           <p class="stat-loading" *ngIf="isLoading">Loading...</p>
-          <p class="stat-error" *ngIf="hasError && !isLoading">N/A</p>
+          <p class="stat-error" *ngIf="hasError && !isLoading"></p>
         </div>
       </div>
 
@@ -35,9 +35,9 @@
         <div class="stat-icon parts-icon ok-icon">✅</div>
         <div class="stat-info">
           <h3>Shift OK Parts</h3>
-          <p class="stat-number" *ngIf="!isLoading && !hasError">{{ productionData.okCount }}</p>
+          <p class="stat-number" *ngIf="!isLoading && !hasError">{{ getDisplayValue(productionData.okCount) }}</p>
           <p class="stat-loading" *ngIf="isLoading">Loading...</p>
-          <p class="stat-error" *ngIf="hasError && !isLoading">N/A</p>
+          <p class="stat-error" *ngIf="hasError && !isLoading"></p>
         </div>
       </div>
 
@@ -46,9 +46,9 @@
         <div class="stat-icon parts-icon notok-icon">❌</div>
         <div class="stat-info">
           <h3>NOT OK Parts</h3>
-          <p class="stat-number" *ngIf="!isLoading && !hasError">{{ productionData.notOkCount }}</p>
+          <p class="stat-number" *ngIf="!isLoading && !hasError">{{ getDisplayValue(productionData.notOkCount) }}</p>
           <p class="stat-loading" *ngIf="isLoading">Loading...</p>
-          <p class="stat-error" *ngIf="hasError && !isLoading">N/A</p>
+          <p class="stat-error" *ngIf="hasError && !isLoading"></p>
         </div>
       </div> 
       <!-- Current Shift Card -->
@@ -60,9 +60,9 @@
             class="stat-number"
             *ngIf="!isLoading && !hasError"
             [style.font-size.rem]="getSkuFontSize()"
-          >{{ productionData.sku }}</p>
+          >{{ getDisplayValue(productionData.sku) }}</p>
           <p class="stat-loading" *ngIf="isLoading">Loading...</p>
-          <p class="stat-error" *ngIf="hasError && !isLoading">N/A</p>
+          <p class="stat-error" *ngIf="hasError && !isLoading"></p>
         </div>
       </div>
           
@@ -72,9 +72,9 @@
         <div class="stat-icon shift-icon">🕚</div>
         <div class="stat-info">
           <h3>Current Shift</h3>
-          <p class="stat-number" *ngIf="!isLoading && !hasError">{{ productionData.shift }}</p>
+          <p class="stat-number" *ngIf="!isLoading && !hasError">{{ getDisplayValue(productionData.shift) }}</p>
           <p class="stat-loading" *ngIf="isLoading">Loading...</p>
-          <p class="stat-error" *ngIf="hasError && !isLoading">N/A</p>
+          <p class="stat-error" *ngIf="hasError && !isLoading"></p>
         </div>
       </div>
     </div>
@@ -88,23 +88,23 @@
           <div class="details-grid">
             <div class="detail-item">
               <label>Barcode</label>
-              <input readonly [value]="productionData.barcode || 'N/A'" />
+              <input readonly [value]="productionData.barcode || ''" />
             </div>
             <div class="detail-item">
               <label>Operator Name</label>
-              <input readonly [value]="productionData.operatorName || 'N/A'" />
+              <input readonly [value]="productionData.operatorName || ''" />
             </div>
             <div class="detail-item">
               <label>Cycle Start Time</label>
-              <input readonly [value]="productionData.cycleStartTime || 'N/A'" />
+              <input readonly [value]="productionData.cycleStartTime || ''" />
             </div>
             <div class="detail-item">
               <label>Cycle End Time</label>
-              <input readonly [value]="productionData.productionDateTime ? (productionData.productionDateTime | date:'HH:mm:ss') : 'N/A'"  />
+              <input readonly [value]="productionData.productionDateTime ? (productionData.productionDateTime | date:'HH:mm:ss') : ''"  />
             </div>
             <div class="detail-item">
               <label>Cycle Time</label>
-              <input readonly [value]="productionData.cycleTime !== undefined ? productionData.cycleTime + ' sec' : 'N/A'" />
+              <input readonly [value]="getDisplayValue(productionData.cycleTime) ? getDisplayValue(productionData.cycleTime) + ' sec' : ''" />
             </div>
             <div class="detail-item">
               <label>Final Status</label>

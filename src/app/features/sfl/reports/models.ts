@@ -48,4 +48,4 @@ export interface ProductionTotalsRow {
   okCount: number;
   notOkCount: number;
 }
-export type ViewMode = 'DAY' | 'WEEK' | 'MONTH';
+export type ViewMode = 'DAY' | 'WEEK' | 'MONTH' | 'YEAR';

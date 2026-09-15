@@ -19,7 +19,7 @@ import {
   SummaryDateBlock,
 } from '../models';
 
-type ViewType = 'DAY' | 'WEEK' | 'MONTH';
+type ViewType = 'DAY' | 'WEEK' | 'MONTH' | 'YEAR';
 
 @Component({
   selector: 'app-view-production-summary-report',
@@ -80,7 +80,8 @@ export class ProductionReportComponent implements OnInit, OnDestroy {
         options: [
           { label: 'Day', value: 'DAY' },
           { label: 'Week', value: 'WEEK' },
-          { label: 'Month', value: 'MONTH' }
+          { label: 'Month', value: 'MONTH' },
+          { label: 'Year', value: 'YEAR' }
         ],
         onChange: (value) => {
           this.view = value;
@@ -208,8 +209,10 @@ export class ProductionReportComponent implements OnInit, OnDestroy {
       request$ = this.service.fetchDay(this.from, this.to, skuParam, shiftParam);
     } else if (this.view === 'WEEK') {
       request$ = this.service.fetchWeek(this.year, skuParam, shiftParam);
-    } else {
+    } else if (this.view === 'MONTH') {
       request$ = this.service.fetchMonth(this.year, skuParam, shiftParam);
+    } else {
+      request$ = this.service.fetchYear(this.year, skuParam, shiftParam);
     }
 
     request$
@@ -258,7 +261,9 @@ export class ProductionReportComponent implements OnInit, OnDestroy {
       const key =
         this.view === 'WEEK'
           ? `${d.getFullYear()}-W${this.getISOWeek(d)}`
-          : `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+          : this.view === 'MONTH'
+            ? `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`
+            : `${d.getFullYear()}`;
 
       const gk = `${key}_${r.sku}_${r.shift}`;
 
@@ -331,6 +336,10 @@ export class ProductionReportComponent implements OnInit, OnDestroy {
 
     if (this.view === 'WEEK') {
       return `${d.getFullYear()}-W${this.getISOWeek(d)}`;
+    }
+
+    if (this.view === 'YEAR') {
+      return `${d.getFullYear()}`;
     }
 
     return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;

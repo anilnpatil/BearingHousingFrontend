@@ -135,19 +135,25 @@ export class Dashboard implements OnInit, OnDestroy {
     const data = this.productionData as unknown as Record<string, unknown>;
     const value = data[key];
 
-    if (value === undefined || value === null || value === '') {
-      return 'N/A';
+    if (value === undefined || value === null || value === '' || value === 0 || value === '0') {
+      return '';
     }
 
     return String(value);
+  }
+
+  getDisplayValue(value: unknown): string {
+    return value === undefined || value === null || value === '' || value === 0 || value === '0'
+      ? ''
+      : String(value);
   }
 
   getProcessRangeValue(processNumber: number, minField: string, maxField: string): string {
     const minValue = this.getProcessValue(processNumber, minField);
     const maxValue = this.getProcessValue(processNumber, maxField);
 
-    if (minValue === 'N/A' || maxValue === 'N/A') {
-      return 'N/A';
+    if (!minValue || !maxValue) {
+      return '';
     }
 
     return `${minValue} / ${maxValue}`;
@@ -160,7 +166,7 @@ export class Dashboard implements OnInit, OnDestroy {
     if (status === 2 || String(status).trim().toLowerCase() === 'fail') {
       return 'Fail';
     }
-    return 'N/A';
+    return '';
   }
 
   getStatusClass(status: unknown): string {
@@ -174,7 +180,7 @@ export class Dashboard implements OnInit, OnDestroy {
 
   getFinalStatusLabel(): string {
     const label = this.getStatusLabel(this.productionData.finalStatus);
-    return label === 'Pass' ? '✅ OK' : label === 'Fail' ? '❌ NOT OK' : 'N/A';
+    return label === 'Pass' ? '✅ OK' : label === 'Fail' ? '❌ NOT OK' : '';
   }
 
 }

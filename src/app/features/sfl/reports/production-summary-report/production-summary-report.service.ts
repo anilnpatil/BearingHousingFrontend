@@ -65,6 +65,24 @@ export class ProductionReportService {
     return this.http.get<ProductionReportRow[]>(`${this.baseUrl}/month`, { params });
   }
 
+  fetchYear(
+    year: number,
+    sku: string | number,
+    shift: number | null
+  ): Observable<ProductionReportRow[]> {
+    const normalizedSku = this.normalizeSku(sku);
+
+    let params = new HttpParams()
+      .set('year', year.toString())
+      .set('sku', normalizedSku);
+
+    if (shift !== null) {
+      params = params.set('shift', shift.toString());
+    }
+
+    return this.http.get<ProductionReportRow[]>(`${this.baseUrl}/year`, { params });
+  }
+
   private normalizeSku(sku: string | number): string {
     if (sku === null || sku === undefined || sku === '' || sku === 0 || sku === '0') {
       return 'ALL';

@@ -234,7 +234,7 @@ export class ViewReportComponent implements OnInit, OnDestroy {
       return 'NOT OK';
     }
 
-    return 'N/A';
+    return '';
   }
 
   getGraphStatusLabel(row: ProductionSummary, processNumber: number): string {
@@ -248,7 +248,7 @@ export class ViewReportComponent implements OnInit, OnDestroy {
       return 'NOT OK';
     }
 
-    return 'N/A';
+    return '';
   }
 
   getGraphStatusValue(row: ProductionSummary, processNumber: number): number | undefined {
@@ -268,8 +268,8 @@ export class ViewReportComponent implements OnInit, OnDestroy {
     const rowData = row as unknown as Record<string, unknown>;
     const value = rowData[key] ?? rowData[field];
 
-    if (value === undefined || value === null || value === '') {
-      return 'N/A';
+    if (value === undefined || value === null || value === '' || value === 0 || value === '0') {
+      return '';
     }
 
     return typeof value === 'number' ? value : String(value);
@@ -302,7 +302,7 @@ export class ViewReportComponent implements OnInit, OnDestroy {
       barcode: row.barcode ?? '',
       shift: row.shift ?? '',
       operatorName: row.operatorName ?? '',
-      finalStatus: row.finalStatus === 1 ? 'OK' : row.finalStatus === 2 ? 'NOT OK' : 'N/A',
+      finalStatus: row.finalStatus === 1 ? 'OK' : row.finalStatus === 2 ? 'NOT OK' : '',
       P1_BeforeGlueStatus: this.getProcessStatusLabel(row, 1, 'beforeGlueStatus'),
       P1_AfterGlueStatus: this.getProcessStatusLabel(row, 1, 'afterGlueStatus'),
       P1_ToxLoadMax: this.getProcessValue(row, 1, 'toxLoadMax'),

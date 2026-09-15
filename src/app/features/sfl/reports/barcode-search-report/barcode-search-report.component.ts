@@ -424,7 +424,13 @@ export class BarcodeSearchReportComponent
       return false;
     }
     const normalized = status.trim().toUpperCase();
-    return normalized === 'A_NOT_OK' || normalized === 'B_NOT_OK' || normalized === 'NOT OK' || normalized === 'NOT_OK';
+    return normalized === 'A_NOT_OK'
+      || normalized === 'B_NOT_OK'
+      || normalized === 'A_NG'
+      || normalized === 'B_NG'
+      || normalized === 'NG'
+      || normalized === 'NOT OK'
+      || normalized === 'NOT_OK';
   }
 
   public isNumericStatusOk(status: number | null | undefined): boolean {
@@ -436,7 +442,13 @@ export class BarcodeSearchReportComponent
   }
 
   public getNumericStatusLabel(status: number | null | undefined): string {
-    return status === 1 ? 'OK' : status === 2 ? 'NOT OK' : 'N/A';
+    return status === 1 ? 'OK' : status === 2 ? 'NOT OK' : '';
+  }
+
+  public getDisplayValue(value: unknown): string {
+    return value === undefined || value === null || value === '' || value === 0 || value === '0'
+      ? ''
+      : String(value);
   }
 
   public getImageStatusLabel(status: string | null | undefined): string {
@@ -446,7 +458,7 @@ export class BarcodeSearchReportComponent
     if (this.isNotOkStatus(status)) {
       return 'NOT OK';
     }
-    return 'N/A';
+    return '';
   }
 
   /**

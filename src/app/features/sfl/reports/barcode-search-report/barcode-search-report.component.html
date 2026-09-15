@@ -70,11 +70,11 @@
           <tbody>
             <tr>
               <td>{{ productionData.productionDateTime | date:'dd-MM-yyyy HH:mm:ss' }}</td>
-              <td>{{ productionData.barcode }}</td>
-              <td>{{ productionData.shift }}</td>
-              <td>{{ productionData.sku }}</td>
-              <td>{{ productionData.numberofProcess ?? 'N/A' }}</td>
-              <td>{{ productionData.operatorName }}</td>
+              <td>{{ getDisplayValue(productionData.barcode) }}</td>
+              <td>{{ getDisplayValue(productionData.shift) }}</td>
+              <td>{{ getDisplayValue(productionData.sku) }}</td>
+              <td>{{ getDisplayValue(productionData.numberofProcess) }}</td>
+              <td>{{ getDisplayValue(productionData.operatorName) }}</td>
               <td>
                 <span class="status-tag"
                       [class.ok]="isNumericStatusOk(productionData.finalStatus)"
@@ -97,11 +97,11 @@
                 </span>
               </td>
               <!-- <td>{{ productionData.p1_toxLoadMax }}</td> -->
-              <td>{{ productionData.p1_toxLoadActual }}</td>
+              <td>{{ getDisplayValue(productionData.p1_toxLoadActual) }}</td>
               <!-- <td>{{ productionData.p1_toxLoadMin }}</td> -->
-              <td>{{ productionData.p1_toxDisplacementMax }}</td>
-              <td>{{ productionData.p1_toxDisplacementActual }}</td>
-              <td>{{ productionData.p1_toxDisplacementMin }}</td>
+              <td>{{ getDisplayValue(productionData.p1_toxDisplacementMax) }}</td>
+              <td>{{ getDisplayValue(productionData.p1_toxDisplacementActual) }}</td>
+              <td>{{ getDisplayValue(productionData.p1_toxDisplacementMin) }}</td>
               <td>
                 <span class="status-tag"
                       [class.ok]="isNumericStatusOk(productionData.p1_graphStatus)"
@@ -124,11 +124,11 @@
                 </span>
               </td>
               <!-- <td>{{ productionData.p2_toxLoadMax }}</td> -->
-              <td>{{ productionData.p2_toxLoadActual }}</td>
+              <td>{{ getDisplayValue(productionData.p2_toxLoadActual) }}</td>
               <!-- <td>{{ productionData.p2_toxLoadMin }}</td> -->
-              <td>{{ productionData.p2_toxDisplacementMax }}</td>
-              <td>{{ productionData.p2_toxDisplacementActual }}</td>
-              <td>{{ productionData.p2_toxDisplacementMin }}</td>
+              <td>{{ getDisplayValue(productionData.p2_toxDisplacementMax) }}</td>
+              <td>{{ getDisplayValue(productionData.p2_toxDisplacementActual) }}</td>
+              <td>{{ getDisplayValue(productionData.p2_toxDisplacementMin) }}</td>
               <td>
                 <span class="status-tag"
                       [class.ok]="isNumericStatusOk(productionData.p2_graphStatus)"
@@ -136,10 +136,10 @@
                   {{ getNumericStatusLabel(productionData.p2_graphStatus) }}
                 </span>
               </td>
-              <td>{{ productionData.cupConsumed }}</td>
-              <td>{{ productionData.cycleStartTime || 'N/A' }}</td>
+              <td>{{ getDisplayValue(productionData.cupConsumed) }}</td>
+              <td>{{ productionData.cycleStartTime || '' }}</td>
               <td>{{ productionData.productionDateTime | date:'dd-MM-yyyy HH:mm:ss' }}</td>
-              <td>{{ productionData.cycleTime }}</td>              
+              <td>{{ getDisplayValue(productionData.cycleTime) }}</td>              
             </tr>
           </tbody>
         </table>

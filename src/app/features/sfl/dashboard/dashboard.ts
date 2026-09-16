@@ -39,12 +39,12 @@ export class Dashboard implements OnInit, OnDestroy {
     beforeGlueStatus: undefined,
     afterGlueStatus: undefined,
     finalStatus: undefined,
-    toxLoadActual: 0,
-    toxLoadMin: 0,
-    toxLoadMax: 0,
-    toxDisplacementActual: 0,
-    toxDisplacementMin: 0,
-    toxDisplacementMax: 0,
+    toxEndLoad: 0,
+    toxMidLoad: 0,
+    toxStartLoad: 0,
+    toxEndDisplacement: 0,
+    toxMidDisplacement: 0,
+    toxStartDisplacement: 0,
   };
 
   isLoading = true;

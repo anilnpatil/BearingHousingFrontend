@@ -45,21 +45,21 @@
               <th>FinalStatus</th>
               <th>p1_BeforeGlueStatus</th>
               <th>p1_AfterGlueStatus</th>
-              <!-- <th>p1_ToxLoadMax</th> -->
-              <th>p1_ToxLoadActual</th>
-              <!-- <th>p1_ToxLoadMin</th> -->
-              <th>p1_ToxDisplacementMax</th>
-              <th>p1_ToxDisplacementActual</th>              
-              <th>p1_ToxDisplacementMin</th>
+              <th>p1_ToxStartLoad</th>
+              <th>p1_ToxMidLoad</th>
+              <th>p1_ToxEndLoad</th>              
+              <th>p1_ToxStartDisplacement</th>
+              <th>p1_ToxMidDisplacement</th>
+              <th>p1_ToxEndDisplacement</th>             
               <th>p1_GraphStatus</th>
               <th>p2_BeforeGlueStatus</th>
               <th>p2_AfterGlueStatus</th>
-              <!-- <th>p2_ToxLoadMax</th> -->
-              <th>p2_ToxLoadActual</th>
-              <!-- <th>p2_ToxLoadMin</th> -->
-              <th>p2_ToxDisplacementMax</th>
-              <th>p2_ToxDisplacementActual</th>
-              <th>p2_ToxDisplacementMin</th>
+              <th>p2_ToxStartLoad</th>
+              <th>p2_ToxMidLoad</th>
+              <th>p2_ToxEndLoad</th>              
+              <th>p2_ToxStartDisplacement</th>
+              <th>p2_ToxMidDisplacement</th>
+              <th>p2_ToxEndDisplacement</th>              
               <th>p2_GraphStatus</th>
               <th>CupConsumed</th>              
               <th>CycleStartTime</th>
@@ -96,12 +96,12 @@
                   {{ getNumericStatusLabel(productionData.p1_afterGlueStatus) }}
                 </span>
               </td>
-              <!-- <td>{{ productionData.p1_toxLoadMax }}</td> -->
-              <td>{{ getDisplayValue(productionData.p1_toxLoadActual) }}</td>
-              <!-- <td>{{ productionData.p1_toxLoadMin }}</td> -->
-              <td>{{ getDisplayValue(productionData.p1_toxDisplacementMax) }}</td>
-              <td>{{ getDisplayValue(productionData.p1_toxDisplacementActual) }}</td>
-              <td>{{ getDisplayValue(productionData.p1_toxDisplacementMin) }}</td>
+              <td>{{ getDisplayValue(productionData.p1_toxStartLoad) }}</td>
+              <td>{{ getDisplayValue(productionData.p1_toxMidLoad) }}</td>
+              <td>{{ getDisplayValue(productionData.p1_toxEndLoad) }}</td>              
+              <td>{{ getDisplayValue(productionData.p1_toxStartDisplacement) }}</td>
+              <td>{{ getDisplayValue(productionData.p1_toxMidDisplacement) }}</td>
+              <td>{{ getDisplayValue(productionData.p1_toxEndDisplacement) }}</td>              
               <td>
                 <span class="status-tag"
                       [class.ok]="isNumericStatusOk(productionData.p1_graphStatus)"
@@ -123,12 +123,12 @@
                   {{ getNumericStatusLabel(productionData.p2_afterGlueStatus) }}
                 </span>
               </td>
-              <!-- <td>{{ productionData.p2_toxLoadMax }}</td> -->
-              <td>{{ getDisplayValue(productionData.p2_toxLoadActual) }}</td>
-              <!-- <td>{{ productionData.p2_toxLoadMin }}</td> -->
-              <td>{{ getDisplayValue(productionData.p2_toxDisplacementMax) }}</td>
-              <td>{{ getDisplayValue(productionData.p2_toxDisplacementActual) }}</td>
-              <td>{{ getDisplayValue(productionData.p2_toxDisplacementMin) }}</td>
+              <td>{{ getDisplayValue(productionData.p2_toxStartLoad) }}</td>
+              <td>{{ getDisplayValue(productionData.p2_toxMidLoad) }}</td>
+              <td>{{ getDisplayValue(productionData.p2_toxEndLoad) }}</td>              
+              <td>{{ getDisplayValue(productionData.p2_toxStartDisplacement) }}</td>
+              <td>{{ getDisplayValue(productionData.p2_toxMidDisplacement) }}</td>
+              <td>{{ getDisplayValue(productionData.p2_toxEndDisplacement) }}</td>              
               <td>
                 <span class="status-tag"
                       [class.ok]="isNumericStatusOk(productionData.p2_graphStatus)"

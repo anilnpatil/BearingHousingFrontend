@@ -124,39 +124,48 @@
               <div class="detail-item">
                 <label>Before Glue Status</label>
                 <input readonly [class]="getProcessStatusClass(1, 'beforeGlueStatus')" [value]="getProcessStatusLabel(1, 'beforeGlueStatus')" />
-              </div>
+              </div>                           
               <div class="detail-item">
-                <label>After Glue Status</label>
-                <input readonly [class]="getProcessStatusClass(1, 'afterGlueStatus')" [value]="getProcessStatusLabel(1, 'afterGlueStatus')" />
-              </div>               
-              <!-- <div class="detail-item">
-                <label>Load Min / Max Value</label>
-                <input readonly [value]="getProcessRangeValue(1, 'toxLoadMin', 'toxLoadMax')" />
-              </div> -->
-              <div class="detail-item">
-                <label>Actual Load Value(kg)</label>
-                <input readonly [value]="getProcessValue(1, 'toxLoadActual')" />
+                <label>Start Load Value(kg)</label>
+                <input readonly [value]="getProcessValue(1, 'toxStartLoad')" />
               </div>              
+              <div class="detail-item">
+                <label>Start Displacement Value(mm)</label>
+                <input readonly [value]="getProcessValue(1, 'toxStartDisplacement')" />
+              </div>
             </div>
 
             <div class="details-row">             
               <div class="detail-item">
-                <label>Max Displacement Value(mm)</label>
-                <input readonly [value]="getProcessValue(1, 'toxDisplacementMax')" />
+                <label>After Glue Status</label>
+                <input readonly [class]="getProcessStatusClass(1, 'afterGlueStatus')" [value]="getProcessStatusLabel(1, 'afterGlueStatus')" />
+              </div> 
+              
+              <div class="detail-item">
+                <label>Mid Load Value(kg)</label>
+                <input readonly [value]="getProcessValue(1, 'toxMidLoad')" />
               </div>
               <div class="detail-item">
-                <label>Actual Displacement Value(mm)</label>
-                <input readonly [value]="getProcessValue(1, 'toxDisplacementActual')" />
-              </div>
-              <div class="detail-item">
-                <label>Min Displacement Value(mm)</label>
-                <input readonly [value]="getProcessValue(1, 'toxDisplacementMin')" />
-              </div>
+                <label>Mid Displacement Value(mm)</label>
+                <input readonly [value]="getProcessValue(1, 'toxMidDisplacement')" />
+              </div>              
+            </div>
+
+            <div class="details-row"> 
               <div class="detail-item">
                 <label>Graph Status</label>
                 <input readonly [class]="getProcessStatusClass(1, 'graphStatus')" [value]="getProcessStatusLabel(1, 'graphStatus')" />
               </div>
-            </div>
+              <div class="detail-item">
+                <label>End Load Value(kg)</label>
+                <input readonly [value]="getProcessValue(1, 'toxEndLoad')" />
+              </div>
+              <div class="detail-item">
+                <label>End Displacement Value(mm)</label>
+                <input readonly [value]="getProcessValue(1, 'toxEndDisplacement')" />
+              </div>
+            </div>   
+
           </div>
         </div>
 
@@ -169,36 +178,44 @@
                 <input readonly [class]="getProcessStatusClass(2, 'beforeGlueStatus')" [value]="getProcessStatusLabel(2, 'beforeGlueStatus')" />
               </div>
               <div class="detail-item">
+                <label>Start Load Value(kg)</label>
+                <input readonly [value]="getProcessValue(2, 'toxStartLoad')" />
+              </div>
+              <div class="detail-item">
+                <label>Start Displacement Value(mm)</label>
+                <input readonly [value]="getProcessValue(2, 'toxStartDisplacement')" />
+              </div>              
+            </div>
+            <div class="details-row">
+              <div class="detail-item">
                 <label>After Glue Status</label>
                 <input readonly [class]="getProcessStatusClass(2, 'afterGlueStatus')" [value]="getProcessStatusLabel(2, 'afterGlueStatus')" />
+              </div>
+              <div class="detail-item">
+                <label>Mid Load Value(kg)</label>
+                <input readonly [value]="getProcessValue(2, 'toxMidLoad')" />
               </div>              
-              <!-- <div class="detail-item">
-                <label>Load Min / Max</label>
-                <input readonly [value]="getProcessRangeValue(2, 'toxLoadMin', 'toxLoadMax')" />
-              </div> -->
               <div class="detail-item">
-                <label>Actual Load Value(kg)</label>
-                <input readonly [value]="getProcessValue(2, 'toxLoadActual')" />
-              </div>
+                <label>Mid Displacement Value(mm)</label>
+                <input readonly [value]="getProcessValue(2, 'toxMidDisplacement')" />
+              </div>             
             </div>
-            <div class="details-row">               
-              <div class="detail-item">
-                <label> Max Displacement Value(mm)</label>
-                <input readonly [value]="getProcessValue(2, 'toxDisplacementMax')" />
-              </div>
-              <div class="detail-item">
-                <label>Actual Displacement Value(mm)</label>
-                <input readonly [value]="getProcessValue(2, 'toxDisplacementActual')" />
-              </div>                            
-              <div class="detail-item">
-                <label>Min Displacement Value(mm)</label>
-                <input readonly [value]="getProcessValue(2, 'toxDisplacementMin')" />
-              </div>
+
+            <div class="details-row">
               <div class="detail-item">
                 <label>Graph Status</label>
                 <input readonly [class]="getProcessStatusClass(2, 'graphStatus')" [value]="getProcessStatusLabel(2, 'graphStatus')" />
               </div>
+              <div class="detail-item">
+                <label>End Load Value(kg)</label>
+                <input readonly [value]="getProcessValue(2, 'toxEndLoad')" />
+              </div>
+              <div class="detail-item">
+                <label>End Displacement Value(mm)</label>
+                <input readonly [value]="getProcessValue(2, 'toxEndDisplacement')" />
+              </div>
             </div>
+
           </div>
         </div>
       </div>

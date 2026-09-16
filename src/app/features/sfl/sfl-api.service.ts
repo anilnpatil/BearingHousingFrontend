@@ -33,12 +33,12 @@ export interface ProductionSummary {
   cycleStartTime?: string;
   beforeGlueStatus?: number;
   afterGlueStatus?: number;
-  toxLoadActual?: number;
-  toxLoadMin?: number;
-  toxLoadMax?: number;
-  toxDisplacementActual?: number;
-  toxDisplacementMin?: number;
-  toxDisplacementMax?: number;
+  toxEndLoad?: number;
+  toxMidLoad?: number;
+  toxStartLoad?: number;
+  toxEndDisplacement?: number;
+  toxMidDisplacement?: number;
+  toxStartDisplacement?: number;
   finalStatus?: number;
   okCount?: number;
   notOkCount?: number;
@@ -49,22 +49,22 @@ export interface ProductionSummary {
 
   p1_beforeGlueStatus?: number;
   p1_afterGlueStatus?: number;
-  p1_toxLoadActual?: number;
-  p1_toxLoadMin?: number;
-  p1_toxLoadMax?: number;  
-  p1_toxDisplacementMin?: number;
-  p1_toxDisplacementMax?: number;
-  p1_toxDisplacementActual?: number;
+  p1_toxEndLoad?: number;
+  p1_toxMidLoad?: number;
+  p1_toxStartLoad?: number;  
+  p1_toxMidDisplacement?: number;
+  p1_toxStartDisplacement?: number;
+  p1_toxEndDisplacement?: number;
   p1_graphStatus?: number;
 
   p2_beforeGlueStatus?: number;
   p2_afterGlueStatus?: number;
-  p2_toxLoadActual?: number;
-  p2_toxLoadMin?: number;
-  p2_toxLoadMax?: number;  
-  p2_toxDisplacementMin?: number;
-  p2_toxDisplacementMax?: number;
-  p2_toxDisplacementActual?: number;
+  p2_toxEndLoad?: number;
+  p2_toxMidLoad?: number;
+  p2_toxStartLoad?: number;  
+  p2_toxMidDisplacement?: number;
+  p2_toxStartDisplacement?: number;
+  p2_toxEndDisplacement?: number;
   p2_graphStatus?: number;
   cupConsumed?: number;
 }

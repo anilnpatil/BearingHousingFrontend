@@ -25,11 +25,11 @@ describe('Dashboard', () => {
     component.productionData = {
       ...component.productionData,
       numberofProcess: 2,
-      p1_toxLoadActual: 5.229,
-      p2_toxLoadActual: 13.878
+      p1_toxEndLoad: 5.229,
+      p2_toxEndLoad: 13.878
     };
 
     expect(component.shouldShowSecondProcess()).toBeTrue();
-    expect(component.getProcessDetailValue(2, 'toxLoadActual')).toBe(13.878);
+    expect(component.getProcessDetailValue(2, 'toxEndLoad')).toBe(13.878);
   });
 });

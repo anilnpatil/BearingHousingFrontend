@@ -24,7 +24,7 @@
         <div class="stat-icon production-icon">🏭</div>
         <div class="stat-info">
           <h3>Total Shift Production</h3>
-          <p class="stat-number" *ngIf="!isLoading && !hasError">{{ getDisplayValue(productionData.totalPartCount) }}</p>
+          <p class="stat-number" *ngIf="!isLoading && !hasError">{{ getCountDisplayValue(productionData.totalPartCount) }}</p>
           <p class="stat-loading" *ngIf="isLoading">Loading...</p>
           <p class="stat-error" *ngIf="hasError && !isLoading"></p>
         </div>
@@ -35,7 +35,7 @@
         <div class="stat-icon parts-icon ok-icon">✅</div>
         <div class="stat-info">
           <h3>Shift OK Parts</h3>
-          <p class="stat-number" *ngIf="!isLoading && !hasError">{{ getDisplayValue(productionData.okCount) }}</p>
+          <p class="stat-number" *ngIf="!isLoading && !hasError">{{ getCountDisplayValue(productionData.okCount) }}</p>
           <p class="stat-loading" *ngIf="isLoading">Loading...</p>
           <p class="stat-error" *ngIf="hasError && !isLoading"></p>
         </div>
@@ -46,7 +46,7 @@
         <div class="stat-icon parts-icon notok-icon">❌</div>
         <div class="stat-info">
           <h3>NOT OK Parts</h3>
-          <p class="stat-number" *ngIf="!isLoading && !hasError">{{ getDisplayValue(productionData.notOkCount) }}</p>
+          <p class="stat-number" *ngIf="!isLoading && !hasError">{{ getCountDisplayValue(productionData.notOkCount) }}</p>
           <p class="stat-loading" *ngIf="isLoading">Loading...</p>
           <p class="stat-error" *ngIf="hasError && !isLoading"></p>
         </div>

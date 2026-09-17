@@ -148,6 +148,18 @@ export class Dashboard implements OnInit, OnDestroy {
       : String(value);
   }
 
+  getCountDisplayValue(value: unknown): string {
+    if (value === undefined || value === null || value === '') {
+      return '';
+    }
+
+    if (value === 0 || value === '0') {
+      return '0';
+    }
+
+    return String(value);
+  }
+
   getProcessRangeValue(processNumber: number, minField: string, maxField: string): string {
     const minValue = this.getProcessValue(processNumber, minField);
     const maxValue = this.getProcessValue(processNumber, maxField);

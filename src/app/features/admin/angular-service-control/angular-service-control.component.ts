@@ -12,11 +12,11 @@ interface ServiceConfig {
 // Define the services to be managed
 const SERVICES: ServiceConfig[] = [
   
-   {
-     name: 'BearingHousingBackendService', 
-     id: 'spring-boot', 
-     description: 'BearingHousingBackend API Service', 
-     port: 8083 },
+  //  {
+  //    name: 'BearingHousingBackendService', 
+  //    id: 'spring-boot', 
+  //    description: 'BearingHousingBackend API Service', 
+  //    port: 8083 },
 
    { 
     name: 'BearingHousingNoderedService', 

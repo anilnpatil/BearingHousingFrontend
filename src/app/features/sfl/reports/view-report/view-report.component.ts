@@ -43,7 +43,7 @@ export class ViewReportComponent implements OnInit, OnDestroy {
   /** Pagination */
   page = 0;
   pageInput = 1;
-  size = 15;
+  size = 20;
   totalElements = 0;
   totalPages = 0;
 

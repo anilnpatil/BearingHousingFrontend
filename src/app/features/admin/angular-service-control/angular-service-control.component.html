@@ -6,7 +6,45 @@
       <p class="subtitle">Manage application services and network access</p>
     </div>
 
-    <!-- Messages Section -->
+        <!-- QR Code Section -->
+    <div class="qr-section">
+      <h3>Mobile Access</h3>
+      <p class="section-description">
+        Scan QR code to access Angular app on mobile. Service will be restarted automatically to handle network changes.
+      </p>
+
+      <div class="qr-container">
+        <div *ngIf="isLoadingQr()" class="qr-loading">
+          <div class="spinner"></div>
+          <p>Generating QR code and restarting service...</p>
+        </div>
+
+        <div *ngIf="qrCode() && !isLoadingQr()" class="qr-box">
+          <img [src]="qrCode()" alt="Angular App QR Code" class="qr-image" />
+          <p class="qr-url" *ngIf="angularUrl()">{{ angularUrl() }}</p>
+        </div>
+
+        <button
+          class="btn btn-secondary"
+          (click)="regenerateQrCode()"
+          [disabled]="isLoadingQr()"
+          [class.loading]="isLoadingQr()"
+        >
+          <span class="btn-icon">🔄</span>
+          <span class="btn-text">Regenerate QR Code</span>
+        </button>
+      </div>
+
+      <div class="qr-info">
+        <span class="info-icon">ℹ️</span>
+        <span class="info-text">
+          Ensure your mobile device is connected to the same network as this PC. 
+          QR code regeneration will restart the Angular service to adapt to network changes.
+        </span>
+      </div>
+    </div>
+
+      <!-- Messages Section -->
     <div *ngIf="error() || successMessage()" class="messages-section">
       <!-- Error Message -->
       <div *ngIf="error()" class="alert alert-error">
@@ -77,42 +115,6 @@
       </div>
     </div>
 
-    <!-- QR Code Section -->
-    <div class="qr-section">
-      <h3>Mobile Access</h3>
-      <p class="section-description">
-        Scan QR code to access Angular app on mobile. Service will be restarted automatically to handle network changes.
-      </p>
 
-      <div class="qr-container">
-        <div *ngIf="isLoadingQr()" class="qr-loading">
-          <div class="spinner"></div>
-          <p>Generating QR code and restarting service...</p>
-        </div>
-
-        <div *ngIf="qrCode() && !isLoadingQr()" class="qr-box">
-          <img [src]="qrCode()" alt="Angular App QR Code" class="qr-image" />
-          <p class="qr-url" *ngIf="angularUrl()">{{ angularUrl() }}</p>
-        </div>
-
-        <button
-          class="btn btn-secondary"
-          (click)="regenerateQrCode()"
-          [disabled]="isLoadingQr()"
-          [class.loading]="isLoadingQr()"
-        >
-          <span class="btn-icon">🔄</span>
-          <span class="btn-text">Regenerate QR Code</span>
-        </button>
-      </div>
-
-      <div class="qr-info">
-        <span class="info-icon">ℹ️</span>
-        <span class="info-text">
-          Ensure your mobile device is connected to the same network as this PC. 
-          QR code regeneration will restart the Angular service to adapt to network changes.
-        </span>
-      </div>
-    </div>
   </div>
 </div>

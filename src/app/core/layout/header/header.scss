@@ -96,7 +96,7 @@
 
   label {
     font-size: 0.85rem;
-    color: #e0e7ff;
+    color: #e0e1ff;
     font-weight: 500;
     white-space: nowrap;
   }
@@ -129,6 +129,11 @@
     color: #94a3b8;
     cursor: not-allowed;
   }
+}
+
+.filter-barcode .filter-input {
+  width: 280px;
+  max-width: none;
 }
 
 .filter-btn {

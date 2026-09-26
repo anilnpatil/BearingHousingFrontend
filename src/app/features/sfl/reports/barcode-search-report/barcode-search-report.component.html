@@ -113,27 +113,27 @@
                 <span class="status-tag"
                       [class.ok]="isNumericStatusOk(productionData.p2_beforeGlueStatus)"
                       [class.notok]="isNumericStatusNotOk(productionData.p2_beforeGlueStatus)">
-                  {{ getNumericStatusLabel(productionData.p2_beforeGlueStatus) }}
+                  {{ getNumericStatusLabel(productionData.p2_beforeGlueStatus) || '-' }}
                 </span>
               </td>
               <td>
                 <span class="status-tag"
                       [class.ok]="isNumericStatusOk(productionData.p2_afterGlueStatus)"
                       [class.notok]="isNumericStatusNotOk(productionData.p2_afterGlueStatus)">
-                  {{ getNumericStatusLabel(productionData.p2_afterGlueStatus) }}
+                  {{ getNumericStatusLabel(productionData.p2_afterGlueStatus) || '-' }}
                 </span>
               </td>
-              <td>{{ getDisplayValue(productionData.p2_toxStartLoad) }}</td>
-              <td>{{ getDisplayValue(productionData.p2_toxMidLoad) }}</td>
-              <td>{{ getDisplayValue(productionData.p2_toxEndLoad) }}</td>              
-              <td>{{ getDisplayValue(productionData.p2_toxStartDisplacement) }}</td>
-              <td>{{ getDisplayValue(productionData.p2_toxMidDisplacement) }}</td>
-              <td>{{ getDisplayValue(productionData.p2_toxEndDisplacement) }}</td>              
+              <td>{{ productionData.p2_toxStartLoad === null ? '-' : getDisplayValue(productionData.p2_toxStartLoad) }}</td>
+              <td>{{ productionData.p2_toxMidLoad === null ? '-' : getDisplayValue(productionData.p2_toxMidLoad) }}</td>
+              <td>{{ productionData.p2_toxEndLoad === null ? '-' : getDisplayValue(productionData.p2_toxEndLoad) }}</td>              
+              <td>{{ productionData.p2_toxStartDisplacement === null ? '-' : getDisplayValue(productionData.p2_toxStartDisplacement) }}</td>
+              <td>{{ productionData.p2_toxMidDisplacement === null ? '-' : getDisplayValue(productionData.p2_toxMidDisplacement) }}</td>
+              <td>{{ productionData.p2_toxEndDisplacement === null ? '-' : getDisplayValue(productionData.p2_toxEndDisplacement) }}</td>              
               <td>
                 <span class="status-tag"
                       [class.ok]="isNumericStatusOk(productionData.p2_graphStatus)"
                       [class.notok]="isNumericStatusNotOk(productionData.p2_graphStatus)">
-                  {{ getNumericStatusLabel(productionData.p2_graphStatus) }}
+                  {{ getNumericStatusLabel(productionData.p2_graphStatus) || '-' }}
                 </span>
               </td>
               <td>{{ getDisplayValue(productionData.cupConsumed) }}</td>

@@ -1,6 +1,6 @@
 .header {
   position: fixed;
-  top: 0;
+  top: var(--app-brand-header-height, 64px);
   left: 0;
   right: 0;
   background: linear-gradient(90deg, #1e40af, #2563eb);

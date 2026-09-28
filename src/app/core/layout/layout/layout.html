@@ -1,6 +1,12 @@
 <!-- Error Display Component (Global) -->
 <app-error-display></app-error-display>
 
+<header class="brand-header" *ngIf="showHeader()">
+  <img class="brand-logo left-logo" src="images/left-logo.png" alt="Left Logo">
+  <h1>VG BEARING HOUSING ASSEMBLY MACHINE</h1>
+  <img class="brand-logo right-logo" src="images/right-logo.png" alt="Right Logo">
+</header>
+
 <!-- Header -->
 <app-header 
   *ngIf="showHeader()"

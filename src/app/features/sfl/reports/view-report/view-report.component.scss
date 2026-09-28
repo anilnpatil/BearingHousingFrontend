@@ -58,7 +58,7 @@
 /*    TABLE WRAPPER  */
 .table-wrapper {
   position: fixed;
-  top: var(--app-header-height, 60px);
+  top: calc(var(--app-brand-header-height, 64px) + var(--app-header-height, 60px));
   left: 0;
   right: 0;
   bottom: calc(var(--app-footer-height, 40px) + var(--report-pagination-height, 52px));
@@ -281,7 +281,7 @@
   }
 
   .table-wrapper {
-    top: var(--app-header-height, 60px);
+    top: calc(var(--app-brand-header-height, 64px) + var(--app-header-height, 60px));
   }
 
   .error-content {

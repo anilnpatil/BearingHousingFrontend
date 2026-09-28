@@ -445,10 +445,12 @@ export class BarcodeSearchReportComponent
     return status === 1 ? 'OK' : status === 2 ? 'NOT OK' : '';
   }
 
-  public getDisplayValue(value: unknown): string {
-    return value === undefined || value === null || value === '' || value === 0 || value === '0'
-      ? ''
-      : String(value);
+  public getDisplayValue(value: unknown, nullValue = ''): string {
+    if (value === undefined || value === null) {
+      return nullValue;
+    }
+
+    return value === '' || value === 0 || value === '0' ? '' : String(value);
   }
 
   public getImageStatusLabel(status: string | null | undefined): string {

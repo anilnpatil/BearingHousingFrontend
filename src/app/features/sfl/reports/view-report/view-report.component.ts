@@ -262,13 +262,18 @@ export class ViewReportComponent implements OnInit, OnDestroy {
   getProcessValue(
     row: ProductionSummary,
     processNumber: number,
-    field: string
+    field: string,
+    nullValue: string | number = ''
   ): string | number {
     const key = `p${processNumber}_${field}`;
     const rowData = row as unknown as Record<string, unknown>;
     const value = rowData[key] ?? rowData[field];
 
-    if (value === undefined || value === null || value === '' || value === 0 || value === '0') {
+    if (value === undefined || value === null) {
+      return nullValue;
+    }
+
+    if (value === '' || value === 0 || value === '0') {
       return '';
     }
 

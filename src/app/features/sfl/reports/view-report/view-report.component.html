@@ -46,18 +46,18 @@
     </thead>
     
     <tbody>
-      <tr *ngFor="let d of data" (click)="openBarcode(d)" role="button" tabindex="0" class="clickable-row">
-        <td class="productionDateTime-col">{{ d.productionDateTime | date:'dd-MM-yyyy HH:mm:ss' }}</td>
-        <td class="barcode-col">{{ getProcessValue(d, 0, 'barcode') }}</td>
-        <td class="shift-col">{{ getProcessValue(d, 0, 'shift') }}</td>
-        <td class="sku-col">{{ getProcessValue(d, 0, 'sku') }}</td>
-        <td class="numberofProcess-col">{{ getProcessValue(d, 0, 'numberofProcess') }}</td>
-        <td class="operatorName-col">{{ getProcessValue(d, 0, 'operatorName') }}</td>
+      <tr *ngFor="let d of data" (dblclick)="openBarcode(d)" (keydown.enter)="openBarcode(d)" (keydown.space)="openBarcode(d); $event.preventDefault()" role="button" tabindex="0" class="clickable-row">
+        <td class="productionDateTime-col">{{ (d.productionDateTime | date:'dd-MM-yyyy HH:mm:ss') || '-' }}</td>
+        <td class="barcode-col">{{ getProcessValue(d, 0, 'barcode', '-') }}</td>
+        <td class="shift-col">{{ getProcessValue(d, 0, 'shift', '-') }}</td>
+        <td class="sku-col">{{ getProcessValue(d, 0, 'sku', '-') }}</td>
+        <td class="numberofProcess-col">{{ getProcessValue(d, 0, 'numberofProcess', '-') }}</td>
+        <td class="operatorName-col">{{ getProcessValue(d, 0, 'operatorName', '-') }}</td>
         <td class="finalStatus-col">
           <span class="status"
                 [class.ok]="d.finalStatus === 1"
                 [class.notok]="d.finalStatus === 2">
-            {{ d.finalStatus === 1 ? 'OK' : d.finalStatus === 2 ? 'NOT OK' : '' }}
+            {{ d.finalStatus === 1 ? 'OK' : d.finalStatus === 2 ? 'NOT OK' : '-' }}
           </span>
         </td>
 
@@ -65,28 +65,28 @@
           <span class="status"
                 [class.ok]="isProcessStatusOk(d, 1, 'beforeGlueStatus')"
                 [class.notok]="isProcessStatusNotOk(d, 1, 'beforeGlueStatus')">
-            {{ getProcessStatusLabel(d, 1, 'beforeGlueStatus') }}
+            {{ getProcessStatusLabel(d, 1, 'beforeGlueStatus') || '-' }}
           </span>
         </td>
         <td class="p1-afterGlueStatus-col">
           <span class="status"
                 [class.ok]="isProcessStatusOk(d, 1, 'afterGlueStatus')"
                 [class.notok]="isProcessStatusNotOk(d, 1, 'afterGlueStatus')">
-            {{ getProcessStatusLabel(d, 1, 'afterGlueStatus') }}
+            {{ getProcessStatusLabel(d, 1, 'afterGlueStatus') || '-' }}
           </span>
         </td>
-        <td class="p1-toxStartLoad-col">{{ getProcessValue(d, 1, 'toxStartLoad') }}</td>
-        <td class="p1-toxMidLoad-col">{{ getProcessValue(d, 1, 'toxMidLoad') }}</td>
-        <td class="p1-toxEndLoad-col">{{ getProcessValue(d, 1, 'toxEndLoad') }}</td>        
-        <td class="p1-toxStartDisplacement-col">{{ getProcessValue(d, 1, 'toxStartDisplacement') }}</td>
-        <td class="p1-toxMidDisplacement-col">{{ getProcessValue(d, 1, 'toxMidDisplacement') }}</td>
-        <td class="p1-toxEndDisplacement-col">{{ getProcessValue(d, 1, 'toxEndDisplacement') }}</td>
+        <td class="p1-toxStartLoad-col">{{ getProcessValue(d, 1, 'toxStartLoad', '-') }}</td>
+        <td class="p1-toxMidLoad-col">{{ getProcessValue(d, 1, 'toxMidLoad', '-') }}</td>
+        <td class="p1-toxEndLoad-col">{{ getProcessValue(d, 1, 'toxEndLoad', '-') }}</td>        
+        <td class="p1-toxStartDisplacement-col">{{ getProcessValue(d, 1, 'toxStartDisplacement', '-') }}</td>
+        <td class="p1-toxMidDisplacement-col">{{ getProcessValue(d, 1, 'toxMidDisplacement', '-') }}</td>
+        <td class="p1-toxEndDisplacement-col">{{ getProcessValue(d, 1, 'toxEndDisplacement', '-') }}</td>
         
         <td class="p1-graphStatus-col">
           <span class="status"
                 [class.ok]="getGraphStatusValue(d, 1) === 1"
                 [class.notok]="getGraphStatusValue(d, 1) === 2">
-            {{ getGraphStatusLabel(d, 1) }}
+            {{ getGraphStatusLabel(d, 1) || '-' }}
           </span>
         </td>
 
@@ -104,13 +104,13 @@
             {{ getProcessStatusLabel(d, 2, 'afterGlueStatus') || '-' }}
           </span>
         </td>
-        <td class="p2-toxStartLoad-col" *ngIf="shouldShowSecondProcess()">{{ getProcessValue(d, 2, 'toxStartLoad') || '-' }}</td>
-        <td class="p2-toxMidLoad-col" *ngIf="shouldShowSecondProcess()">{{ getProcessValue(d, 2, 'toxMidLoad') || '-' }}</td>
-        <td class="p2-toxEndLoad-col" *ngIf="shouldShowSecondProcess()">{{ getProcessValue(d, 2, 'toxEndLoad') || '-' }}</td>
+        <td class="p2-toxStartLoad-col" *ngIf="shouldShowSecondProcess()">{{ getProcessValue(d, 2, 'toxStartLoad', '-') }}</td>
+        <td class="p2-toxMidLoad-col" *ngIf="shouldShowSecondProcess()">{{ getProcessValue(d, 2, 'toxMidLoad', '-') }}</td>
+        <td class="p2-toxEndLoad-col" *ngIf="shouldShowSecondProcess()">{{ getProcessValue(d, 2, 'toxEndLoad', '-') }}</td>
         
-        <td class="p2-toxStartDisplacement-col" *ngIf="shouldShowSecondProcess()">{{ getProcessValue(d, 2, 'toxStartDisplacement') || '-' }}</td>
-        <td class="p2-toxMidDisplacement-col" *ngIf="shouldShowSecondProcess()">{{ getProcessValue(d, 2, 'toxMidDisplacement') || '-' }}</td>
-        <td class="p2-toxEndDisplacement-col" *ngIf="shouldShowSecondProcess()">{{ getProcessValue(d, 2, 'toxEndDisplacement') || '-' }}</td>        
+        <td class="p2-toxStartDisplacement-col" *ngIf="shouldShowSecondProcess()">{{ getProcessValue(d, 2, 'toxStartDisplacement', '-') }}</td>
+        <td class="p2-toxMidDisplacement-col" *ngIf="shouldShowSecondProcess()">{{ getProcessValue(d, 2, 'toxMidDisplacement', '-') }}</td>
+        <td class="p2-toxEndDisplacement-col" *ngIf="shouldShowSecondProcess()">{{ getProcessValue(d, 2, 'toxEndDisplacement', '-') }}</td>
         <td class="p2-graphStatus-col" *ngIf="shouldShowSecondProcess()">
           <span class="status"
                 [class.ok]="getGraphStatusValue(d, 2) === 1"
@@ -118,10 +118,10 @@
             {{ getGraphStatusLabel(d, 2) || '-' }}
           </span>
         </td>
-        <td class="cupConsumed-col">{{ getProcessValue(d, 0, 'cupConsumed') }}</td>
-        <td class="cycleStartTime-col">{{ d.cycleStartTime || '' }}</td>
-        <td class="cycleEndTime-col">{{ d.productionDateTime | date:'dd-MM-yyyy HH:mm:ss' }}</td>
-        <td class="cycleTime-col">{{ getProcessValue(d, 0, 'cycleTime') }}</td>
+        <td class="cupConsumed-col">{{ getProcessValue(d, 0, 'cupConsumed', '-') }}</td>
+        <td class="cycleStartTime-col">{{ d.cycleStartTime ?? '-' }}</td>
+        <td class="cycleEndTime-col">{{ (d.productionDateTime | date:'dd-MM-yyyy HH:mm:ss') || '-' }}</td>
+        <td class="cycleTime-col">{{ getProcessValue(d, 0, 'cycleTime', '-') }}</td>
       </tr>
     </tbody>
   </table>

@@ -69,44 +69,44 @@
           </thead>
           <tbody>
             <tr>
-              <td>{{ productionData.productionDateTime | date:'dd-MM-yyyy HH:mm:ss' }}</td>
-              <td>{{ getDisplayValue(productionData.barcode) }}</td>
-              <td>{{ getDisplayValue(productionData.shift) }}</td>
-              <td>{{ getDisplayValue(productionData.sku) }}</td>
-              <td>{{ getDisplayValue(productionData.numberofProcess) }}</td>
-              <td>{{ getDisplayValue(productionData.operatorName) }}</td>
+              <td>{{ (productionData.productionDateTime | date:'dd-MM-yyyy HH:mm:ss') || '-' }}</td>
+              <td>{{ getDisplayValue(productionData.barcode, '-') }}</td>
+              <td>{{ getDisplayValue(productionData.shift, '-') }}</td>
+              <td>{{ getDisplayValue(productionData.sku, '-') }}</td>
+              <td>{{ getDisplayValue(productionData.numberofProcess, '-') }}</td>
+              <td>{{ getDisplayValue(productionData.operatorName, '-') }}</td>
               <td>
                 <span class="status-tag"
                       [class.ok]="isNumericStatusOk(productionData.finalStatus)"
                       [class.notok]="isNumericStatusNotOk(productionData.finalStatus)">
-                  {{ getNumericStatusLabel(productionData.finalStatus) }}
+                  {{ getNumericStatusLabel(productionData.finalStatus) || '-' }}
                 </span>
               </td>
               <td>
                 <span class="status-tag"
                       [class.ok]="isNumericStatusOk(productionData.p1_beforeGlueStatus)"
                       [class.notok]="isNumericStatusNotOk(productionData.p1_beforeGlueStatus)">
-                  {{ getNumericStatusLabel(productionData.p1_beforeGlueStatus) }}
+                  {{ getNumericStatusLabel(productionData.p1_beforeGlueStatus) || '-' }}
                 </span>
               </td>
               <td>
                 <span class="status-tag"
                       [class.ok]="isNumericStatusOk(productionData.p1_afterGlueStatus)"
                       [class.notok]="isNumericStatusNotOk(productionData.p1_afterGlueStatus)">
-                  {{ getNumericStatusLabel(productionData.p1_afterGlueStatus) }}
+                  {{ getNumericStatusLabel(productionData.p1_afterGlueStatus) || '-' }}
                 </span>
               </td>
-              <td>{{ getDisplayValue(productionData.p1_toxStartLoad) }}</td>
-              <td>{{ getDisplayValue(productionData.p1_toxMidLoad) }}</td>
-              <td>{{ getDisplayValue(productionData.p1_toxEndLoad) }}</td>              
-              <td>{{ getDisplayValue(productionData.p1_toxStartDisplacement) }}</td>
-              <td>{{ getDisplayValue(productionData.p1_toxMidDisplacement) }}</td>
-              <td>{{ getDisplayValue(productionData.p1_toxEndDisplacement) }}</td>              
+              <td>{{ getDisplayValue(productionData.p1_toxStartLoad, '-') }}</td>
+              <td>{{ getDisplayValue(productionData.p1_toxMidLoad, '-') }}</td>
+              <td>{{ getDisplayValue(productionData.p1_toxEndLoad, '-') }}</td>              
+              <td>{{ getDisplayValue(productionData.p1_toxStartDisplacement, '-') }}</td>
+              <td>{{ getDisplayValue(productionData.p1_toxMidDisplacement, '-') }}</td>
+              <td>{{ getDisplayValue(productionData.p1_toxEndDisplacement, '-') }}</td>              
               <td>
                 <span class="status-tag"
                       [class.ok]="isNumericStatusOk(productionData.p1_graphStatus)"
                       [class.notok]="isNumericStatusNotOk(productionData.p1_graphStatus)">
-                  {{ getNumericStatusLabel(productionData.p1_graphStatus) }}
+                  {{ getNumericStatusLabel(productionData.p1_graphStatus) || '-' }}
                 </span>
               </td>
               <td>
@@ -123,12 +123,12 @@
                   {{ getNumericStatusLabel(productionData.p2_afterGlueStatus) || '-' }}
                 </span>
               </td>
-              <td>{{ productionData.p2_toxStartLoad === null ? '-' : getDisplayValue(productionData.p2_toxStartLoad) }}</td>
-              <td>{{ productionData.p2_toxMidLoad === null ? '-' : getDisplayValue(productionData.p2_toxMidLoad) }}</td>
-              <td>{{ productionData.p2_toxEndLoad === null ? '-' : getDisplayValue(productionData.p2_toxEndLoad) }}</td>              
-              <td>{{ productionData.p2_toxStartDisplacement === null ? '-' : getDisplayValue(productionData.p2_toxStartDisplacement) }}</td>
-              <td>{{ productionData.p2_toxMidDisplacement === null ? '-' : getDisplayValue(productionData.p2_toxMidDisplacement) }}</td>
-              <td>{{ productionData.p2_toxEndDisplacement === null ? '-' : getDisplayValue(productionData.p2_toxEndDisplacement) }}</td>              
+              <td>{{ getDisplayValue(productionData.p2_toxStartLoad, '-') }}</td>
+              <td>{{ getDisplayValue(productionData.p2_toxMidLoad, '-') }}</td>
+              <td>{{ getDisplayValue(productionData.p2_toxEndLoad, '-') }}</td>              
+              <td>{{ getDisplayValue(productionData.p2_toxStartDisplacement, '-') }}</td>
+              <td>{{ getDisplayValue(productionData.p2_toxMidDisplacement, '-') }}</td>
+              <td>{{ getDisplayValue(productionData.p2_toxEndDisplacement, '-') }}</td>              
               <td>
                 <span class="status-tag"
                       [class.ok]="isNumericStatusOk(productionData.p2_graphStatus)"
@@ -136,10 +136,10 @@
                   {{ getNumericStatusLabel(productionData.p2_graphStatus) || '-' }}
                 </span>
               </td>
-              <td>{{ getDisplayValue(productionData.cupConsumed) }}</td>
-              <td>{{ productionData.cycleStartTime || '' }}</td>
-              <td>{{ productionData.productionDateTime | date:'dd-MM-yyyy HH:mm:ss' }}</td>
-              <td>{{ getDisplayValue(productionData.cycleTime) }}</td>              
+              <td>{{ getDisplayValue(productionData.cupConsumed, '-') }}</td>
+              <td>{{ productionData.cycleStartTime ?? '-' }}</td>
+              <td>{{ (productionData.productionDateTime | date:'dd-MM-yyyy HH:mm:ss') || '-' }}</td>
+              <td>{{ getDisplayValue(productionData.cycleTime, '-') }}</td>              
             </tr>
           </tbody>
         </table>

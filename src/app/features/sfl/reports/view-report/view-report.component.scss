@@ -94,6 +94,10 @@
   white-space: nowrap;
 }
 
+.report-table thead th.multiline-header-col {
+  white-space: normal;
+}
+
 /*    TABLE BODY  */
 .report-table tbody td {
   padding: 8px 10px;
